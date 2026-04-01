@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 
+import HeroPreview from "@/components/HeroPreview";
+
 const ASSETS = {
-  appPreview:
-    "https://www.figma.com/api/mcp/asset/e3f53571-d882-4d32-a91c-eb8c80e035ba",
   logo: "https://www.figma.com/api/mcp/asset/56438114-aaed-4c0f-9035-f40a1c8e2546",
   shadow:
     "https://www.figma.com/api/mcp/asset/ba931cf3-1aec-4e15-a1d6-290245b64899",
@@ -143,32 +143,8 @@ export default function Home() {
           </div>
         </div>
 
-        {/* pills + app preview */}
-        <div className="relative flex flex-col items-center gap-5">
-          <div className="flex gap-2">
-            {(["Домашка", "Флешкарты"] as const).map((t) => (
-              <span
-                key={t}
-                className="inline-flex items-center justify-center rounded-full bg-white px-4 py-[10px] text-base font-medium leading-6 text-[rgba(38,38,38,0.6)] shadow-[0px_0px_6px_0px_rgba(0,0,0,0.02),0px_2px_4px_0px_rgba(0,0,0,0.08)]"
-              >
-                {t}
-              </span>
-            ))}
-            <span className="inline-flex items-center justify-center rounded-full bg-[#39c] px-4 py-[10px] text-base font-medium leading-6 text-white shadow-[0px_0px_6px_0px_rgba(0,0,0,0.02),0px_2px_4px_0px_rgba(0,0,0,0.08)]">
-              Чат
-            </span>
-          </div>
-
-          <div className="w-full max-w-[1024px] overflow-clip rounded-3xl border border-[#262626]">
-            <div className="relative aspect-[2/1] w-full">
-              <img
-                alt="Превью продукта"
-                className="absolute inset-0 size-full object-cover"
-                src={ASSETS.appPreview}
-              />
-            </div>
-          </div>
-        </div>
+        {/* interactive pills + full-width app preview */}
+        <HeroPreview />
       </section>
 
       {/* ===== STATS ===== */}
