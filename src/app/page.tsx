@@ -150,7 +150,7 @@ export default function Home() {
             <div className="flex h-[180px] flex-col items-start justify-between overflow-clip rounded-3xl bg-[#fdf5e2] p-6 sm:col-span-2 sm:h-[220px] sm:p-8">
               <p className="text-[40px] font-semibold leading-[44px] sm:text-[56px] sm:leading-[60px]">85%</p>
               <p className="text-base font-medium leading-6 sm:text-[20px] sm:leading-7">
-                Экономия времени на создании материалов
+                Экономия времени на подготовке материалов
               </p>
             </div>
             <div className="flex h-[180px] flex-col items-start justify-between overflow-clip rounded-3xl bg-[#f3f9fe] p-6 sm:h-[220px] sm:p-8">
