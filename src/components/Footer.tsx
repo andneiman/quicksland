@@ -45,9 +45,11 @@ export default function Footer() {
 
   return (
     <footer className="flex w-full shrink-0 flex-col items-center px-4 sm:px-20">
-      <div className="flex w-full flex-col gap-5 overflow-clip p-4 sm:p-8">
-        <div className="flex w-full flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex flex-wrap items-center gap-1">
+      <div className="flex w-full flex-col gap-4 overflow-clip p-4 sm:p-8">
+        {/* links + language — stacked on mobile, row on desktop */}
+        <div className="flex w-full flex-col items-start gap-8 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+          {/* legal links — vertical on mobile, horizontal on desktop */}
+          <div className="flex flex-col items-start sm:flex-row sm:items-center sm:gap-1">
             <a
               href="https://quicks.ai/terms"
               className="inline-flex items-center justify-center rounded-full px-4 py-[10px] text-sm font-medium leading-5 text-[#262626] transition-colors hover:bg-[rgba(38,38,38,0.05)]"
@@ -62,6 +64,7 @@ export default function Footer() {
             </a>
           </div>
 
+          {/* language switcher */}
           <div className="relative" ref={dropdownRef}>
             <button
               type="button"
@@ -73,7 +76,7 @@ export default function Footer() {
             </button>
 
             {langOpen && (
-              <div className="absolute right-0 top-full z-50 mt-2 overflow-clip rounded-2xl border border-[rgba(38,38,38,0.08)] bg-white shadow-[0px_4px_12px_rgba(0,0,0,0.08)]">
+              <div className="absolute bottom-full left-0 z-50 mb-2 overflow-clip rounded-2xl border border-[rgba(38,38,38,0.08)] bg-white shadow-[0px_4px_12px_rgba(0,0,0,0.08)] sm:bottom-auto sm:left-auto sm:right-0 sm:top-full sm:mb-0 sm:mt-2">
                 {LANGUAGES.map((lang) => (
                   <a
                     key={lang.id}
@@ -88,7 +91,8 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="flex w-full flex-col gap-2 px-4 py-2 text-sm font-normal leading-5 text-[#252525] sm:flex-row sm:items-start sm:justify-between">
+        {/* bottom row */}
+        <div className="flex w-full items-start justify-between px-4 py-2 text-sm font-normal leading-5 text-[#252525]">
           <p>
             Связь с нами в Tg:
             <br />
@@ -101,7 +105,7 @@ export default function Footer() {
               @quicks_team
             </a>
           </p>
-          <p className="text-right">Все права защищены</p>
+          <p className="text-right">Все права защищены.</p>
         </div>
       </div>
     </footer>
