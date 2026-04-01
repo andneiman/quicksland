@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 
 import HeroPreview from "@/components/HeroPreview";
+import FAQ from "@/components/FAQ";
 
 const ASSETS = {
   logo: "https://www.figma.com/api/mcp/asset/56438114-aaed-4c0f-9035-f40a1c8e2546",
@@ -22,12 +23,6 @@ const ASSETS = {
     "https://www.figma.com/api/mcp/asset/6154b090-8f66-4701-945f-835ab8dbeeb3",
   iconPencil:
     "https://www.figma.com/api/mcp/asset/e4ab5bf7-6345-44c5-a1f2-f3c1892e604b",
-  iconChevronUp:
-    "https://www.figma.com/api/mcp/asset/552405dc-907c-40ce-bdd9-6a497eb977f4",
-  divider:
-    "https://www.figma.com/api/mcp/asset/f51ff4e8-2377-4fa1-8963-5646e273bd74",
-  iconChevronDown:
-    "https://www.figma.com/api/mcp/asset/6cc021fd-68cb-47ea-9c54-527a97a4fa3d",
   iconChevronDownSm:
     "https://www.figma.com/api/mcp/asset/5cbc157d-8d41-40cf-a17b-f12e7d84c79e",
 };
@@ -43,15 +38,6 @@ const FEATURES: { bg: string; icon: string; label: string }[] = [
   { bg: "#00d5be", icon: ASSETS.iconMic, label: "Голосовые задания" },
 ];
 
-const FAQ = [
-  {
-    q: "Для чего мне ИИ ассистент?",
-    a: "ИИ ассистент помогает экономить время, создавая учебные материалы, проверяя домашку и много другое",
-  },
-  { q: "Сколько это стоит?" },
-  { q: "А что с конфиденциальностью?" },
-  { q: "У меня другой вопрос, куда писать?" },
-];
 
 function FeatureTag({
   bg,
@@ -264,44 +250,7 @@ export default function Home() {
           С радостью отвечаем
         </div>
 
-        <div className="flex w-full max-w-[720px] flex-col gap-4 overflow-clip rounded-3xl bg-[rgba(37,37,37,0.05)] px-8 pb-8 pt-8">
-          {FAQ.map((item, i) => (
-            <div key={item.q}>
-              <div className="flex w-full gap-4">
-                <div className="relative size-7 shrink-0">
-                  <img
-                    alt=""
-                    className="absolute inset-0 size-full"
-                    src={
-                      i === 0
-                        ? ASSETS.iconChevronUp
-                        : ASSETS.iconChevronDown
-                    }
-                  />
-                </div>
-                <div className="flex min-w-0 flex-1 flex-col gap-2">
-                  <p className="text-[20px] font-medium leading-7 text-[#262626]">
-                    {item.q}
-                  </p>
-                  {item.a && (
-                    <p className="text-[20px] font-medium leading-7 text-[rgba(38,38,38,0.4)]">
-                      {item.a}
-                    </p>
-                  )}
-                </div>
-              </div>
-              {i < FAQ.length - 1 && (
-                <div className="relative mt-4 h-4 w-full">
-                  <img
-                    alt=""
-                    className="absolute inset-0 size-full"
-                    src={ASSETS.divider}
-                  />
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
+        <FAQ />
       </section>
 
       {/* ===== CTA ===== */}
