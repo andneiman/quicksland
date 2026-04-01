@@ -2,6 +2,7 @@
 
 import HeroPreview from "@/components/HeroPreview";
 import FAQ from "@/components/FAQ";
+import Footer from "@/components/Footer";
 
 const ASSETS = {
   logo: "https://www.figma.com/api/mcp/asset/56438114-aaed-4c0f-9035-f40a1c8e2546",
@@ -23,8 +24,6 @@ const ASSETS = {
     "https://www.figma.com/api/mcp/asset/6154b090-8f66-4701-945f-835ab8dbeeb3",
   iconPencil:
     "https://www.figma.com/api/mcp/asset/e4ab5bf7-6345-44c5-a1f2-f3c1892e604b",
-  iconChevronDownSm:
-    "https://www.figma.com/api/mcp/asset/5cbc157d-8d41-40cf-a17b-f12e7d84c79e",
 };
 
 const FEATURES: { bg: string; icon: string; label: string }[] = [
@@ -267,47 +266,7 @@ export default function Home() {
       </section>
 
       {/* ===== FOOTER ===== */}
-      <footer className="flex w-full shrink-0 flex-col items-center px-5 sm:px-20">
-        <div className="flex w-full flex-col gap-5 overflow-clip p-8">
-          <div className="flex w-full flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <div className="flex items-center">
-              <a
-                href="#"
-                className="inline-flex items-center justify-center rounded-full bg-[rgba(38,38,38,0.05)] px-4 py-[10px] text-sm font-medium leading-5 text-[#262626]"
-              >
-                Условия использования
-              </a>
-              <a
-                href="#"
-                className="inline-flex items-center justify-center rounded-full px-4 py-[10px] text-sm font-medium leading-5 text-[rgba(38,38,38,0.6)]"
-              >
-                Политика конфиденциальности
-              </a>
-            </div>
-            <button
-              type="button"
-              className="inline-flex items-center gap-2 rounded-full bg-[rgba(38,38,38,0.05)] py-[10px] pl-4 pr-[10px] text-sm font-medium leading-5 text-[#262626]"
-            >
-              Russian
-              <span className="relative size-5">
-                <img
-                  alt=""
-                  className="absolute inset-0 size-full"
-                  src={ASSETS.iconChevronDownSm}
-                />
-              </span>
-            </button>
-          </div>
-          <div className="flex w-full flex-col gap-2 px-4 py-2 text-sm font-normal leading-5 text-[#252525] sm:flex-row sm:items-start sm:justify-between">
-            <p>
-              Связь с нами в Tg:
-              <br />
-              <span className="text-[rgba(37,37,37,0.5)]">@quicks_team</span>
-            </p>
-            <p className="text-right">Все права защищены</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
 
       {/* ===== TOP BAR (fixed) ===== */}
       <nav className="fixed left-1/2 top-4 z-50 flex -translate-x-1/2 items-start gap-[18px] overflow-clip rounded-full border border-[rgba(38,38,38,0.05)] bg-[rgba(255,255,255,0.8)] p-3 backdrop-blur-[15px]">
