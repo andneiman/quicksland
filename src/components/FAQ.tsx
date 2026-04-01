@@ -1,15 +1,36 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 
-const FAQ_DATA = [
+const FAQ_DATA: { q: string; a: ReactNode }[] = [
   {
     q: "Для чего мне ИИ ассистент?",
     a: "ИИ ассистент помогает экономить время, создавая учебные материалы, проверяя домашку и много другое",
   },
-  { q: "Сколько это стоит?", a: "" },
-  { q: "А что с конфиденциальностью?", a: "" },
-  { q: "У меня другой вопрос, куда писать?", a: "" },
+  {
+    q: "Сколько это стоит?",
+    a: "Для первых пользователей сервис бесплатный. Успейте зарегистрироваться!",
+  },
+  {
+    q: "А что с конфиденциальностью?",
+    a: "Конфиденциальность — один из ключевых приоритетов продукта. Мы не храним записи сессий, а пользовательские данные хранятся в обезличенном виде и обрабатываются в соответствии с современными стандартами безопасности и конфиденциальности",
+  },
+  {
+    q: "У меня другой вопрос, куда писать?",
+    a: (
+      <>
+        Пишите нам в Telegram{" "}
+        <a
+          href="https://t.me/quicks_team"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-[#39c] underline"
+        >
+          @quicks_team
+        </a>
+      </>
+    ),
+  },
 ];
 
 function Chevron({ open }: { open: boolean }) {
@@ -60,9 +81,9 @@ export default function FAQ() {
             >
               <div className="overflow-hidden">
                 {item.a && (
-                  <p className="pb-1 pl-8 pt-2 text-base font-medium leading-6 text-[rgba(38,38,38,0.4)] sm:pl-9 sm:text-[20px] sm:leading-7">
+                  <div className="pb-1 pl-8 pt-2 text-base font-medium leading-6 text-[rgba(38,38,38,0.4)] sm:pl-9 sm:text-[20px] sm:leading-7">
                     {item.a}
-                  </p>
+                  </div>
                 )}
               </div>
             </div>
