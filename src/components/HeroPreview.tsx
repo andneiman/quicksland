@@ -37,7 +37,7 @@ export default function HeroPreview() {
       </div>
 
       {/* preview image — full width */}
-      <div className="w-full overflow-clip rounded-3xl border border-[#262626]">
+      <div className="w-full overflow-clip rounded-3xl">
         <div className="relative aspect-[2/1] w-full">
           <Image
             src={current.src}

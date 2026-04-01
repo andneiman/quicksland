@@ -97,8 +97,8 @@ export default function Home() {
 
       {/* ===== HERO ===== */}
       <section className="relative flex w-full shrink-0 flex-col items-center gap-10 px-5 py-16 sm:px-20">
-        {/* shadow behind the app preview */}
-        <div className="pointer-events-none absolute bottom-[-167px] left-[8.44%] right-[10%] h-[921px]">
+        {/* shadow behind the app preview — z-0 so it stays below content */}
+        <div className="pointer-events-none absolute bottom-[-167px] left-[8.44%] right-[10%] z-0 h-[921px]">
           <div className="absolute inset-[-21.72%_-19.16%]">
             <img
               alt=""
@@ -108,7 +108,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="relative flex w-full flex-col items-center gap-10 p-4 sm:p-8">
+        <div className="relative z-10 flex w-full flex-col items-center gap-10 p-4 sm:p-8">
           {/* headline + subtitle */}
           <div className="flex flex-col items-center gap-4 text-center">
             <h1 className="text-[40px] font-medium leading-[44px] tracking-[0px] sm:text-[64px] sm:leading-[68px]">
