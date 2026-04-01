@@ -78,13 +78,13 @@ export default function Home() {
       <div className="pointer-events-none absolute left-0 top-0 h-[221px] w-full bg-gradient-to-b from-[#eee] to-white" />
 
       {/* ── spacer for fixed top-bar ── */}
-      <div className="h-24 w-full shrink-0" />
+      <div className="h-[72px] w-full shrink-0 sm:h-24" />
 
       {/* ===== HERO ===== */}
-      <section className="relative flex w-full shrink-0 flex-col items-center gap-10 overflow-clip px-5 py-16 sm:px-20">
-        {/* shadow behind the app preview — z-0 so it stays below content */}
-        <div className="pointer-events-none absolute bottom-[-167px] left-[8.44%] right-[10%] z-0 h-[921px]">
-          <div className="absolute inset-[-21.72%_-19.16%]">
+      <section className="relative flex w-full shrink-0 flex-col items-center gap-10 px-4 py-12 sm:overflow-clip sm:px-20 sm:py-16">
+        {/* shadow — mobile: centered, lower; desktop: original position */}
+        <div className="pointer-events-none absolute left-1/2 top-[296px] z-0 h-[513px] w-[529px] -translate-x-1/2 sm:bottom-[-167px] sm:left-[8.44%] sm:right-[10%] sm:top-auto sm:h-[921px] sm:w-auto sm:translate-x-0">
+          <div className="absolute inset-[-38.99%_-37.81%] sm:inset-[-21.72%_-19.16%]">
             <img
               alt=""
               className="block size-full max-w-none"
@@ -93,15 +93,15 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="relative z-10 flex w-full flex-col items-center gap-10 p-4 sm:p-8">
+        <div className="relative z-10 flex w-full flex-col items-center gap-6 sm:gap-10 sm:p-8">
           {/* headline + subtitle */}
           <div className="flex flex-col items-center gap-4 text-center">
-            <h1 className="text-[40px] font-medium leading-[44px] tracking-[0px] sm:text-[64px] sm:leading-[68px]">
+            <h1 className="text-[32px] font-semibold leading-[36px] tracking-[0px] sm:text-[64px] sm:font-medium sm:leading-[68px]">
               ИИ&nbsp;ассистент
               <br />
               для преподавателей
             </h1>
-            <p className="text-[18px] font-medium leading-7 sm:text-[20px] sm:leading-7">
+            <p className="text-base font-medium leading-6 sm:text-[20px] sm:leading-7">
               Записывает ваши уроки и автоматические создает{" "}
               <br className="hidden sm:inline" />
               <span className="font-medium text-[#ef4444]">
@@ -115,16 +115,16 @@ export default function Home() {
           </div>
 
           {/* CTA */}
-          <div className="flex flex-col items-center">
+          <div className="flex w-full flex-col items-center gap-4 sm:w-auto">
             <a
               href="https://calendly.com/riaistesting/new-meeting"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center rounded-full bg-[#39c] px-6 py-4 text-base font-semibold leading-6 text-white"
+              className="inline-flex w-full items-center justify-center rounded-full bg-[#39c] px-6 py-4 text-base font-medium leading-6 text-white sm:w-auto sm:font-semibold"
             >
               Попробовать бесплатно
             </a>
-            <p className="mt-4 text-center text-sm font-normal leading-5 text-[#262626]">
+            <p className="text-center text-sm font-normal leading-5 text-[#262626]">
               запишитесь на 15-минутный демо и получите бесплатный доступ
             </p>
           </div>
