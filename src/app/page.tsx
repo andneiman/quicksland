@@ -117,7 +117,9 @@ export default function Home() {
           {/* CTA */}
           <div className="flex flex-col items-center">
             <a
-              href="#"
+              href="https://calendly.com/riaistesting/new-meeting"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center rounded-full bg-[#39c] px-6 py-4 text-base font-semibold leading-6 text-white"
             >
               Попробовать бесплатно
@@ -231,7 +233,9 @@ export default function Home() {
                 </p>
               </div>
               <a
-                href="#"
+                href="https://calendly.com/riaistesting/new-meeting"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center rounded-2xl bg-[#39c] px-6 py-4 text-base font-medium leading-6 text-white"
               >
                 Попробовать бесплатно
@@ -258,7 +262,9 @@ export default function Home() {
           Готовы начать?
         </h2>
         <a
-          href="#"
+          href="https://calendly.com/riaistesting/new-meeting"
+          target="_blank"
+          rel="noopener noreferrer"
           className="mt-8 inline-flex items-center rounded-full bg-[#39c] px-6 py-4 text-base font-semibold leading-6 text-white"
         >
           Попробовать бесплатно
@@ -292,14 +298,16 @@ export default function Home() {
         <div className="flex shrink-0 items-center">
           <div className="h-10 w-8 shrink-0 rounded-full" />
           <a
-            href="#"
+            href="https://ru.quicks.ai"
             className="flex shrink-0 items-center rounded-full bg-[rgba(38,38,38,0.05)] px-4 py-[10px] text-sm font-semibold leading-5 text-[#262626]"
           >
             Войти
           </a>
         </div>
         <a
-          href="#"
+          href="https://calendly.com/riaistesting/new-meeting"
+          target="_blank"
+          rel="noopener noreferrer"
           className="flex shrink-0 items-center rounded-full bg-[#39c] px-4 py-[10px] text-sm font-semibold leading-5 text-white"
         >
           Попробовать

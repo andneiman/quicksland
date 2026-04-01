@@ -56,7 +56,7 @@ export default function Footer() {
             </a>
             <a
               href="https://quicks.ai/privacy"
-              className="inline-flex items-center justify-center rounded-full px-4 py-[10px] text-sm font-medium leading-5 text-[rgba(38,38,38,0.6)] transition-colors hover:bg-[rgba(38,38,38,0.05)]"
+              className="inline-flex items-center justify-center rounded-full px-4 py-[10px] text-sm font-medium leading-5 text-[#262626] transition-colors hover:bg-[rgba(38,38,38,0.05)]"
             >
               Политика конфиденциальности
             </a>
