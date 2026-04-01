@@ -291,12 +291,6 @@ export default function Home() {
         {/* nav buttons */}
         <div className="flex shrink-0 items-center gap-2">
           <a
-            href="https://ru.quicks.ai"
-            className="flex shrink-0 items-center rounded-full bg-[rgba(38,38,38,0.05)] px-4 py-[10px] text-sm font-semibold leading-5 text-[#262626]"
-          >
-            Войти
-          </a>
-          <a
             href="https://calendly.com/riaistesting/new-meeting"
             target="_blank"
             rel="noopener noreferrer"
