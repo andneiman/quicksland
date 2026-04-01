@@ -135,8 +135,8 @@ export default function Home() {
       </section>
 
       {/* ===== STATS ===== */}
-      <section className="flex w-full shrink-0 flex-col items-center gap-10 px-5 py-16 sm:px-20">
-        <div className="max-w-[960px] text-center text-[28px] font-semibold leading-[32px] sm:text-[40px] sm:leading-[44px]">
+      <section className="flex w-full shrink-0 flex-col items-center gap-10 px-4 py-12 sm:px-20 sm:py-16">
+        <div className="max-w-[960px] text-center text-[24px] font-semibold leading-[28px] sm:text-[40px] sm:leading-[44px]">
           <span className="text-[rgba(38,38,38,0.4)]">
             Освободите время на себя
           </span>
@@ -147,70 +147,63 @@ export default function Home() {
         <div className="flex w-full flex-col gap-4">
           {/* stat cards */}
           <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-4 sm:grid-rows-1">
-            <div className="flex h-[220px] flex-col items-start justify-between overflow-clip rounded-3xl bg-[#fdf5e2] p-8 sm:col-span-2">
-              <p className="text-[56px] font-semibold leading-[60px]">85%</p>
-              <p className="text-[20px] font-medium leading-7">
+            <div className="flex h-[180px] flex-col items-start justify-between overflow-clip rounded-3xl bg-[#fdf5e2] p-6 sm:col-span-2 sm:h-[220px] sm:p-8">
+              <p className="text-[40px] font-semibold leading-[44px] sm:text-[56px] sm:leading-[60px]">85%</p>
+              <p className="text-base font-medium leading-6 sm:text-[20px] sm:leading-7">
                 Экономия времени на создании материалов
               </p>
             </div>
-            <div className="flex h-[220px] flex-col items-start justify-between overflow-clip rounded-3xl bg-[#f3f9fe] p-8">
-              <p className="text-[56px] font-semibold leading-[60px]">138%</p>
-              <p className="text-[20px] font-medium leading-7">
+            <div className="flex h-[180px] flex-col items-start justify-between overflow-clip rounded-3xl bg-[#f3f9fe] p-6 sm:h-[220px] sm:p-8">
+              <p className="text-[40px] font-semibold leading-[44px] sm:text-[56px] sm:leading-[60px]">138%</p>
+              <p className="text-base font-medium leading-6 sm:text-[20px] sm:leading-7">
                 Усвоение материала
               </p>
             </div>
-            <div className="flex h-[220px] flex-col items-start justify-between overflow-clip rounded-3xl bg-[#fcf3f1] p-8">
-              <p className="text-[56px] font-semibold leading-[60px]">190%</p>
-              <p className="text-[20px] font-medium leading-7">
+            <div className="flex h-[180px] flex-col items-start justify-between overflow-clip rounded-3xl bg-[#fcf3f1] p-6 sm:h-[220px] sm:p-8">
+              <p className="text-[40px] font-semibold leading-[44px] sm:text-[56px] sm:leading-[60px]">190%</p>
+              <p className="text-base font-medium leading-6 sm:text-[20px] sm:leading-7">
                 Рост вовлеченности
               </p>
             </div>
           </div>
 
           {/* feature highlight */}
-          <div className="flex w-full flex-col items-center gap-10 rounded-3xl bg-[rgba(38,38,38,0.05)] p-8 lg:h-[448px] lg:flex-row">
+          <div className="flex w-full flex-col items-center gap-10 overflow-clip rounded-3xl bg-[rgba(38,38,38,0.05)] p-6 sm:p-8 lg:h-[448px] lg:flex-row">
             {/* left: tag cloud */}
-            <div className="flex flex-1 items-center justify-center self-stretch overflow-clip rounded-[20px] px-6 py-5">
-              <div className="flex w-[358px] flex-wrap content-center items-center justify-center gap-[6px]">
-                {/* row 1 */}
+            <div className="flex w-full flex-1 items-center justify-center self-stretch overflow-hidden rounded-[20px] px-2 py-5 sm:px-6">
+              <div className="flex w-full max-w-[358px] flex-wrap content-center items-center justify-center gap-[6px]">
                 <div className="flex shrink-0 gap-[6px]">
                   <Placeholder w={156} />
                   <Placeholder w={156} />
                 </div>
-                {/* row 2 */}
                 <div className="flex shrink-0 gap-[6px]">
                   <Placeholder w={95} />
                   <FeatureTag {...FEATURES[0]} />
                   <Placeholder w={94} />
                 </div>
-                {/* row 3 */}
                 <div className="flex shrink-0 gap-[6px]">
                   <Placeholder w={84} />
                   <FeatureTag {...FEATURES[1]} />
                   <FeatureTag {...FEATURES[2]} />
                   <Placeholder w={84} />
                 </div>
-                {/* row 4 */}
                 <div className="flex shrink-0 gap-[6px]">
                   <Placeholder w={65} />
                   <FeatureTag {...FEATURES[3]} />
                   <FeatureTag {...FEATURES[4]} />
                   <Placeholder w={65} />
                 </div>
-                {/* row 5 */}
                 <div className="flex shrink-0 gap-[6px]">
                   <Placeholder w={80} />
                   <FeatureTag {...FEATURES[5]} />
                   <FeatureTag {...FEATURES[6]} />
                   <Placeholder w={80} />
                 </div>
-                {/* row 6 */}
                 <div className="flex shrink-0 gap-[6px]">
                   <Placeholder w={112} />
                   <FeatureTag {...FEATURES[7]} />
                   <Placeholder w={112} />
                 </div>
-                {/* row 7 */}
                 <div className="flex shrink-0 gap-[6px]">
                   <Placeholder w={120} />
                   <Placeholder w={120} />
@@ -219,14 +212,14 @@ export default function Home() {
             </div>
 
             {/* right: copy */}
-            <div className="flex flex-1 flex-col items-start justify-center gap-6 self-stretch p-6">
+            <div className="flex flex-1 flex-col items-start justify-center gap-6 self-stretch p-2 sm:p-6">
               <div className="flex w-full flex-col gap-4">
-                <h3 className="text-[32px] font-semibold leading-[36px] sm:text-[40px] sm:leading-[44px]">
+                <h3 className="text-[28px] font-semibold leading-[32px] sm:text-[40px] sm:leading-[44px]">
                   Единственный ИИ,
                   <br />
                   который вам нужен
                 </h3>
-                <p className="text-[20px] font-medium leading-7 text-[rgba(38,38,38,0.4)]">
+                <p className="text-base font-medium leading-6 text-[rgba(38,38,38,0.4)] sm:text-[20px] sm:leading-7">
                   Набор инструментов необходимый
                   <br />
                   для современного преподавания
@@ -236,7 +229,7 @@ export default function Home() {
                 href="https://calendly.com/riaistesting/new-meeting"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center rounded-2xl bg-[#39c] px-6 py-4 text-base font-medium leading-6 text-white"
+                className="inline-flex w-full items-center justify-center rounded-2xl bg-[#39c] px-6 py-4 text-base font-medium leading-6 text-white sm:w-auto"
               >
                 Попробовать бесплатно
               </a>
@@ -246,8 +239,8 @@ export default function Home() {
       </section>
 
       {/* ===== FAQ ===== */}
-      <section className="flex w-full shrink-0 flex-col items-center gap-10 px-5 py-10 sm:px-20">
-        <div className="max-w-[960px] text-center text-[28px] font-semibold leading-[32px] sm:text-[40px] sm:leading-[44px]">
+      <section className="flex w-full shrink-0 flex-col items-center gap-10 px-4 py-10 sm:px-20">
+        <div className="max-w-[960px] text-center text-[24px] font-semibold leading-[28px] sm:text-[40px] sm:leading-[44px]">
           <span className="text-[rgba(38,38,38,0.4)]">Есть вопросы?</span>
           <br />
           С радостью отвечаем
@@ -257,15 +250,15 @@ export default function Home() {
       </section>
 
       {/* ===== CTA ===== */}
-      <section className="flex w-full shrink-0 flex-col items-center justify-center px-5 pb-20 pt-4 sm:px-20">
-        <h2 className="text-center text-[32px] font-semibold leading-[36px] sm:text-[40px] sm:leading-[44px]">
+      <section className="flex w-full shrink-0 flex-col items-center justify-center px-4 pb-16 pt-4 sm:px-20 sm:pb-20">
+        <h2 className="text-center text-[28px] font-semibold leading-[32px] sm:text-[40px] sm:leading-[44px]">
           Готовы начать?
         </h2>
         <a
           href="https://calendly.com/riaistesting/new-meeting"
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-8 inline-flex items-center rounded-full bg-[#39c] px-6 py-4 text-base font-semibold leading-6 text-white"
+          className="mt-8 inline-flex w-full items-center justify-center rounded-full bg-[#39c] px-6 py-4 text-base font-semibold leading-6 text-white sm:w-auto"
         >
           Попробовать бесплатно
         </a>
@@ -274,18 +267,19 @@ export default function Home() {
       {/* ===== FOOTER ===== */}
       <Footer />
 
-      {/* ===== TOP BAR (fixed) ===== */}
-      <nav className="fixed left-1/2 top-4 z-50 flex -translate-x-1/2 items-start gap-[18px] overflow-clip rounded-full border border-[rgba(38,38,38,0.05)] bg-[rgba(255,255,255,0.8)] p-3 backdrop-blur-[15px]">
+      {/* ===== TOP BAR ===== */}
+      {/* Mobile: full-width fixed bar | Desktop: centered floating pill */}
+      <nav className="fixed left-0 top-0 z-50 flex w-full items-center justify-between bg-[rgba(255,255,255,0.8)] px-4 py-4 backdrop-blur-[15px] sm:left-1/2 sm:top-4 sm:w-auto sm:-translate-x-1/2 sm:gap-[18px] sm:rounded-full sm:border sm:border-[rgba(38,38,38,0.05)] sm:p-3">
         {/* logo */}
-        <div className="flex shrink-0 items-center gap-2 self-stretch px-3 py-[2px]">
-          <div className="relative size-7 shrink-0 overflow-hidden">
+        <div className="flex shrink-0 items-center gap-2 px-0 py-[2px] sm:px-3">
+          <div className="relative size-8 shrink-0 overflow-hidden sm:size-7">
             <img
               alt="quicks.ai"
               className="absolute left-[-49.22%] top-[-0.32%] h-[100.48%] w-[198.45%] max-w-none"
               src={ASSETS.logo}
             />
           </div>
-          <div className="relative h-[22.896px] w-[101.33px] shrink-0">
+          <div className="relative h-[26px] w-[80px] shrink-0 sm:h-[22.896px] sm:w-[101.33px]">
             <img
               alt=""
               className="absolute inset-0 block size-full max-w-none"
@@ -295,23 +289,22 @@ export default function Home() {
         </div>
 
         {/* nav buttons */}
-        <div className="flex shrink-0 items-center">
-          <div className="h-10 w-8 shrink-0 rounded-full" />
+        <div className="flex shrink-0 items-center gap-2">
           <a
             href="https://ru.quicks.ai"
             className="flex shrink-0 items-center rounded-full bg-[rgba(38,38,38,0.05)] px-4 py-[10px] text-sm font-semibold leading-5 text-[#262626]"
           >
             Войти
           </a>
+          <a
+            href="https://calendly.com/riaistesting/new-meeting"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex shrink-0 items-center rounded-full bg-[#39c] px-4 py-[10px] text-sm font-semibold leading-5 text-white"
+          >
+            Попробовать
+          </a>
         </div>
-        <a
-          href="https://calendly.com/riaistesting/new-meeting"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex shrink-0 items-center rounded-full bg-[#39c] px-4 py-[10px] text-sm font-semibold leading-5 text-white"
-        >
-          Попробовать
-        </a>
       </nav>
     </div>
   );

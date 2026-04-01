@@ -44,10 +44,10 @@ export default function Footer() {
   const currentLang = LANGUAGES[0];
 
   return (
-    <footer className="flex w-full shrink-0 flex-col items-center px-5 sm:px-20">
-      <div className="flex w-full flex-col gap-5 overflow-clip p-8">
+    <footer className="flex w-full shrink-0 flex-col items-center px-4 sm:px-20">
+      <div className="flex w-full flex-col gap-5 overflow-clip p-4 sm:p-8">
         <div className="flex w-full flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex items-center gap-1">
+          <div className="flex flex-wrap items-center gap-1">
             <a
               href="https://quicks.ai/terms"
               className="inline-flex items-center justify-center rounded-full px-4 py-[10px] text-sm font-medium leading-5 text-[#262626] transition-colors hover:bg-[rgba(38,38,38,0.05)]"
