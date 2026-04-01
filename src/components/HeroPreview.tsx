@@ -35,15 +35,16 @@ export default function HeroPreview() {
         ))}
       </div>
 
-      <div className="w-full overflow-clip rounded-3xl">
-        <Image
-          src={current.src}
-          alt={`Превью — ${current.label}`}
-          width={1024}
-          height={724}
-          className="h-auto w-full transition-opacity duration-300"
-          priority
-        />
+      <div className="relative w-full overflow-clip rounded-3xl">
+        <div className="relative aspect-[2/1] w-full">
+          <Image
+            src={current.src}
+            alt={`Превью — ${current.label}`}
+            fill
+            className="object-contain transition-opacity duration-300"
+            priority
+          />
+        </div>
       </div>
     </div>
   );
