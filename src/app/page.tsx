@@ -141,10 +141,10 @@ export default function Home() {
               запишитесь на 15-минутный демо и получите бесплатный доступ
             </p>
           </div>
-        </div>
 
-        {/* interactive pills + full-width app preview */}
-        <HeroPreview />
+          {/* interactive pills + full-width app preview */}
+          <HeroPreview />
+        </div>
       </section>
 
       {/* ===== STATS ===== */}
