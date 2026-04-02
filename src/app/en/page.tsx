@@ -78,8 +78,8 @@ export default function HomeEn() {
       <div className="h-[72px] w-full shrink-0 sm:h-24" />
 
       {/* ===== HERO ===== */}
-      <section className="relative flex w-full shrink-0 flex-col items-center gap-10 overflow-clip px-4 py-12 sm:px-20 sm:py-16">
-        <div className="pointer-events-none absolute left-1/2 top-[296px] z-0 h-[513px] w-[529px] -translate-x-1/2 sm:bottom-[-167px] sm:left-[8.44%] sm:right-[10%] sm:top-auto sm:h-[921px] sm:w-auto sm:translate-x-0">
+      <section className="relative flex w-full shrink-0 flex-col items-center gap-10 px-4 py-12 sm:px-20 sm:py-16">
+        <div className="pointer-events-none absolute left-1/2 top-[200px] z-0 h-[513px] w-[529px] -translate-x-1/2 sm:bottom-[-300px] sm:left-[8.44%] sm:right-[10%] sm:top-auto sm:h-[921px] sm:w-auto sm:translate-x-0">
           <div className="absolute inset-[-38.99%_-37.81%] sm:inset-[-21.72%_-19.16%]">
             <img
               alt=""
