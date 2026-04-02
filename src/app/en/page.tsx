@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 
-import HeroPreview from "@/components/HeroPreview";
-import FAQ from "@/components/FAQ";
-import Footer from "@/components/Footer";
+import HeroPreviewEn from "@/components/en/HeroPreviewEn";
+import FAQEn from "@/components/en/FAQEn";
+import FooterEn from "@/components/en/FooterEn";
 
 const ASSETS = {
   shadow:
@@ -24,14 +24,14 @@ const ASSETS = {
 };
 
 const FEATURES: { bg: string; icon: string; label: string }[] = [
-  { bg: "#ff6467", icon: ASSETS.iconMic, label: "Запись лекций" },
-  { bg: "#2b7fff", icon: ASSETS.iconSubtitles, label: "Квизы" },
-  { bg: "#00c950", icon: ASSETS.iconCards, label: "Флэшкарты" },
-  { bg: "#fdc700", icon: ASSETS.iconChecklist, label: "Проверка домашки" },
-  { bg: "#ad46ff", icon: ASSETS.iconWave, label: "Чат" },
-  { bg: "#ee78d0", icon: ASSETS.iconParagraph, label: "Саммери" },
-  { bg: "#2b7fff", icon: ASSETS.iconPencil, label: "Заметки" },
-  { bg: "#00d5be", icon: ASSETS.iconMic, label: "Голосовые задания" },
+  { bg: "#ff6467", icon: ASSETS.iconMic, label: "Recordings" },
+  { bg: "#2b7fff", icon: ASSETS.iconSubtitles, label: "Quizzes" },
+  { bg: "#00c950", icon: ASSETS.iconCards, label: "Flashcards" },
+  { bg: "#fdc700", icon: ASSETS.iconChecklist, label: "Homework" },
+  { bg: "#ad46ff", icon: ASSETS.iconWave, label: "Chat" },
+  { bg: "#ee78d0", icon: ASSETS.iconParagraph, label: "Summaries" },
+  { bg: "#2b7fff", icon: ASSETS.iconPencil, label: "Canvas" },
+  { bg: "#00d5be", icon: ASSETS.iconMic, label: "Audio tasks" },
 ];
 
 
@@ -68,7 +68,7 @@ function Placeholder({ w }: { w: number }) {
   );
 }
 
-export default function Home() {
+export default function HomeEn() {
   return (
     <div className="relative flex min-h-dvh w-full flex-col items-center overflow-clip bg-white text-[#262626]">
       {/* ── gradient background ── */}
@@ -79,7 +79,6 @@ export default function Home() {
 
       {/* ===== HERO ===== */}
       <section className="relative flex w-full shrink-0 flex-col items-center gap-10 overflow-clip px-4 py-12 sm:px-20 sm:py-16">
-        {/* shadow — mobile: centered, lower; desktop: original position */}
         <div className="pointer-events-none absolute left-1/2 top-[296px] z-0 h-[513px] w-[529px] -translate-x-1/2 sm:bottom-[-167px] sm:left-[8.44%] sm:right-[10%] sm:top-auto sm:h-[921px] sm:w-auto sm:translate-x-0">
           <div className="absolute inset-[-38.99%_-37.81%] sm:inset-[-21.72%_-19.16%]">
             <img
@@ -91,27 +90,25 @@ export default function Home() {
         </div>
 
         <div className="relative z-10 flex w-full flex-col items-center gap-6 sm:gap-10 sm:p-8">
-          {/* headline + subtitle */}
           <div className="flex flex-col items-center gap-4 text-center">
             <h1 className="text-[32px] font-semibold leading-[36px] tracking-[0px] sm:text-[64px] sm:font-medium sm:leading-[68px]">
-              ИИ&nbsp;ассистент
+              AI&nbsp;assistant
               <br />
-              для преподавателей
+              for tutors
             </h1>
             <p className="text-base font-medium leading-6 sm:text-[20px] sm:leading-7">
-              Записывает ваши уроки и автоматические создает{" "}
+              It records your lessons and automatically creates{" "}
               <br className="hidden sm:inline" />
               <span className="font-medium text-[#ef4444]">
-                домашние задания
+                homework
               </span>
               ,{" "}
-              <span className="font-medium text-[#38bdf8]">квизы</span>,{" "}
-              <span className="font-medium text-[#e879f9]">флэшкарты</span> и
-              многое другое
+              <span className="font-medium text-[#38bdf8]">quizzes</span>,{" "}
+              <span className="font-medium text-[#e879f9]">flashcards</span>,
+              and much more
             </p>
           </div>
 
-          {/* CTA */}
           <div className="flex w-full flex-col items-center gap-4 sm:w-auto">
             <a
               href="https://calendly.com/riaistesting/new-meeting"
@@ -119,15 +116,14 @@ export default function Home() {
               rel="noopener noreferrer"
               className="inline-flex w-full items-center justify-center rounded-full bg-[#39c] px-6 py-4 text-base font-medium leading-6 text-white sm:w-auto sm:font-semibold"
             >
-              Попробовать бесплатно
+              Try for free
             </a>
             <p className="text-center text-sm font-normal leading-5 text-[#262626]">
-              запишитесь на 15-минутный демо и получите бесплатный доступ
+              Book a 15-minute demo and get free access
             </p>
           </div>
 
-          {/* interactive pills + full-width app preview */}
-          <HeroPreview />
+          <HeroPreviewEn />
         </div>
       </section>
 
@@ -135,38 +131,35 @@ export default function Home() {
       <section className="relative z-10 flex w-full shrink-0 flex-col items-center gap-10 bg-white px-4 py-12 sm:px-20 sm:py-16">
         <div className="max-w-[960px] text-center text-[24px] font-semibold leading-[28px] sm:text-[40px] sm:leading-[44px]">
           <span className="text-[rgba(38,38,38,0.4)]">
-            Освободите время на себя
+            Free up more time for yourself
           </span>
           <br />
-          и сделайте занятия эффективнее и интереснее
+          and make your lessons more effective and engaging
         </div>
 
         <div className="flex w-full flex-col gap-4">
-          {/* stat cards */}
           <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-4 sm:grid-rows-1">
             <div className="flex h-[180px] flex-col items-start justify-between overflow-clip rounded-3xl bg-[#fdf5e2] p-6 sm:col-span-2 sm:h-[220px] sm:p-8">
               <p className="text-[40px] font-semibold leading-[44px] sm:text-[56px] sm:leading-[60px]">85%</p>
               <p className="text-base font-medium leading-6 sm:text-[20px] sm:leading-7">
-                Экономия времени на подготовке материалов
+                Saves time on lesson prep
               </p>
             </div>
             <div className="flex h-[180px] flex-col items-start justify-between overflow-clip rounded-3xl bg-[#f3f9fe] p-6 sm:h-[220px] sm:p-8">
               <p className="text-[40px] font-semibold leading-[44px] sm:text-[56px] sm:leading-[60px]">138%</p>
               <p className="text-base font-medium leading-6 sm:text-[20px] sm:leading-7">
-                Усвоение материала
+                Deeper learning
               </p>
             </div>
             <div className="flex h-[180px] flex-col items-start justify-between overflow-clip rounded-3xl bg-[#fcf3f1] p-6 sm:h-[220px] sm:p-8">
               <p className="text-[40px] font-semibold leading-[44px] sm:text-[56px] sm:leading-[60px]">190%</p>
               <p className="text-base font-medium leading-6 sm:text-[20px] sm:leading-7">
-                Рост вовлеченности
+                Higher engagement
               </p>
             </div>
           </div>
 
-          {/* feature highlight */}
           <div className="flex w-full flex-col items-center gap-10 overflow-clip rounded-3xl bg-[rgba(38,38,38,0.05)] p-6 sm:p-8 lg:h-[448px] lg:flex-row">
-            {/* left: tag cloud */}
             <div className="flex w-full flex-1 items-center justify-center self-stretch overflow-hidden rounded-[20px] px-2 py-5 sm:px-6">
               <div className="flex w-full max-w-[358px] flex-wrap content-center items-center justify-center gap-[6px]">
                 <div className="flex shrink-0 gap-[6px]">
@@ -208,18 +201,17 @@ export default function Home() {
               </div>
             </div>
 
-            {/* right: copy */}
             <div className="flex flex-1 flex-col items-start justify-center gap-6 self-stretch p-2 sm:p-6">
               <div className="flex w-full flex-col gap-4">
                 <h3 className="text-[28px] font-semibold leading-[32px] sm:text-[40px] sm:leading-[44px]">
-                  Единственный ИИ,
+                  The only AI
                   <br />
-                  который вам нужен
+                  you need
                 </h3>
                 <p className="text-base font-medium leading-6 text-[rgba(38,38,38,0.4)] sm:text-[20px] sm:leading-7">
-                  Набор инструментов необходимый
+                  The essential toolkit
                   <br />
-                  для современного преподавания
+                  for modern tutoring
                 </p>
               </div>
               <a
@@ -228,7 +220,7 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="inline-flex w-full items-center justify-center rounded-2xl bg-[#39c] px-6 py-4 text-base font-medium leading-6 text-white sm:w-auto"
               >
-                Попробовать бесплатно
+                Try for free
               </a>
             </div>
           </div>
@@ -238,18 +230,18 @@ export default function Home() {
       {/* ===== FAQ ===== */}
       <section className="flex w-full shrink-0 flex-col items-center gap-10 px-4 py-10 sm:px-20">
         <div className="max-w-[960px] text-center text-[24px] font-semibold leading-[28px] sm:text-[40px] sm:leading-[44px]">
-          <span className="text-[rgba(38,38,38,0.4)]">Есть вопросы?</span>
+          <span className="text-[rgba(38,38,38,0.4)]">Got questions?</span>
           <br />
-          С радостью отвечаем
+          We&apos;d be happy to help
         </div>
 
-        <FAQ />
+        <FAQEn />
       </section>
 
       {/* ===== CTA ===== */}
       <section className="flex w-full shrink-0 flex-col items-center justify-center px-4 pb-16 pt-4 sm:px-20 sm:pb-20">
         <h2 className="text-center text-[28px] font-semibold leading-[32px] sm:text-[40px] sm:leading-[44px]">
-          Готовы начать?
+          Ready to start?
         </h2>
         <a
           href="https://calendly.com/riaistesting/new-meeting"
@@ -257,17 +249,15 @@ export default function Home() {
           rel="noopener noreferrer"
           className="mt-8 inline-flex w-full items-center justify-center rounded-full bg-[#39c] px-6 py-4 text-base font-semibold leading-6 text-white sm:w-auto"
         >
-          Попробовать бесплатно
+          Try for free
         </a>
       </section>
 
       {/* ===== FOOTER ===== */}
-      <Footer locale="en" />
+      <FooterEn />
 
       {/* ===== TOP BAR ===== */}
-      {/* Mobile: full-width bar | Desktop: centered floating pill (logo + button) */}
       <nav className="fixed left-0 top-0 z-50 flex w-full items-center justify-between bg-[rgba(255,255,255,0.8)] px-4 py-3 backdrop-blur-[15px] sm:left-1/2 sm:top-4 sm:w-auto sm:-translate-x-1/2 sm:gap-[18px] sm:overflow-clip sm:rounded-full sm:border sm:border-[rgba(38,38,38,0.05)] sm:p-3">
-        {/* logo */}
         <div className="flex shrink-0 items-center gap-2 sm:px-3 sm:py-1">
           <img
             alt="quicks.ai"
@@ -291,7 +281,7 @@ export default function Home() {
           rel="noopener noreferrer"
           className="flex shrink-0 items-center rounded-full bg-[#39c] px-4 py-[10px] text-sm font-semibold leading-5 text-white"
         >
-          Попробовать
+          Try now
         </a>
       </nav>
     </div>
