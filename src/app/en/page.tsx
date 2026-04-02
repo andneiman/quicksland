@@ -123,7 +123,7 @@ export default function HomeEn() {
             </p>
           </div>
 
-          <HeroPreviewEn />
+          {/* <HeroPreviewEn /> */}
         </div>
       </section>
 
