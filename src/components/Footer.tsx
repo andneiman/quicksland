@@ -58,8 +58,8 @@ export default function Footer({ locale = "ru" }: { locale?: "ru" | "en" }) {
             </span>
           </div>
 
-          {/* language switcher */}
-          <div className="relative" ref={dropdownRef}>
+          {/* language switcher (hidden, uncomment to restore) */}
+          <div className="relative hidden" ref={dropdownRef}>
             <button
               type="button"
               onClick={() => setLangOpen(!langOpen)}
