@@ -268,18 +268,18 @@ export default function Home() {
       <Footer />
 
       {/* ===== TOP BAR ===== */}
-      {/* Mobile: full-width fixed bar | Desktop: centered floating pill */}
-      <nav className="fixed left-0 top-0 z-50 flex w-full items-center justify-between bg-[rgba(255,255,255,0.8)] px-4 py-4 backdrop-blur-[15px] sm:left-1/2 sm:top-4 sm:w-auto sm:-translate-x-1/2 sm:gap-[18px] sm:rounded-full sm:border sm:border-[rgba(38,38,38,0.05)] sm:p-3">
+      {/* Mobile: full-width bar | Desktop: centered floating pill (logo + button) */}
+      <nav className="fixed left-0 top-0 z-50 flex w-full items-center justify-between bg-[rgba(255,255,255,0.8)] px-4 py-4 backdrop-blur-[15px] sm:left-1/2 sm:top-4 sm:w-auto sm:-translate-x-1/2 sm:gap-[18px] sm:overflow-clip sm:rounded-full sm:border sm:border-[rgba(38,38,38,0.05)] sm:p-3">
         {/* logo */}
         <div className="flex shrink-0 items-center gap-2 px-0 py-[2px] sm:px-3">
-          <div className="relative size-7 shrink-0 overflow-hidden">
+          <div className="relative size-8 shrink-0 overflow-hidden">
             <img
               alt="quicks.ai"
               className="absolute left-[-49.22%] top-[-0.32%] h-[100.48%] w-[198.45%] max-w-none"
               src={ASSETS.logo}
             />
           </div>
-          <div className="relative h-[22.896px] w-[101.33px] shrink-0">
+          <div className="relative h-[26px] w-[80px] shrink-0">
             <img
               alt=""
               className="absolute inset-0 block size-full max-w-none"
@@ -288,17 +288,14 @@ export default function Home() {
           </div>
         </div>
 
-        {/* nav buttons */}
-        <div className="flex shrink-0 items-center gap-2">
-          <a
-            href="https://calendly.com/riaistesting/new-meeting"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex shrink-0 items-center rounded-full bg-[#39c] px-4 py-[10px] text-sm font-semibold leading-5 text-white"
-          >
-            Попробовать
-          </a>
-        </div>
+        <a
+          href="https://calendly.com/riaistesting/new-meeting"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex shrink-0 items-center rounded-full bg-[#39c] px-4 py-[10px] text-sm font-semibold leading-5 text-white"
+        >
+          Попробовать
+        </a>
       </nav>
     </div>
   );

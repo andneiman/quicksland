@@ -50,18 +50,12 @@ export default function Footer() {
         <div className="flex w-full flex-col items-start gap-8 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
           {/* legal links — vertical on mobile, horizontal on desktop */}
           <div className="flex flex-col items-start sm:flex-row sm:items-center sm:gap-1">
-            <a
-              href="https://quicks.ai/terms"
-              className="inline-flex items-center justify-center rounded-full px-4 py-[10px] text-sm font-medium leading-5 text-[#262626] transition-colors hover:bg-[rgba(38,38,38,0.05)]"
-            >
+            <span className="inline-flex items-center justify-center px-4 py-[10px] text-sm font-medium leading-5 text-[#262626]">
               Условия использования
-            </a>
-            <a
-              href="https://quicks.ai/privacy"
-              className="inline-flex items-center justify-center rounded-full px-4 py-[10px] text-sm font-medium leading-5 text-[#262626] transition-colors hover:bg-[rgba(38,38,38,0.05)]"
-            >
+            </span>
+            <span className="inline-flex items-center justify-center px-4 py-[10px] text-sm font-medium leading-5 text-[#262626]">
               Политика конфиденциальности
-            </a>
+            </span>
           </div>
 
           {/* language switcher */}
