@@ -6,7 +6,7 @@ import Image from "next/image";
 const TABS = [
   { id: "homework", label: "Домашка", src: "/previews/homework.png" },
   { id: "flashcards", label: "Флешкарты", src: "/previews/flashcards.png" },
-  { id: "chat", label: "Чат", src: "/previews/chat.png" },
+  { id: "chat", label: "ИИ чат", src: "/previews/chat.png" },
 ] as const;
 
 type TabId = (typeof TABS)[number]["id"];
