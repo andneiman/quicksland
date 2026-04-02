@@ -4,9 +4,9 @@ import { useState } from "react";
 import Image from "next/image";
 
 const TABS = [
-  { id: "homework", label: "Домашка", src: "/previews/homework.png" },
-  { id: "flashcards", label: "Флешкарты", src: "/previews/flashcards.png" },
-  { id: "chat", label: "ИИ чат", src: "/previews/chat.png" },
+  { id: "homework", label: "Домашка", src: "/previews/homework.jpg" },
+  { id: "flashcards", label: "Флешкарты", src: "/previews/flashcards.jpg" },
+  { id: "chat", label: "ИИ чат", src: "/previews/chat.jpg" },
 ] as const;
 
 type TabId = (typeof TABS)[number]["id"];
