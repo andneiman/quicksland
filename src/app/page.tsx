@@ -5,11 +5,8 @@ import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
 
 const ASSETS = {
-  logo: "https://www.figma.com/api/mcp/asset/56438114-aaed-4c0f-9035-f40a1c8e2546",
   shadow:
     "https://www.figma.com/api/mcp/asset/ba931cf3-1aec-4e15-a1d6-290245b64899",
-  wordmark:
-    "https://www.figma.com/api/mcp/asset/d381ff00-749c-4a1f-849b-8de819c8a274",
   iconMic:
     "https://www.figma.com/api/mcp/asset/c929f881-2638-4dc5-9c11-d993dd016927",
   iconSubtitles:
@@ -269,23 +266,23 @@ export default function Home() {
 
       {/* ===== TOP BAR ===== */}
       {/* Mobile: full-width bar | Desktop: centered floating pill (logo + button) */}
-      <nav className="fixed left-0 top-0 z-50 flex w-full items-center justify-between bg-[rgba(255,255,255,0.8)] px-4 py-4 backdrop-blur-[15px] sm:left-1/2 sm:top-4 sm:w-auto sm:-translate-x-1/2 sm:gap-[18px] sm:overflow-clip sm:rounded-full sm:border sm:border-[rgba(38,38,38,0.05)] sm:p-3">
+      <nav className="fixed left-0 top-0 z-50 flex w-full items-center justify-between bg-[rgba(255,255,255,0.8)] px-4 py-3 backdrop-blur-[15px] sm:left-1/2 sm:top-4 sm:w-auto sm:-translate-x-1/2 sm:gap-[18px] sm:overflow-clip sm:rounded-full sm:border sm:border-[rgba(38,38,38,0.05)] sm:p-3">
         {/* logo */}
-        <div className="flex shrink-0 items-center gap-2 px-0 py-[2px] sm:px-3">
-          <div className="relative size-8 shrink-0 overflow-hidden">
-            <img
-              alt="quicks.ai"
-              className="absolute left-[-49.22%] top-[-0.32%] h-[100.48%] w-[198.45%] max-w-none"
-              src={ASSETS.logo}
-            />
-          </div>
-          <div className="relative h-[26px] w-[80px] shrink-0">
-            <img
-              alt=""
-              className="absolute inset-0 block size-full max-w-none"
-              src={ASSETS.wordmark}
-            />
-          </div>
+        <div className="flex shrink-0 items-center gap-2 sm:px-3 sm:py-1">
+          <img
+            alt="quicks.ai"
+            src="/logo.png"
+            width={32}
+            height={32}
+            className="size-8 shrink-0"
+          />
+          <img
+            alt="quicks"
+            src="/wordmark.svg"
+            width={80}
+            height={26}
+            className="h-[26px] w-[80px] shrink-0"
+          />
         </div>
 
         <a
