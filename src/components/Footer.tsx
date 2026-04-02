@@ -3,8 +3,8 @@
 import { useState, useRef, useEffect } from "react";
 
 const LANGUAGES = [
-  { id: "ru", label: "Russian", href: "/" },
-  { id: "en", label: "English", href: "https://quicks.ai" },
+  { id: "ru", label: "Russian", href: "/ru" },
+  { id: "en", label: "English", href: "/en" },
 ] as const;
 
 function Chevron({ open }: { open: boolean }) {
@@ -27,7 +27,7 @@ function Chevron({ open }: { open: boolean }) {
   );
 }
 
-export default function Footer() {
+export default function Footer({ locale = "ru" }: { locale?: "ru" | "en" }) {
   const [langOpen, setLangOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -41,7 +41,7 @@ export default function Footer() {
     return () => document.removeEventListener("mousedown", handleOutside);
   }, []);
 
-  const currentLang = LANGUAGES[0];
+  const currentLang = LANGUAGES.find((l) => l.id === locale) ?? LANGUAGES[0];
 
   return (
     <footer className="flex w-full shrink-0 flex-col items-center px-4 sm:px-20">
