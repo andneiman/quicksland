@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const TABS = [
   { id: "homework", label: "Домашка", src: "/previews/homework.jpg" },
-  { id: "flashcards", label: "Флешкарты", src: "/previews/flashcards.jpg" },
+  { id: "flashcards", label: "Флэшкарты", src: "/previews/flashcards.jpg" },
   { id: "chat", label: "ИИ чат", src: "/previews/chat.jpg" },
 ] as const;
 
