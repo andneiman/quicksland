@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 
 import type { Metadata } from "next";
+import EmailForm from "@/components/EmailForm";
 
 export const metadata: Metadata = {
   title: "Quicks — AI-native workspace for learning and work",
@@ -43,19 +44,7 @@ export default function MainPage() {
             So it&apos;s time to reimagine what a workspace should be.
           </p>
 
-          {/* email form (visual only, no functionality) */}
-          <div className="mt-10 flex w-full max-w-[330px] flex-col gap-2">
-            <div className="flex items-center justify-center rounded-2xl border border-[rgba(100,100,100,0.33)] bg-white px-6 py-[17px]">
-              <span className="text-center text-lg font-medium leading-[26px] text-black/40">
-                Enter your email
-              </span>
-            </div>
-            <div className="flex items-center justify-center rounded-2xl border border-[rgba(255,255,255,0.16)] bg-[#2c2826] px-6 py-[17px]">
-              <span className="text-center text-lg font-medium leading-[26px] text-white">
-                Join early access
-              </span>
-            </div>
-          </div>
+          <EmailForm />
         </div>
       </section>
 
