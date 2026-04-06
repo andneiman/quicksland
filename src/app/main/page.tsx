@@ -39,8 +39,9 @@ export default function MainPage() {
             className="mt-6 text-center text-base leading-7 text-[#262626] sm:mt-4 sm:text-[20px] sm:leading-[28px]"
             style={{ fontFeatureSettings: "'ss01' 1" }}
           >
-            We now live in a world when AI can do your work for you. Well, most of it.{" "}
-            So it&apos;s time to reimagine what a workspace should be.
+            We now live in a world when AI can do your work for you. Well, most of it.
+            <br className="hidden sm:inline" />
+            {" "}So it&apos;s time to reimagine what a workspace should be.
           </p>
 
           <EmailForm />
