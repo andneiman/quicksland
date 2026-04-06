@@ -1,8 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
 
+import type { Metadata } from "next";
 import HeroPreviewEn from "@/components/en/HeroPreviewEn";
 import FAQEn from "@/components/en/FAQEn";
 import FooterEn from "@/components/en/FooterEn";
+
+export const metadata: Metadata = {
+  title: "Quicks — AI assistant for tutors",
+  description:
+    "It records your lessons and automatically creates homework, quizzes, flashcards, and much more",
+};
 
 const ASSETS = {
   shadow:
