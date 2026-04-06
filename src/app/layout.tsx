@@ -19,6 +19,10 @@ export const metadata: Metadata = {
   title: "Quicks — ИИ ассистент для преподавателей",
   description:
     "Записывает ваши уроки и автоматически создает домашние задания, квизы, флэшкарты и многое другое",
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
 };
 
 export default function RootLayout({
