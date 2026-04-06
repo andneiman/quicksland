@@ -19,14 +19,12 @@ const FAQ_DATA: { q: string; a: ReactNode }[] = [
     q: "I have a different question. Where should I reach out?",
     a: (
       <>
-        Write to us on Telegram{" "}
+        Write to us on{" "}
         <a
-          href="https://t.me/quicks_team"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="mailto:tutors@quicks.com"
           className="text-[#39c] underline"
         >
-          @quicks_team
+          tutors@quicks.com
         </a>
       </>
     ),

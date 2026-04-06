@@ -88,12 +88,10 @@ export default function FooterEn() {
             Let&apos;s connect:
             <br />
             <a
-              href="https://t.me/quicks_team"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="mailto:tutors@quicks.com"
               className="text-[rgba(37,37,37,0.5)]"
             >
-              @quicks_team
+              tutors@quicks.com
             </a>
           </p>
           <p className="text-right">All rights reserved.</p>
