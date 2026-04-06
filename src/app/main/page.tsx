@@ -35,13 +35,12 @@ export default function MainPage() {
 
           {/* subtitle */}
           <p
-            className="mt-6 max-w-[667px] text-center text-base leading-7 text-[#262626] sm:mt-4 sm:text-[20px] sm:leading-[28px]"
+            className="mt-6 text-center text-base leading-7 text-[#262626] sm:mt-4 sm:text-[20px] sm:leading-[28px]"
             style={{ fontFeatureSettings: "'ss01' 1" }}
           >
-            We now live in a time when AI can do your work for you. Well, most of
-            it.
-            <br className="hidden sm:inline" />
-            {" "}So it&apos;s time to reimagine what a workspace should be.
+            We now live in a time when AI can do your work for you. Well, most of it.
+            <br />
+            So it&apos;s time to reimagine what a workspace should be.
           </p>
 
           {/* email form (visual only, no functionality) */}
