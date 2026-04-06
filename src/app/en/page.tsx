@@ -111,7 +111,7 @@ export default function HomeEn() {
 
           <div className="flex w-full flex-col items-center gap-4 sm:w-auto">
             <a
-              href="https://calendly.com/riaistesting/new-meeting"
+              href="https://calendly.com/riaistesting/quicks-demo"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex w-full items-center justify-center rounded-full bg-[#39c] px-6 py-4 text-base font-medium leading-6 text-white sm:w-auto sm:font-semibold"
@@ -215,7 +215,7 @@ export default function HomeEn() {
                 </p>
               </div>
               <a
-                href="https://calendly.com/riaistesting/new-meeting"
+                href="https://calendly.com/riaistesting/quicks-demo"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex w-full items-center justify-center rounded-2xl bg-[#39c] px-6 py-4 text-base font-medium leading-6 text-white sm:w-auto"
@@ -244,7 +244,7 @@ export default function HomeEn() {
           Ready to start?
         </h2>
         <a
-          href="https://calendly.com/riaistesting/new-meeting"
+          href="https://calendly.com/riaistesting/quicks-demo"
           target="_blank"
           rel="noopener noreferrer"
           className="mt-8 inline-flex w-full items-center justify-center rounded-full bg-[#39c] px-6 py-4 text-base font-semibold leading-6 text-white sm:w-auto"
@@ -276,7 +276,7 @@ export default function HomeEn() {
         </div>
 
         <a
-          href="https://calendly.com/riaistesting/new-meeting"
+          href="https://calendly.com/riaistesting/quicks-demo"
           target="_blank"
           rel="noopener noreferrer"
           className="flex shrink-0 items-center rounded-full bg-[#39c] px-4 py-[10px] text-sm font-semibold leading-5 text-white"
