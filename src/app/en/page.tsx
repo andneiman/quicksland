@@ -12,7 +12,6 @@ export const metadata: Metadata = {
 };
 
 const ASSETS = {
-  shadow: "/shadow.svg",
   iconMic: "/icons/mic.svg",
   iconSubtitles: "/icons/subtitles.svg",
   iconCards: "/icons/cards.svg",
@@ -80,11 +79,27 @@ export default function HomeEn() {
       <section className="relative flex w-full shrink-0 flex-col items-center gap-10 px-4 py-12 sm:px-20 sm:py-16">
         <div className="pointer-events-none absolute left-1/2 top-[200px] z-0 h-[513px] w-[529px] -translate-x-1/2 sm:bottom-[-300px] sm:left-[8.44%] sm:right-[10%] sm:top-auto sm:h-[921px] sm:w-auto sm:translate-x-0">
           <div className="absolute inset-[-38.99%_-37.81%] sm:inset-[-21.72%_-19.16%]">
-            <img
-              alt=""
-              className="block size-full max-w-none"
-              src={ASSETS.shadow}
-            />
+            <svg preserveAspectRatio="none" width="100%" height="100%" overflow="visible" style={{ display: "block" }} viewBox="0 0 1444 1321" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g filter="url(#shadow-blur-en)">
+                <ellipse cx="722" cy="660.5" rx="522" ry="460.5" fill="url(#shadow-g1-en)" />
+                <ellipse cx="722" cy="660.5" rx="522" ry="460.5" fill="url(#shadow-g2-en)" />
+              </g>
+              <defs>
+                <filter id="shadow-blur-en" x="0" y="0" width="1444" height="1321" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                  <feFlood floodOpacity="0" result="BackgroundImageFix" />
+                  <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                  <feGaussianBlur stdDeviation="100" result="effect1_foregroundBlur" />
+                </filter>
+                <linearGradient id="shadow-g1-en" x1="200" y1="660.5" x2="1244" y2="660.5" gradientUnits="userSpaceOnUse">
+                  <stop stopColor="#92E2FF" />
+                  <stop offset="1" stopColor="#E87FFF" />
+                </linearGradient>
+                <linearGradient id="shadow-g2-en" x1="722" y1="465.267" x2="722" y2="683.437" gradientUnits="userSpaceOnUse">
+                  <stop stopColor="white" stopOpacity="0" />
+                  <stop offset="1" stopColor="white" />
+                </linearGradient>
+              </defs>
+            </svg>
           </div>
         </div>
 
