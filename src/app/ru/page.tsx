@@ -5,22 +5,14 @@ import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
 
 const ASSETS = {
-  shadow:
-    "https://www.figma.com/api/mcp/asset/ba931cf3-1aec-4e15-a1d6-290245b64899",
-  iconMic:
-    "https://www.figma.com/api/mcp/asset/c929f881-2638-4dc5-9c11-d993dd016927",
-  iconSubtitles:
-    "https://www.figma.com/api/mcp/asset/e72bcecc-3fd4-40ec-b095-b8cf921a5f7a",
-  iconCards:
-    "https://www.figma.com/api/mcp/asset/5af56057-a11a-42d1-8a6a-08912b88b11c",
-  iconChecklist:
-    "https://www.figma.com/api/mcp/asset/3149fc55-d1cd-4f3d-abc7-61e9a3ccd705",
-  iconWave:
-    "https://www.figma.com/api/mcp/asset/1bd0961c-a367-4c68-ae4c-5864a94ec8de",
-  iconParagraph:
-    "https://www.figma.com/api/mcp/asset/6154b090-8f66-4701-945f-835ab8dbeeb3",
-  iconPencil:
-    "https://www.figma.com/api/mcp/asset/e4ab5bf7-6345-44c5-a1f2-f3c1892e604b",
+  shadow: "/shadow.svg",
+  iconMic: "/icons/mic.svg",
+  iconSubtitles: "/icons/subtitles.svg",
+  iconCards: "/icons/cards.svg",
+  iconChecklist: "/icons/checklist.svg",
+  iconWave: "/icons/wave.svg",
+  iconParagraph: "/icons/paragraph.svg",
+  iconPencil: "/icons/pencil.svg",
 };
 
 const FEATURES: { bg: string; icon: string; label: string }[] = [
