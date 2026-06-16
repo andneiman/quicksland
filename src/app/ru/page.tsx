@@ -121,7 +121,7 @@ export default function Home() {
           {/* CTA */}
           <div className="flex w-full flex-col items-center gap-4 sm:w-auto">
             <a
-              href="https://planerka.app/victoria-testing-zd48lv/quicks-demo"
+              href="https://planerka.app/dmitriy-u1vvsd/20min"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex w-full items-center justify-center rounded-full bg-[#39c] px-6 py-4 text-base font-medium leading-6 text-white sm:w-auto sm:font-semibold"
@@ -230,7 +230,7 @@ export default function Home() {
                 </p>
               </div>
               <a
-                href="https://planerka.app/victoria-testing-zd48lv/quicks-demo"
+                href="https://planerka.app/dmitriy-u1vvsd/20min"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex w-full items-center justify-center rounded-2xl bg-[#39c] px-6 py-4 text-base font-medium leading-6 text-white sm:w-auto"
@@ -259,7 +259,7 @@ export default function Home() {
           Готовы начать?
         </h2>
         <a
-          href="https://planerka.app/victoria-testing-zd48lv/quicks-demo"
+          href="https://planerka.app/dmitriy-u1vvsd/20min"
           target="_blank"
           rel="noopener noreferrer"
           className="mt-8 inline-flex w-full items-center justify-center rounded-full bg-[#39c] px-6 py-4 text-base font-semibold leading-6 text-white sm:w-auto"
@@ -293,7 +293,7 @@ export default function Home() {
         </div>
 
         <a
-          href="https://planerka.app/victoria-testing-zd48lv/quicks-demo"
+          href="https://planerka.app/dmitriy-u1vvsd/20min"
           target="_blank"
           rel="noopener noreferrer"
           className="flex shrink-0 items-center rounded-full bg-[#39c] px-4 py-[10px] text-sm font-semibold leading-5 text-white"
