@@ -42,7 +42,7 @@ export default function HeroPreviewEn() {
         ))}
       </div>
 
-      <div className="relative -mx-2 w-[calc(100%+1rem)] overflow-clip rounded-3xl sm:mx-0 sm:w-full">
+      <div className="relative -mx-2 w-[calc(100%+1rem)] overflow-clip sm:mx-0 sm:w-full">
         <div className="relative aspect-[2200/1330] w-full">
           {TABS.map((tab) => {
             const isActive = tab.id === active;
