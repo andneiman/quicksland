@@ -31,10 +31,12 @@ const TESTIMONIALS = [
     role: "Business English, Singapore",
   },
   {
+    // hidden on mobile (keep on desktop)
     quote:
       "Had a student ask me something weird about case endings at 10pm… answered with the AI chat in like 2 minutes. Felt a bit like cheating lol but it helped.",
     name: "Noah B.",
     role: "German tutor, Berlin",
+    hideOnMobile: true,
   },
   {
     quote:
@@ -78,6 +80,7 @@ export default function SocialProofEn() {
             className={[
               "flex flex-col justify-between gap-6 rounded-3xl bg-[rgba(38,38,38,0.04)] p-6 sm:p-8",
               i < 3 ? "lg:col-span-2" : "sm:col-span-1 lg:col-span-3",
+              "hideOnMobile" in t && t.hideOnMobile ? "hidden sm:flex" : "",
             ].join(" ")}
           >
             <blockquote className="text-base font-medium leading-6 text-[#262626] sm:text-[18px] sm:leading-7">
