@@ -72,7 +72,7 @@ function Placeholder({ w }: { w: number }) {
 
 export default function HomeEn() {
   return (
-    <div className="relative flex min-h-dvh w-full flex-col items-center bg-white text-[#262626]">
+    <div className="relative flex min-h-dvh w-full max-w-[100vw] flex-col items-center overflow-x-clip bg-white text-[#262626]">
       <link rel="preload" as="image" href="/previews/en-homework.jpg" type="image/jpeg" />
       <link rel="preload" as="image" href="/previews/en-flashcards.jpg" type="image/jpeg" />
       <link rel="preload" as="image" href="/previews/en-chat.jpg" type="image/jpeg" />
@@ -83,9 +83,10 @@ export default function HomeEn() {
       <div className="h-[72px] w-full shrink-0 sm:h-24" />
 
       {/* ===== HERO ===== */}
-      <section className="relative flex w-full shrink-0 flex-col items-center gap-10 overflow-visible px-4 pb-24 pt-12 sm:px-20 sm:pb-16 sm:pt-16">
-        <div className="pointer-events-none absolute left-1/2 top-[300px] z-0 h-[620px] w-[560px] -translate-x-1/2 sm:bottom-[-320px] sm:left-[8.44%] sm:right-[10%] sm:top-auto sm:h-[980px] sm:w-auto sm:translate-x-0">
-          <div className="absolute inset-[-38.99%_-37.81%] sm:inset-[-21.72%_-19.16%]">
+      <section className="relative flex w-full shrink-0 flex-col items-center gap-10 overflow-x-clip px-4 pb-24 pt-12 sm:overflow-visible sm:px-20 sm:pb-16 sm:pt-16">
+        {/* Glow contained so it can't widen the page on mobile */}
+        <div className="pointer-events-none absolute left-1/2 top-[300px] z-0 h-[620px] w-[min(560px,100%)] -translate-x-1/2 sm:bottom-[-320px] sm:left-[8.44%] sm:right-[10%] sm:top-auto sm:h-[980px] sm:w-auto sm:translate-x-0">
+          <div className="absolute inset-[-20%_-10%] sm:inset-[-21.72%_-19.16%]">
             <svg preserveAspectRatio="none" width="100%" height="100%" overflow="visible" style={{ display: "block" }} viewBox="0 0 1444 1321" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g filter="url(#shadow-blur-en)">
                 <ellipse cx="722" cy="660.5" rx="522" ry="460.5" fill="url(#shadow-g1-en)" />

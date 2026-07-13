@@ -20,6 +20,11 @@ body {
   background: var(--surface-primary);
   color: var(--symbol-primary);
   font-family: var(--font-inter), "Inter", sans-serif;
+  overflow-x: clip;
+}
+
+html {
+  overflow-x: clip;
 }
 
 @keyframes sheet-backdrop-in {

@@ -93,13 +93,6 @@ const VARIANT_CLASS: Record<Variant, string> = {
   nav: "flex shrink-0 items-center gap-1.5 rounded-full bg-[#262626] px-4 py-[10px] text-sm font-semibold leading-5 text-white",
 };
 
-type VvFrame = {
-  /** keyboard / chrome offset from layout bottom */
-  sheetBottom: number;
-  /** full layout height — overlay covers behind keyboard too */
-  layoutHeight: number;
-};
-
 export default function DesktopAppCta({
   variant = "hero",
   className = "",
@@ -117,10 +110,6 @@ export default function DesktopAppCta({
     "idle" | "loading" | "success" | "error"
   >("idle");
   const [copied, setCopied] = useState(false);
-  const [frame, setFrame] = useState<VvFrame>({
-    sheetBottom: 0,
-    layoutHeight: 0,
-  });
 
   useEffect(() => {
     setMounted(true);
@@ -129,58 +118,34 @@ export default function DesktopAppCta({
   useEffect(() => {
     if (!open) return;
 
-    const sync = () => {
-      const layoutHeight = window.innerHeight;
-      const vv = window.visualViewport;
-      if (!vv) {
-        setFrame({ sheetBottom: 0, layoutHeight });
-        return;
-      }
-      // Distance from visual viewport bottom to layout viewport bottom
-      const sheetBottom = Math.max(
-        0,
-        Math.round(layoutHeight - vv.height - vv.offsetTop)
-      );
-      setFrame({ sheetBottom, layoutHeight });
-    };
-
-    sync();
-    const vv = window.visualViewport;
-    vv?.addEventListener("resize", sync);
-    vv?.addEventListener("scroll", sync);
-    window.addEventListener("resize", sync);
-
-    return () => {
-      vv?.removeEventListener("resize", sync);
-      vv?.removeEventListener("scroll", sync);
-      window.removeEventListener("resize", sync);
-    };
-  }, [open]);
-
-  useEffect(() => {
-    if (!open) return;
-
-    const prevOverflow = document.body.style.overflow;
-    const prevPosition = document.body.style.position;
-    const prevTop = document.body.style.top;
-    const prevWidth = document.body.style.width;
-    const scrollY = window.scrollY;
-
+    const prevOverflow = document.documentElement.style.overflow;
+    document.documentElement.style.overflow = "hidden";
     document.body.style.overflow = "hidden";
-    document.body.style.position = "fixed";
-    document.body.style.top = `-${scrollY}px`;
-    document.body.style.width = "100%";
 
     setAllowDismiss(false);
-    const dismissId = window.setTimeout(() => setAllowDismiss(true), 480);
+    const dismissId = window.setTimeout(() => setAllowDismiss(true), 450);
+
+    // Prevent iOS from scrolling the page when focusing the input
+    const onFocusIn = (e: FocusEvent) => {
+      const target = e.target;
+      if (!(target instanceof HTMLElement)) return;
+      if (target.tagName !== "INPUT" && target.tagName !== "TEXTAREA") return;
+      // Keep sheet pinned; cancel delayed scroll-into-view jumps
+      window.setTimeout(() => {
+        window.scrollTo(0, 0);
+      }, 50);
+    };
+    document.addEventListener("focusin", onFocusIn);
 
     return () => {
       window.clearTimeout(dismissId);
-      document.body.style.overflow = prevOverflow;
-      document.body.style.position = prevPosition;
-      document.body.style.top = prevTop;
-      document.body.style.width = prevWidth;
-      window.scrollTo(0, scrollY);
+      document.removeEventListener("focusin", onFocusIn);
+      document.documentElement.style.overflow = prevOverflow;
+      document.body.style.overflow = "";
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+      document.body.style.left = "";
     };
   }, [open, animKey]);
 
@@ -205,7 +170,7 @@ export default function DesktopAppCta({
       typeof window !== "undefined" &&
       window.matchMedia("(max-width: 639px)").matches;
     if (isMobile) {
-      setAnimKey((k) => k + 1); // force remount so enter animation always runs
+      setAnimKey((k) => k + 1);
       setOpen(true);
       return;
     }
@@ -249,6 +214,9 @@ export default function DesktopAppCta({
 
   function close() {
     setAllowDismiss(false);
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
     setOpen(false);
     setSendStatus("idle");
     setCopied(false);
@@ -265,10 +233,7 @@ export default function DesktopAppCta({
       ? createPortal(
           <div
             key={animKey}
-            className="fixed inset-x-0 top-0 z-[200]"
-            style={{
-              height: frame.layoutHeight || "100dvh",
-            }}
+            className="fixed inset-0 z-[200] flex flex-col justify-end"
             role="dialog"
             aria-modal
             aria-labelledby={titleId}
@@ -279,43 +244,27 @@ export default function DesktopAppCta({
               onClick={requestClose}
             />
 
-            {/* White fill behind keyboard / below sheet — kills Safari gap */}
             <div
-              aria-hidden
-              className="pointer-events-none absolute inset-x-0 bottom-0 bg-white"
-              style={{
-                height: Math.max(frame.sheetBottom + 24, 24),
-              }}
-            />
-
-            <div
-              className="sheet-panel-in absolute inset-x-0"
-              style={{ bottom: frame.sheetBottom }}
+              className="sheet-panel-in relative z-10 w-full"
               onClick={(e) => e.stopPropagation()}
               onPointerDown={(e) => e.stopPropagation()}
             >
-              <div className="relative rounded-t-[28px] bg-white px-6 pb-8 pt-8 shadow-[0_-8px_40px_rgba(0,0,0,0.12)]">
-                {/* Extra insurance: white continues under the panel */}
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute inset-x-0 top-[40%] -bottom-[100vh] bg-white"
-                />
-
-                <div className="relative mx-auto mb-5 flex justify-center">
+              <div className="rounded-t-[28px] bg-white px-6 pb-[max(2rem,env(safe-area-inset-bottom))] pt-8 shadow-[0_-8px_40px_rgba(0,0,0,0.12)]">
+                <div className="mx-auto mb-5 flex justify-center">
                   <PhoneIcon />
                 </div>
 
                 <h2
                   id={titleId}
-                  className="relative text-center text-[28px] font-semibold leading-[32px] text-[#262626]"
+                  className="text-center text-[28px] font-semibold leading-[32px] text-[#262626]"
                 >
                   On your phone?
                 </h2>
-                <p className="relative mx-auto mt-3 max-w-[280px] text-center text-base font-medium leading-6 text-[rgba(38,38,38,0.5)]">
+                <p className="mx-auto mt-3 max-w-[280px] text-center text-base font-medium leading-6 text-[rgba(38,38,38,0.5)]">
                   We&apos;ll email you a link to open later on your computer
                 </p>
 
-                <div className="relative mt-8">
+                <div className="mt-8">
                   {sendStatus === "success" ? (
                     <div className="flex w-full items-center justify-center gap-2 rounded-full bg-[#e8f5e9] px-5 py-4 text-[#2e7d32]">
                       <CheckIcon />
@@ -336,7 +285,8 @@ export default function DesktopAppCta({
                         placeholder="Your work email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="min-w-0 flex-1 bg-transparent text-base font-medium leading-6 text-[#262626] outline-none placeholder:text-[rgba(38,38,38,0.35)]"
+                        // 16px minimum — prevents iOS Safari input zoom / unzoom
+                        className="min-w-0 flex-1 bg-transparent text-[16px] font-medium leading-6 text-[#262626] outline-none placeholder:text-[rgba(38,38,38,0.35)]"
                       />
                       <button
                         type="submit"
@@ -353,7 +303,7 @@ export default function DesktopAppCta({
                   )}
                 </div>
 
-                <div className="relative mt-8 flex justify-center pb-1">
+                <div className="mt-8 flex justify-center pb-1">
                   <button
                     type="button"
                     onClick={handleCopy}
