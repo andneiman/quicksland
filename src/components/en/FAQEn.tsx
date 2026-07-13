@@ -21,10 +21,10 @@ const FAQ_DATA: { q: string; a: ReactNode }[] = [
       <>
         Write to us on{" "}
         <a
-          href="mailto:tutors@quicks.com"
+          href="mailto:school@quicks.com"
           className="text-[#39c] underline"
         >
-          tutors@quicks.com
+          school@quicks.com
         </a>
       </>
     ),

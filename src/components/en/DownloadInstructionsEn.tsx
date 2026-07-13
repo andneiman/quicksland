@@ -185,14 +185,14 @@ export default function DownloadInstructionsEn({
       <footer className="px-4 py-6 text-center text-[11px] leading-4 text-[rgba(38,38,38,0.4)] sm:py-8">
         <p>Have any questions?</p>
         <p>
-          Our{" "}
+          Email{" "}
           <a
-            href="mailto:tutors@quicks.com"
+            href="mailto:school@quicks.com"
             className="text-[rgba(38,38,38,0.6)] hover:underline"
           >
-            tutors@quicks.com
+            school@quicks.com
           </a>{" "}
-          team is here to assist you
+          — we&apos;re here to assist you
         </p>
       </footer>
     </div>

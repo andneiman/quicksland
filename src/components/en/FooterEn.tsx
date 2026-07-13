@@ -98,10 +98,10 @@ export default function FooterEn() {
             Let&apos;s connect:
             <br />
             <a
-              href="mailto:tutors@quicks.com"
+              href="mailto:school@quicks.com"
               className="text-[rgba(37,37,37,0.5)]"
             >
-              tutors@quicks.com
+              school@quicks.com
             </a>
           </p>
           <p className="text-right">All rights reserved.</p>
