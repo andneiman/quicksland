@@ -4,6 +4,7 @@ import {
   useEffect,
   useId,
   useState,
+  type CSSProperties,
   type FormEvent,
   type MouseEvent,
 } from "react";
@@ -110,6 +111,8 @@ export default function DesktopAppCta({
     "idle" | "loading" | "success" | "error"
   >("idle");
   const [copied, setCopied] = useState(false);
+  // Pin overlay to the visible Safari viewport (above keyboard)
+  const [vv, setVv] = useState({ top: 0, height: 0 });
 
   useEffect(() => {
     setMounted(true);
@@ -118,34 +121,39 @@ export default function DesktopAppCta({
   useEffect(() => {
     if (!open) return;
 
-    const prevOverflow = document.documentElement.style.overflow;
+    const sync = () => {
+      const viewport = window.visualViewport;
+      if (!viewport) {
+        setVv({ top: 0, height: window.innerHeight });
+        return;
+      }
+      setVv({
+        top: viewport.offsetTop,
+        height: viewport.height,
+      });
+    };
+
+    sync();
+    const viewport = window.visualViewport;
+    viewport?.addEventListener("resize", sync);
+    viewport?.addEventListener("scroll", sync);
+    window.addEventListener("resize", sync);
+
+    const prevHtmlOverflow = document.documentElement.style.overflow;
+    const prevBodyOverflow = document.body.style.overflow;
     document.documentElement.style.overflow = "hidden";
     document.body.style.overflow = "hidden";
 
     setAllowDismiss(false);
     const dismissId = window.setTimeout(() => setAllowDismiss(true), 450);
 
-    // Prevent iOS from scrolling the page when focusing the input
-    const onFocusIn = (e: FocusEvent) => {
-      const target = e.target;
-      if (!(target instanceof HTMLElement)) return;
-      if (target.tagName !== "INPUT" && target.tagName !== "TEXTAREA") return;
-      // Keep sheet pinned; cancel delayed scroll-into-view jumps
-      window.setTimeout(() => {
-        window.scrollTo(0, 0);
-      }, 50);
-    };
-    document.addEventListener("focusin", onFocusIn);
-
     return () => {
+      viewport?.removeEventListener("resize", sync);
+      viewport?.removeEventListener("scroll", sync);
+      window.removeEventListener("resize", sync);
       window.clearTimeout(dismissId);
-      document.removeEventListener("focusin", onFocusIn);
-      document.documentElement.style.overflow = prevOverflow;
-      document.body.style.overflow = "";
-      document.body.style.position = "";
-      document.body.style.top = "";
-      document.body.style.width = "";
-      document.body.style.left = "";
+      document.documentElement.style.overflow = prevHtmlOverflow;
+      document.body.style.overflow = prevBodyOverflow;
     };
   }, [open, animKey]);
 
@@ -228,12 +236,24 @@ export default function DesktopAppCta({
     close();
   }
 
+  const overlayStyle: CSSProperties =
+    vv.height > 0
+      ? {
+          top: vv.top,
+          height: vv.height,
+          left: 0,
+          right: 0,
+          bottom: "auto",
+        }
+      : { inset: 0 };
+
   const sheet =
     open && mounted
       ? createPortal(
           <div
             key={animKey}
-            className="fixed inset-0 z-[200] flex flex-col justify-end"
+            className="fixed z-[200] flex flex-col justify-end overflow-hidden"
+            style={overlayStyle}
             role="dialog"
             aria-modal
             aria-labelledby={titleId}
@@ -245,11 +265,11 @@ export default function DesktopAppCta({
             />
 
             <div
-              className="sheet-panel-in relative z-10 w-full"
+              className="sheet-panel-in relative z-10 w-full shrink-0"
               onClick={(e) => e.stopPropagation()}
               onPointerDown={(e) => e.stopPropagation()}
             >
-              <div className="rounded-t-[28px] bg-white px-6 pb-[max(2rem,env(safe-area-inset-bottom))] pt-8 shadow-[0_-8px_40px_rgba(0,0,0,0.12)]">
+              <div className="max-h-[min(100%,85dvh)] overflow-y-auto rounded-t-[28px] bg-white px-6 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-8 shadow-[0_-8px_40px_rgba(0,0,0,0.12)]">
                 <div className="mx-auto mb-5 flex justify-center">
                   <PhoneIcon />
                 </div>
@@ -285,7 +305,20 @@ export default function DesktopAppCta({
                         placeholder="Your work email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        // 16px minimum — prevents iOS Safari input zoom / unzoom
+                        onFocus={() => {
+                          // Re-sync after keyboard animation starts
+                          const bump = () => {
+                            const viewport = window.visualViewport;
+                            if (!viewport) return;
+                            setVv({
+                              top: viewport.offsetTop,
+                              height: viewport.height,
+                            });
+                          };
+                          bump();
+                          window.setTimeout(bump, 100);
+                          window.setTimeout(bump, 300);
+                        }}
                         className="min-w-0 flex-1 bg-transparent text-[16px] font-medium leading-6 text-[#262626] outline-none placeholder:text-[rgba(38,38,38,0.35)]"
                       />
                       <button
