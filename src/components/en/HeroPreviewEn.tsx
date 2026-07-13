@@ -13,7 +13,6 @@ type TabId = (typeof TABS)[number]["id"];
 
 export default function HeroPreviewEn() {
   const [active, setActive] = useState<TabId>("homework");
-  const current = TABS.find((t) => t.id === active)!;
 
   return (
     <div className="flex w-full flex-col items-center gap-5">
@@ -37,13 +36,22 @@ export default function HeroPreviewEn() {
 
       <div className="relative w-full overflow-clip rounded-3xl">
         <div className="relative aspect-[2/1] w-full">
-          <Image
-            src={current.src}
-            alt={`Preview — ${current.label}`}
-            fill
-            className="object-contain transition-opacity duration-300"
-            priority
-          />
+          {TABS.map((tab) => (
+            <Image
+              key={tab.id}
+              src={tab.src}
+              alt={`Preview — ${tab.label}`}
+              fill
+              sizes="(max-width: 1280px) 100vw, 1120px"
+              quality={80}
+              priority
+              className={[
+                "object-contain transition-opacity duration-150",
+                tab.id === active ? "opacity-100" : "pointer-events-none opacity-0",
+              ].join(" ")}
+              aria-hidden={tab.id !== active}
+            />
+          ))}
         </div>
       </div>
     </div>
