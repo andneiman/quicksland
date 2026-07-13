@@ -6,6 +6,7 @@ import FAQEn from "@/components/en/FAQEn";
 import FooterEn from "@/components/en/FooterEn";
 import DesktopAppCta from "@/components/en/DesktopAppCta";
 import SocialProofEn from "@/components/en/SocialProofEn";
+import LiveDemoEn from "@/components/en/LiveDemoEn";
 
 export const metadata: Metadata = {
   title: "Quicks — AI assistant for tutors",
@@ -233,6 +234,9 @@ export default function HomeEn() {
           </div>
         </div>
       </section>
+
+      {/* ===== LIVE DEMO ===== */}
+      <LiveDemoEn />
 
       {/* ===== SOCIAL PROOF ===== */}
       <SocialProofEn />
