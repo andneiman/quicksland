@@ -190,9 +190,9 @@ export default function DownloadInstructionsEn({
             href="mailto:tutors@quicks.com"
             className="text-[rgba(38,38,38,0.6)] hover:underline"
           >
-            support team
+            tutors@quicks.com
           </a>{" "}
-          is here to assist you
+          team is here to assist you
         </p>
       </footer>
     </div>

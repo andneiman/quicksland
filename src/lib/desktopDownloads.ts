@@ -15,11 +15,10 @@ export function detectDesktopOS(
 
 export function triggerDesktopDownload(os: DesktopOS) {
   const url = DESKTOP_DOWNLOADS[os];
-  const a = document.createElement("a");
-  a.href = url;
-  a.rel = "noopener";
-  a.download = "";
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
+  // Cross-origin: use a hidden iframe so we stay on the instructions page
+  const iframe = document.createElement("iframe");
+  iframe.style.display = "none";
+  iframe.src = url;
+  document.body.appendChild(iframe);
+  window.setTimeout(() => iframe.remove(), 60_000);
 }
