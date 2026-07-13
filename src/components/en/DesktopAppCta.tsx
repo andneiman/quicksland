@@ -306,7 +306,7 @@ export default function DesktopAppCta({
         className={[VARIANT_CLASS[variant], className].filter(Boolean).join(" ")}
       >
         <DesktopIcon className={variant === "nav" ? "size-4" : "size-5"} />
-        Get the Desktop app
+        {variant === "nav" ? "Get the app" : "Get the Desktop app"}
       </button>
       {sheet}
     </>
