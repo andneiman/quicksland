@@ -1,7 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import Image from "next/image";
+import { useEffect, useState } from "react";
 
 const TABS = [
   { id: "homework", label: "Homework", src: "/previews/en-homework.jpg" },
@@ -14,6 +13,15 @@ type TabId = (typeof TABS)[number]["id"];
 export default function HeroPreviewEn() {
   const [active, setActive] = useState<TabId>("homework");
 
+  // Decode all images up front so tab switches don't wait on decode
+  useEffect(() => {
+    TABS.forEach((tab) => {
+      const img = new window.Image();
+      img.src = tab.src;
+      void img.decode?.().catch(() => {});
+    });
+  }, []);
+
   return (
     <div className="flex w-full flex-col items-center gap-5">
       <div className="flex gap-2">
@@ -23,7 +31,7 @@ export default function HeroPreviewEn() {
             type="button"
             onClick={() => setActive(tab.id)}
             className={[
-              "inline-flex items-center justify-center rounded-full px-4 py-[10px] text-base font-medium leading-6 text-[rgba(38,38,38,0.6)] shadow-[0px_0px_6px_0px_rgba(0,0,0,0.02),0px_2px_4px_0px_rgba(0,0,0,0.08)] transition-colors",
+              "inline-flex items-center justify-center rounded-full px-4 py-[10px] text-base font-medium leading-6 text-[rgba(38,38,38,0.6)] shadow-[0px_0px_6px_0px_rgba(0,0,0,0.02),0px_2px_4px_0px_rgba(0,0,0,0.08)]",
               tab.id === active
                 ? "bg-white"
                 : "bg-[rgba(255,255,255,0.6)]",
@@ -36,22 +44,26 @@ export default function HeroPreviewEn() {
 
       <div className="relative w-full overflow-clip rounded-3xl">
         <div className="relative aspect-[2/1] w-full">
-          {TABS.map((tab) => (
-            <Image
-              key={tab.id}
-              src={tab.src}
-              alt={`Preview — ${tab.label}`}
-              fill
-              sizes="(max-width: 1280px) 100vw, 1120px"
-              quality={80}
-              priority
-              className={[
-                "object-contain transition-opacity duration-150",
-                tab.id === active ? "opacity-100" : "pointer-events-none opacity-0",
-              ].join(" ")}
-              aria-hidden={tab.id !== active}
-            />
-          ))}
+          {TABS.map((tab) => {
+            const isActive = tab.id === active;
+            return (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                key={tab.src}
+                src={tab.src}
+                alt={isActive ? `Preview — ${tab.label}` : ""}
+                width={2200}
+                height={1330}
+                decoding="async"
+                fetchPriority="high"
+                className={[
+                  "absolute inset-0 size-full object-contain",
+                  isActive ? "opacity-100" : "pointer-events-none opacity-0",
+                ].join(" ")}
+                aria-hidden={!isActive}
+              />
+            );
+          })}
         </div>
       </div>
     </div>

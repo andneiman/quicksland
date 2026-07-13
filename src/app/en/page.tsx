@@ -69,6 +69,9 @@ function Placeholder({ w }: { w: number }) {
 export default function HomeEn() {
   return (
     <div className="relative flex min-h-dvh w-full flex-col items-center overflow-clip bg-white text-[#262626]">
+      <link rel="preload" as="image" href="/previews/en-homework.jpg" type="image/jpeg" />
+      <link rel="preload" as="image" href="/previews/en-flashcards.jpg" type="image/jpeg" />
+      <link rel="preload" as="image" href="/previews/en-chat.jpg" type="image/jpeg" />
       {/* ── gradient background ── */}
       <div className="pointer-events-none absolute left-0 top-0 h-[221px] w-full bg-gradient-to-b from-[#eee] to-white" />
 
