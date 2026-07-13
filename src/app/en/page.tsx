@@ -5,6 +5,7 @@ import HeroPreviewEn from "@/components/en/HeroPreviewEn";
 import FAQEn from "@/components/en/FAQEn";
 import FooterEn from "@/components/en/FooterEn";
 import DesktopAppCta from "@/components/en/DesktopAppCta";
+import SocialProofEn from "@/components/en/SocialProofEn";
 
 export const metadata: Metadata = {
   title: "Quicks — AI assistant for tutors",
@@ -243,6 +244,9 @@ export default function HomeEn() {
 
         <FAQEn />
       </section>
+
+      {/* ===== SOCIAL PROOF ===== */}
+      <SocialProofEn />
 
       {/* ===== CTA ===== */}
       <section className="flex w-full shrink-0 flex-col items-center justify-center px-4 pb-16 pt-4 sm:px-20 sm:pb-20">
