@@ -84,7 +84,7 @@ export default function HomeEn() {
 
       {/* ===== HERO ===== */}
       <section className="relative flex w-full shrink-0 flex-col items-center gap-10 overflow-visible px-4 py-12 sm:px-20 sm:py-16">
-        <div className="pointer-events-none absolute left-1/2 top-[360px] z-0 h-[513px] w-[529px] -translate-x-1/2 sm:bottom-[-167px] sm:left-[8.44%] sm:right-[10%] sm:top-auto sm:h-[921px] sm:w-auto sm:translate-x-0">
+        <div className="pointer-events-none absolute left-1/2 top-[360px] z-0 h-[513px] w-[529px] -translate-x-1/2 sm:bottom-[-320px] sm:left-[8.44%] sm:right-[10%] sm:top-auto sm:h-[980px] sm:w-auto sm:translate-x-0">
           <div className="absolute inset-[-38.99%_-37.81%] sm:inset-[-21.72%_-19.16%]">
             <svg preserveAspectRatio="none" width="100%" height="100%" overflow="visible" style={{ display: "block" }} viewBox="0 0 1444 1321" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g filter="url(#shadow-blur-en)">

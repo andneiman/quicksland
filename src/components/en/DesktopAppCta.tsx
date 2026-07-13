@@ -110,30 +110,70 @@ export default function DesktopAppCta({
     "idle" | "loading" | "success" | "error"
   >("idle");
   const [copied, setCopied] = useState(false);
+  // Lock overlay to iOS visual viewport (fixes keyboard gap)
+  const [vv, setVv] = useState({ top: 0, height: 0 });
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  // Mount → next frame enter (so CSS transitions run)
+  useEffect(() => {
+    if (!open) return;
+
+    const sync = () => {
+      const viewport = window.visualViewport;
+      if (!viewport) {
+        setVv({ top: 0, height: window.innerHeight });
+        return;
+      }
+      setVv({ top: viewport.offsetTop, height: viewport.height });
+    };
+
+    sync();
+    const viewport = window.visualViewport;
+    viewport?.addEventListener("resize", sync);
+    viewport?.addEventListener("scroll", sync);
+    window.addEventListener("resize", sync);
+
+    return () => {
+      viewport?.removeEventListener("resize", sync);
+      viewport?.removeEventListener("scroll", sync);
+      window.removeEventListener("resize", sync);
+    };
+  }, [open]);
+
   useEffect(() => {
     if (!open) {
       setEntered(false);
       return;
     }
-    const prev = document.body.style.overflow;
+
+    const prevOverflow = document.body.style.overflow;
+    const prevPosition = document.body.style.position;
+    const prevTop = document.body.style.top;
+    const prevWidth = document.body.style.width;
+    const scrollY = window.scrollY;
+
+    // Freeze page scroll without layout jump (iOS-friendly)
     document.body.style.overflow = "hidden";
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.width = "100%";
+
     setAllowDismiss(false);
 
-    const enter = window.requestAnimationFrame(() => {
-      window.requestAnimationFrame(() => setEntered(true));
-    });
-    const dismiss = window.setTimeout(() => setAllowDismiss(true), 500);
+    // Start enter animation on next frame
+    const enterId = window.setTimeout(() => setEntered(true), 20);
+    const dismissId = window.setTimeout(() => setAllowDismiss(true), 520);
 
     return () => {
-      document.body.style.overflow = prev;
-      window.cancelAnimationFrame(enter);
-      window.clearTimeout(dismiss);
+      window.clearTimeout(enterId);
+      window.clearTimeout(dismissId);
+      document.body.style.overflow = prevOverflow;
+      document.body.style.position = prevPosition;
+      document.body.style.top = prevTop;
+      document.body.style.width = prevWidth;
+      window.scrollTo(0, scrollY);
     };
   }, [open]);
 
@@ -147,7 +187,7 @@ export default function DesktopAppCta({
   useEffect(() => {
     if (!open) return;
     function onKey(e: KeyboardEvent) {
-      if (e.key === "Escape") requestClose();
+      if (e.key === "Escape" && allowDismiss) close();
     }
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
@@ -207,7 +247,7 @@ export default function DesktopAppCta({
       setSendStatus("idle");
       setCopied(false);
       setEmail("");
-    }, 280);
+    }, 320);
   }
 
   function requestClose() {
@@ -215,40 +255,43 @@ export default function DesktopAppCta({
     close();
   }
 
+  const overlayStyle =
+    vv.height > 0
+      ? {
+          top: vv.top,
+          height: vv.height,
+          bottom: "auto" as const,
+        }
+      : undefined;
+
   const sheet =
     open && mounted
       ? createPortal(
           <div
-            className="fixed inset-0 z-[200]"
+            className="fixed inset-x-0 z-[200] overflow-hidden"
+            style={overlayStyle ?? { inset: 0 }}
             role="dialog"
             aria-modal
             aria-labelledby={titleId}
           >
             <div
               className={[
-                "absolute inset-0 bg-black/40 transition-opacity duration-300 ease-out",
-                entered ? "opacity-100" : "opacity-0",
+                "absolute inset-0 bg-black/40",
+                entered ? "sheet-backdrop-in" : "opacity-0",
               ].join(" ")}
               aria-hidden
               onClick={requestClose}
             />
 
-            {/* Sheet slides as one unit; white filler hangs below for keyboard gap */}
             <div
               className={[
-                "absolute inset-x-0 bottom-0 transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] will-change-transform",
-                entered ? "translate-y-0" : "translate-y-full",
+                "absolute inset-x-0 bottom-0",
+                entered ? "sheet-panel-in" : "translate-y-full",
               ].join(" ")}
               onClick={(e) => e.stopPropagation()}
               onPointerDown={(e) => e.stopPropagation()}
             >
-              <div className="relative rounded-t-[28px] bg-white px-6 pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-8 shadow-[0_-8px_40px_rgba(0,0,0,0.12)]">
-                {/* White continuation under the sheet (covers iOS keyboard gap) */}
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute inset-x-0 top-full h-[100vh] bg-white"
-                />
-
+              <div className="rounded-t-[28px] bg-white px-6 pb-8 pt-8 shadow-[0_-8px_40px_rgba(0,0,0,0.12)]">
                 <div className="mx-auto mb-5 flex justify-center">
                   <PhoneIcon />
                 </div>
@@ -280,6 +323,7 @@ export default function DesktopAppCta({
                         type="email"
                         inputMode="email"
                         autoComplete="email"
+                        enterKeyHint="send"
                         placeholder="Your work email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
@@ -300,7 +344,7 @@ export default function DesktopAppCta({
                   )}
                 </div>
 
-                <div className="mt-8 flex justify-center pb-2">
+                <div className="mt-8 flex justify-center pb-1">
                   <button
                     type="button"
                     onClick={handleCopy}
