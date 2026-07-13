@@ -20,6 +20,7 @@ const ASSETS = {
   iconWave: "/icons/wave.svg",
   iconParagraph: "/icons/paragraph.svg",
   iconPencil: "/icons/pencil.svg",
+  iconSpeaker: "/icons/speaker.svg",
 };
 
 const FEATURES: { bg: string; icon: string; label: string }[] = [
@@ -30,7 +31,7 @@ const FEATURES: { bg: string; icon: string; label: string }[] = [
   { bg: "#ad46ff", icon: ASSETS.iconWave, label: "Chat" },
   { bg: "#ee78d0", icon: ASSETS.iconParagraph, label: "Summaries" },
   { bg: "#2b7fff", icon: ASSETS.iconPencil, label: "Canvas" },
-  { bg: "#00d5be", icon: ASSETS.iconMic, label: "Audio tasks" },
+  { bg: "#00d5be", icon: ASSETS.iconSpeaker, label: "Audio tasks" },
 ];
 
 
@@ -46,10 +47,12 @@ function FeatureTag({
   return (
     <div
       className="flex shrink-0 items-center gap-2 rounded-[14px] px-4 py-[10px]"
-      style={{ backgroundColor: bg }}
+      style={{
+        backgroundImage: `linear-gradient(160deg, rgba(255,255,255,0.28) 0%, rgba(255,255,255,0.06) 42%, rgba(0,0,0,0.08) 100%), linear-gradient(180deg, ${bg}, ${bg})`,
+      }}
     >
-      <div className="relative size-6">
-        <img alt="" className="absolute inset-0 size-full" src={icon} />
+      <div className="relative size-6 shrink-0">
+        <img alt="" className="absolute inset-0 size-full object-contain" src={icon} />
       </div>
       <span className="whitespace-nowrap text-base font-bold leading-6 text-white">
         {label}
