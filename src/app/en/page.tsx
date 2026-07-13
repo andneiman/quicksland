@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import HeroPreviewEn from "@/components/en/HeroPreviewEn";
 import FAQEn from "@/components/en/FAQEn";
 import FooterEn from "@/components/en/FooterEn";
+import DesktopAppCta from "@/components/en/DesktopAppCta";
 
 export const metadata: Metadata = {
   title: "Quicks — AI assistant for tutors",
@@ -126,15 +127,8 @@ export default function HomeEn() {
             </p>
           </div>
 
-          <div className="flex w-full flex-col items-center gap-4 sm:w-auto">
-            <a
-              href="https://calendly.com/riaistesting/quicks-demo"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex w-full items-center justify-center rounded-full bg-[#39c] px-6 py-4 text-base font-medium leading-6 text-white sm:w-auto sm:font-semibold"
-            >
-              Try for free
-            </a>
+          <div className="flex flex-col items-center gap-4">
+            <DesktopAppCta variant="hero" />
             <p className="text-center text-sm font-normal leading-5 text-[#262626]">
               Book a 15-minute demo and get free access
             </p>
@@ -231,14 +225,7 @@ export default function HomeEn() {
                   for modern tutoring
                 </p>
               </div>
-              <a
-                href="https://calendly.com/riaistesting/quicks-demo"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex w-full items-center justify-center rounded-2xl bg-[#39c] px-6 py-4 text-base font-medium leading-6 text-white sm:w-auto"
-              >
-                Try for free
-              </a>
+              <DesktopAppCta variant="feature" />
             </div>
           </div>
         </div>
@@ -260,14 +247,7 @@ export default function HomeEn() {
         <h2 className="text-center text-[28px] font-semibold leading-[32px] sm:text-[40px] sm:leading-[44px]">
           Ready to start?
         </h2>
-        <a
-          href="https://calendly.com/riaistesting/quicks-demo"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-8 inline-flex w-full items-center justify-center rounded-full bg-[#39c] px-6 py-4 text-base font-semibold leading-6 text-white sm:w-auto"
-        >
-          Try for free
-        </a>
+        <DesktopAppCta variant="bottom" />
       </section>
 
       {/* ===== FOOTER ===== */}
@@ -292,14 +272,7 @@ export default function HomeEn() {
           />
         </div>
 
-        <a
-          href="https://calendly.com/riaistesting/quicks-demo"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex shrink-0 items-center rounded-full bg-[#39c] px-4 py-[10px] text-sm font-semibold leading-5 text-white"
-        >
-          Try now
-        </a>
+        <DesktopAppCta variant="nav" />
       </nav>
     </div>
   );

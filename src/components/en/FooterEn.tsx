@@ -48,12 +48,22 @@ export default function FooterEn() {
       <div className="flex w-full flex-col gap-4 overflow-clip p-4 sm:p-8">
         <div className="flex w-full flex-col items-start gap-8 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
           <div className="flex flex-col items-start sm:flex-row sm:items-center sm:gap-1">
-            <span className="inline-flex items-center justify-center px-4 py-[10px] text-sm font-medium leading-5 text-[#262626]">
+            <a
+              href="https://billing.quicks.ai/static/terms"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center px-4 py-[10px] text-sm font-medium leading-5 text-[#262626] transition-colors hover:rounded-full hover:bg-[rgba(38,38,38,0.05)]"
+            >
               Terms of use
-            </span>
-            <span className="inline-flex items-center justify-center px-4 py-[10px] text-sm font-medium leading-5 text-[#262626]">
+            </a>
+            <a
+              href="https://billing.quicks.ai/static/privacy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center px-4 py-[10px] text-sm font-medium leading-5 text-[#262626] transition-colors hover:rounded-full hover:bg-[rgba(38,38,38,0.05)]"
+            >
               Privacy policy
-            </span>
+            </a>
           </div>
 
           {/* language switcher (hidden, uncomment to restore) */}
