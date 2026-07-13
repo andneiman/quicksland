@@ -1,6 +1,12 @@
 "use client";
 
-import { useEffect, useId, useState, type FormEvent, type MouseEvent } from "react";
+import {
+  useEffect,
+  useId,
+  useState,
+  type FormEvent,
+  type MouseEvent,
+} from "react";
 import { createPortal } from "react-dom";
 
 function DesktopIcon({ className }: { className?: string }) {
@@ -97,6 +103,7 @@ export default function DesktopAppCta({
   const titleId = useId();
   const [mounted, setMounted] = useState(false);
   const [open, setOpen] = useState(false);
+  const [entered, setEntered] = useState(false);
   const [allowDismiss, setAllowDismiss] = useState(false);
   const [email, setEmail] = useState("");
   const [sendStatus, setSendStatus] = useState<
@@ -108,19 +115,28 @@ export default function DesktopAppCta({
     setMounted(true);
   }, []);
 
+  // Mount → next frame enter (so CSS transitions run)
   useEffect(() => {
-    if (!open) return;
+    if (!open) {
+      setEntered(false);
+      return;
+    }
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     setAllowDismiss(false);
-    const t = window.setTimeout(() => setAllowDismiss(true), 450);
+
+    const enter = window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => setEntered(true));
+    });
+    const dismiss = window.setTimeout(() => setAllowDismiss(true), 500);
+
     return () => {
       document.body.style.overflow = prev;
-      window.clearTimeout(t);
+      window.cancelAnimationFrame(enter);
+      window.clearTimeout(dismiss);
     };
   }, [open]);
 
-  // Re-arm dismiss after success — avoids iOS keyboard “ghost click” closing the sheet
   useEffect(() => {
     if (!open || sendStatus !== "success") return;
     setAllowDismiss(false);
@@ -131,11 +147,11 @@ export default function DesktopAppCta({
   useEffect(() => {
     if (!open) return;
     function onKey(e: KeyboardEvent) {
-      if (e.key === "Escape") close();
+      if (e.key === "Escape") requestClose();
     }
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [open]);
+  }, [open, allowDismiss]);
 
   function handleClick() {
     const isMobile =
@@ -161,7 +177,6 @@ export default function DesktopAppCta({
         body: JSON.stringify({ email }),
       });
       if (!res.ok) throw new Error();
-      // Blur first so keyboard closes before we swap UI
       if (document.activeElement instanceof HTMLElement) {
         document.activeElement.blur();
       }
@@ -185,13 +200,14 @@ export default function DesktopAppCta({
   }
 
   function close() {
-    setOpen(false);
+    setEntered(false);
     setAllowDismiss(false);
-    setTimeout(() => {
+    window.setTimeout(() => {
+      setOpen(false);
       setSendStatus("idle");
       setCopied(false);
       setEmail("");
-    }, 300);
+    }, 280);
   }
 
   function requestClose() {
@@ -209,88 +225,97 @@ export default function DesktopAppCta({
             aria-labelledby={titleId}
           >
             <div
-              className="absolute inset-0 bg-black/40"
+              className={[
+                "absolute inset-0 bg-black/40 transition-opacity duration-300 ease-out",
+                entered ? "opacity-100" : "opacity-0",
+              ].join(" ")}
               aria-hidden
               onClick={requestClose}
             />
 
+            {/* Sheet slides as one unit; white filler hangs below for keyboard gap */}
             <div
-              className="animate-sheet-up absolute inset-x-0 bottom-0 rounded-t-[28px] bg-white px-6 pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-8 shadow-[0_-8px_40px_rgba(0,0,0,0.12)]"
+              className={[
+                "absolute inset-x-0 bottom-0 transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] will-change-transform",
+                entered ? "translate-y-0" : "translate-y-full",
+              ].join(" ")}
               onClick={(e) => e.stopPropagation()}
               onPointerDown={(e) => e.stopPropagation()}
             >
-              {/* Extends white behind iOS keyboard / visual viewport gap */}
-              <div
-                aria-hidden
-                className="pointer-events-none absolute inset-x-0 top-0 -bottom-[100vh] -z-10 rounded-t-[28px] bg-white"
-              />
+              <div className="relative rounded-t-[28px] bg-white px-6 pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-8 shadow-[0_-8px_40px_rgba(0,0,0,0.12)]">
+                {/* White continuation under the sheet (covers iOS keyboard gap) */}
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-x-0 top-full h-[100vh] bg-white"
+                />
 
-              <div className="mx-auto mb-5 flex justify-center">
-                <PhoneIcon />
-              </div>
+                <div className="mx-auto mb-5 flex justify-center">
+                  <PhoneIcon />
+                </div>
 
-              <h2
-                id={titleId}
-                className="text-center text-[28px] font-semibold leading-[32px] text-[#262626]"
-              >
-                On your phone?
-              </h2>
-              <p className="mx-auto mt-3 max-w-[280px] text-center text-base font-medium leading-6 text-[rgba(38,38,38,0.5)]">
-                We&apos;ll email you a link to open later on your computer
-              </p>
-
-              <div className="mt-8">
-                {sendStatus === "success" ? (
-                  <div className="flex w-full items-center justify-center gap-2 rounded-full bg-[#e8f5e9] px-5 py-4 text-[#2e7d32]">
-                    <CheckIcon />
-                    <span className="text-base font-medium leading-6">
-                      Sent to your email
-                    </span>
-                  </div>
-                ) : (
-                  <form
-                    className="flex w-full items-center gap-2 rounded-full border border-[rgba(38,38,38,0.12)] bg-[rgba(38,38,38,0.03)] p-1.5 pl-5"
-                    onSubmit={handleSend}
-                  >
-                    <input
-                      type="email"
-                      inputMode="email"
-                      autoComplete="email"
-                      placeholder="Your work email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      className="min-w-0 flex-1 bg-transparent text-base font-medium leading-6 text-[#262626] outline-none placeholder:text-[rgba(38,38,38,0.35)]"
-                    />
-                    <button
-                      type="submit"
-                      disabled={sendStatus === "loading"}
-                      className="shrink-0 rounded-full bg-[#262626] px-4 py-2.5 text-sm font-semibold leading-5 text-white disabled:opacity-60"
-                    >
-                      {sendStatus === "loading"
-                        ? "Sending…"
-                        : sendStatus === "error"
-                          ? "Try again"
-                          : "Send link"}
-                    </button>
-                  </form>
-                )}
-              </div>
-
-              <div className="mt-8 flex justify-center pb-2">
-                <button
-                  type="button"
-                  onClick={handleCopy}
-                  className="inline-flex items-center gap-1.5 text-sm font-medium leading-5 text-[#262626]"
+                <h2
+                  id={titleId}
+                  className="text-center text-[28px] font-semibold leading-[32px] text-[#262626]"
                 >
-                  {copied ? (
-                    <>
-                      <CheckIcon className="size-4 text-[#2e7d32]" />
-                      <span className="text-[#2e7d32]">Link copied</span>
-                    </>
+                  On your phone?
+                </h2>
+                <p className="mx-auto mt-3 max-w-[280px] text-center text-base font-medium leading-6 text-[rgba(38,38,38,0.5)]">
+                  We&apos;ll email you a link to open later on your computer
+                </p>
+
+                <div className="mt-8">
+                  {sendStatus === "success" ? (
+                    <div className="flex w-full items-center justify-center gap-2 rounded-full bg-[#e8f5e9] px-5 py-4 text-[#2e7d32]">
+                      <CheckIcon />
+                      <span className="text-base font-medium leading-6">
+                        Sent to your email
+                      </span>
+                    </div>
                   ) : (
-                    "Copy link"
+                    <form
+                      className="flex w-full items-center gap-2 rounded-full border border-[rgba(38,38,38,0.12)] bg-[rgba(38,38,38,0.03)] p-1.5 pl-5"
+                      onSubmit={handleSend}
+                    >
+                      <input
+                        type="email"
+                        inputMode="email"
+                        autoComplete="email"
+                        placeholder="Your work email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        className="min-w-0 flex-1 bg-transparent text-base font-medium leading-6 text-[#262626] outline-none placeholder:text-[rgba(38,38,38,0.35)]"
+                      />
+                      <button
+                        type="submit"
+                        disabled={sendStatus === "loading"}
+                        className="shrink-0 rounded-full bg-[#262626] px-4 py-2.5 text-sm font-semibold leading-5 text-white disabled:opacity-60"
+                      >
+                        {sendStatus === "loading"
+                          ? "Sending…"
+                          : sendStatus === "error"
+                            ? "Try again"
+                            : "Send link"}
+                      </button>
+                    </form>
                   )}
-                </button>
+                </div>
+
+                <div className="mt-8 flex justify-center pb-2">
+                  <button
+                    type="button"
+                    onClick={handleCopy}
+                    className="inline-flex items-center gap-1.5 text-sm font-medium leading-5 text-[#262626]"
+                  >
+                    {copied ? (
+                      <>
+                        <CheckIcon className="size-4 text-[#2e7d32]" />
+                        <span className="text-[#2e7d32]">Link copied</span>
+                      </>
+                    ) : (
+                      "Copy link"
+                    )}
+                  </button>
+                </div>
               </div>
             </div>
           </div>,

@@ -13,7 +13,6 @@ type TabId = (typeof TABS)[number]["id"];
 export default function HeroPreviewEn() {
   const [active, setActive] = useState<TabId>("homework");
 
-  // Decode all images up front so tab switches don't wait on decode
   useEffect(() => {
     TABS.forEach((tab) => {
       const img = new window.Image();
@@ -24,24 +23,6 @@ export default function HeroPreviewEn() {
 
   return (
     <div className="flex w-full flex-col items-center gap-5">
-      <div className="flex gap-2">
-        {TABS.map((tab) => (
-          <button
-            key={tab.id}
-            type="button"
-            onClick={() => setActive(tab.id)}
-            className={[
-              "inline-flex items-center justify-center rounded-full px-4 py-[10px] text-base font-medium leading-6 text-[rgba(38,38,38,0.6)] shadow-[0px_0px_6px_0px_rgba(0,0,0,0.02),0px_2px_4px_0px_rgba(0,0,0,0.08)]",
-              tab.id === active
-                ? "bg-white"
-                : "bg-[rgba(255,255,255,0.6)]",
-            ].join(" ")}
-          >
-            {tab.label}
-          </button>
-        ))}
-      </div>
-
       <div className="relative -mx-2 w-[calc(100%+1rem)] overflow-clip sm:mx-0 sm:w-full">
         <div className="relative aspect-[2200/1330] w-full">
           {TABS.map((tab) => {
@@ -65,6 +46,24 @@ export default function HeroPreviewEn() {
             );
           })}
         </div>
+      </div>
+
+      <div className="flex gap-2">
+        {TABS.map((tab) => (
+          <button
+            key={tab.id}
+            type="button"
+            onClick={() => setActive(tab.id)}
+            className={[
+              "inline-flex items-center justify-center rounded-full px-4 py-[10px] text-base font-medium leading-6 text-[rgba(38,38,38,0.6)] shadow-[0px_0px_6px_0px_rgba(0,0,0,0.02),0px_2px_4px_0px_rgba(0,0,0,0.08)]",
+              tab.id === active
+                ? "bg-white"
+                : "bg-[rgba(255,255,255,0.6)]",
+            ].join(" ")}
+          >
+            {tab.label}
+          </button>
+        ))}
       </div>
     </div>
   );
