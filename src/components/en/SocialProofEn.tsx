@@ -9,8 +9,6 @@ const SCHOOLS = [
   { name: "International House", src: "/schools/international-house.png" },
   { name: "Inlingua", src: "/schools/inlingua.png" },
   { name: "Eurocentres", src: "/schools/eurocentres.png" },
-  { name: "Skyeng", src: "/schools/skyeng.png" },
-  { name: "Preply", src: "/schools/preply.png" },
 ] as const;
 
 const TESTIMONIALS = [

@@ -234,6 +234,9 @@ export default function HomeEn() {
         </div>
       </section>
 
+      {/* ===== SOCIAL PROOF ===== */}
+      <SocialProofEn />
+
       {/* ===== FAQ ===== */}
       <section className="flex w-full shrink-0 flex-col items-center gap-10 px-4 py-10 sm:px-20">
         <div className="max-w-[960px] text-center text-[24px] font-semibold leading-[28px] sm:text-[40px] sm:leading-[44px]">
@@ -244,9 +247,6 @@ export default function HomeEn() {
 
         <FAQEn />
       </section>
-
-      {/* ===== SOCIAL PROOF ===== */}
-      <SocialProofEn />
 
       {/* ===== CTA ===== */}
       <section className="flex w-full shrink-0 flex-col items-center justify-center px-4 pb-16 pt-4 sm:px-20 sm:pb-20">
