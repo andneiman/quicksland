@@ -73,8 +73,8 @@ export default function HomeEn() {
       <link rel="preload" as="image" href="/previews/en-homework.jpg" type="image/jpeg" />
       <link rel="preload" as="image" href="/previews/en-flashcards.jpg" type="image/jpeg" />
       <link rel="preload" as="image" href="/previews/en-chat.jpg" type="image/jpeg" />
-      {/* ── gradient background ── */}
-      <div className="pointer-events-none absolute left-0 top-0 h-[221px] w-full bg-gradient-to-b from-[#eee] to-white" />
+      {/* ── top wash: white on mobile, soft gray on desktop ── */}
+      <div className="pointer-events-none absolute left-0 top-0 hidden h-[221px] w-full bg-gradient-to-b from-[#eee] to-white sm:block" />
 
       {/* ── spacer for fixed top-bar ── */}
       <div className="h-[72px] w-full shrink-0 sm:h-24" />
@@ -109,7 +109,7 @@ export default function HomeEn() {
 
         <div className="relative z-10 flex w-full flex-col items-center gap-6 sm:gap-10 sm:p-8">
           <div className="flex flex-col items-center gap-4 text-center">
-            <h1 className="text-[32px] font-semibold leading-[36px] tracking-[0px] sm:text-[64px] sm:font-medium sm:leading-[68px]">
+            <h1 className="text-[36px] font-bold leading-[40px] tracking-[0px] sm:text-[64px] sm:leading-[68px]">
               AI&nbsp;assistant
               <br />
               for tutors

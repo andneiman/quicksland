@@ -79,12 +79,12 @@ function CheckIcon({ className }: { className?: string }) {
 type Variant = "hero" | "feature" | "bottom" | "nav";
 
 const VARIANT_CLASS: Record<Variant, string> = {
-  hero: "inline-flex items-center justify-center gap-2 rounded-full bg-[#39c] px-6 py-4 text-base font-medium leading-6 text-white sm:font-semibold",
+  hero: "inline-flex items-center justify-center gap-2 rounded-full bg-[#262626] px-6 py-4 text-base font-medium leading-6 text-white sm:font-semibold",
   feature:
-    "inline-flex items-center justify-center gap-2 rounded-full bg-[#39c] px-6 py-4 text-base font-medium leading-6 text-white",
+    "inline-flex items-center justify-center gap-2 rounded-full bg-[#262626] px-6 py-4 text-base font-medium leading-6 text-white",
   bottom:
-    "mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-[#39c] px-6 py-4 text-base font-semibold leading-6 text-white",
-  nav: "flex shrink-0 items-center gap-1.5 rounded-full bg-[#39c] px-4 py-[10px] text-sm font-semibold leading-5 text-white",
+    "mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-[#262626] px-6 py-4 text-base font-semibold leading-6 text-white",
+  nav: "flex shrink-0 items-center gap-1.5 rounded-full bg-[#262626] px-4 py-[10px] text-sm font-semibold leading-5 text-white",
 };
 
 export default function DesktopAppCta({
@@ -219,6 +219,12 @@ export default function DesktopAppCta({
               onClick={(e) => e.stopPropagation()}
               onPointerDown={(e) => e.stopPropagation()}
             >
+              {/* Extends white behind iOS keyboard / visual viewport gap */}
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-x-0 top-0 -bottom-[100vh] -z-10 rounded-t-[28px] bg-white"
+              />
+
               <div className="mx-auto mb-5 flex justify-center">
                 <PhoneIcon />
               </div>
@@ -258,7 +264,7 @@ export default function DesktopAppCta({
                     <button
                       type="submit"
                       disabled={sendStatus === "loading"}
-                      className="shrink-0 rounded-full bg-[#39c] px-4 py-2.5 text-sm font-semibold leading-5 text-white disabled:opacity-60"
+                      className="shrink-0 rounded-full bg-[#262626] px-4 py-2.5 text-sm font-semibold leading-5 text-white disabled:opacity-60"
                     >
                       {sendStatus === "loading"
                         ? "Sending…"
@@ -274,14 +280,12 @@ export default function DesktopAppCta({
                 <button
                   type="button"
                   onClick={handleCopy}
-                  className="inline-flex items-center gap-1.5 text-sm font-medium leading-5 text-[#262626] underline underline-offset-2"
+                  className="inline-flex items-center gap-1.5 text-sm font-medium leading-5 text-[#262626]"
                 >
                   {copied ? (
                     <>
                       <CheckIcon className="size-4 text-[#2e7d32]" />
-                      <span className="text-[#2e7d32] no-underline">
-                        Link copied
-                      </span>
+                      <span className="text-[#2e7d32]">Link copied</span>
                     </>
                   ) : (
                     "Copy link"
