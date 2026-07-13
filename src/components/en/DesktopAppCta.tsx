@@ -9,6 +9,7 @@ import {
   type MouseEvent,
 } from "react";
 import { createPortal } from "react-dom";
+import { useRouter } from "next/navigation";
 
 function DesktopIcon({ className }: { className?: string }) {
   return (
@@ -102,6 +103,7 @@ export default function DesktopAppCta({
   className?: string;
 }) {
   const titleId = useId();
+  const router = useRouter();
   const [mounted, setMounted] = useState(false);
   const [open, setOpen] = useState(false);
   const [animKey, setAnimKey] = useState(0);
@@ -182,7 +184,8 @@ export default function DesktopAppCta({
       setOpen(true);
       return;
     }
-    // Desktop click behavior — TBD
+
+    router.push("/en/download");
   }
 
   async function handleSend(e?: FormEvent | MouseEvent) {
