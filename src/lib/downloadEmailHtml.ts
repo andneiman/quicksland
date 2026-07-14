@@ -1,6 +1,6 @@
 const DOWNLOAD_URL = "https://quicks.school/download";
-const LOGO_URL = "https://quicks.school/logo.png";
-const WORDMARK_URL = "https://quicks.school/wordmark.svg";
+const LOGO_URL = "https://quicks.school/email/logo-2x.png";
+const WORDMARK_URL = "https://quicks.school/email/wordmark-3x.png";
 
 export const DOWNLOAD_EMAIL_SUBJECT = "Your Quicks download link";
 
@@ -35,10 +35,10 @@ export function getDownloadEmailHtml() {
                         <table role="presentation" cellpadding="0" cellspacing="0" border="0">
                           <tr>
                             <td valign="middle" style="padding:0 8px 0 0;">
-                              <img src="${LOGO_URL}" width="28" height="28" alt="Quicks" style="display:block;width:28px;height:28px;border:0;" />
+                              <img src="${LOGO_URL}" width="28" height="28" alt="Quicks" style="display:block;width:28px;height:28px;border:0;-ms-interpolation-mode:bicubic;" />
                             </td>
                             <td valign="middle">
-                              <img src="${WORDMARK_URL}" width="80" height="26" alt="quicks" style="display:block;width:80px;height:26px;border:0;" />
+                              <img src="${WORDMARK_URL}" width="80" height="26" alt="quicks" style="display:block;width:80px;height:26px;border:0;-ms-interpolation-mode:bicubic;" />
                             </td>
                           </tr>
                         </table>
