@@ -4,7 +4,7 @@ const WORDMARK_URL = "https://quicks.school/email/wordmark-3x.png";
 
 export const DOWNLOAD_EMAIL_SUBJECT = "Your Quicks download link";
 
-export const DOWNLOAD_EMAIL_TEXT = `You're all set! Here are your download links to get started with Quicks.
+export const DOWNLOAD_EMAIL_TEXT = `Here is your download link to get started with Quicks.
 
 Quicks records your lessons and automatically creates homework, quizzes, flashcards, and much more.
 
