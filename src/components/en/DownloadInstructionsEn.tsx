@@ -6,6 +6,8 @@ import Link from "next/link";
 import {
   DESKTOP_DOWNLOADS,
   detectDesktopOS,
+  fetchDownloads,
+  latestUrlForOs,
   triggerDesktopDownload,
   type DesktopOS,
 } from "@/lib/desktopDownloads";
@@ -94,22 +96,50 @@ function DownloadBadge() {
 
 export default function DownloadInstructionsEn({
   autoStart = true,
+  initialUrl,
+  initialOs,
 }: {
   autoStart?: boolean;
+  initialUrl?: string;
+  initialOs?: DesktopOS;
 }) {
-  const [os, setOs] = useState<DesktopOS>("mac");
+  const [os, setOs] = useState<DesktopOS>(initialOs ?? "mac");
+  const [downloadUrl, setDownloadUrl] = useState(
+    initialUrl || DESKTOP_DOWNLOADS[initialOs ?? "mac"]
+  );
 
   useEffect(() => {
-    const detected = detectDesktopOS();
+    const detected = initialOs ?? detectDesktopOS();
     setOs(detected);
-    if (!autoStart) return;
-    // Defer slightly so navigation completes before browser download prompt
-    const t = window.setTimeout(() => triggerDesktopDownload(detected), 150);
-    return () => window.clearTimeout(t);
-  }, [autoStart]);
+
+    let cancelled = false;
+
+    async function start() {
+      let url = initialUrl;
+      if (!url) {
+        try {
+          const data = await fetchDownloads();
+          url = latestUrlForOs(data, detected);
+        } catch {
+          url = DESKTOP_DOWNLOADS[detected];
+        }
+      }
+      if (cancelled) return;
+      setDownloadUrl(url);
+      if (autoStart) triggerDesktopDownload(url);
+    }
+
+    const t = window.setTimeout(() => {
+      void start();
+    }, 150);
+
+    return () => {
+      cancelled = true;
+      window.clearTimeout(t);
+    };
+  }, [autoStart, initialOs, initialUrl]);
 
   const steps = os === "windows" ? WIN_STEPS : MAC_STEPS;
-  const downloadUrl = DESKTOP_DOWNLOADS[os];
 
   return (
     <div className="flex min-h-dvh w-full flex-col bg-white text-[#262626]">
