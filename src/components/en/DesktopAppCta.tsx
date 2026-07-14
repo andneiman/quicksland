@@ -195,7 +195,7 @@ export default function DesktopAppCta({
 
     setSendStatus("loading");
     try {
-      const res = await fetch("/api/subscribe", {
+      const res = await fetch("/api/send-download-link", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
@@ -215,7 +215,7 @@ export default function DesktopAppCta({
     e.preventDefault();
     e.stopPropagation();
     try {
-      await navigator.clipboard.writeText(window.location.href);
+      await navigator.clipboard.writeText("https://quicks.school/download");
       setCopied(true);
       setTimeout(() => setCopied(false), 2500);
     } catch {
