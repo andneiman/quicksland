@@ -369,11 +369,11 @@ export default function DesktopAppCta({
         onClick={handleClick}
         className={[VARIANT_CLASS[variant], className].filter(Boolean).join(" ")}
       >
-        <DesktopIcon className={variant === "nav" ? "size-4" : "size-5"} />
         {variant === "nav" ? (
-          "Download for free"
+          "Download"
         ) : (
           <>
+            <DesktopIcon className="size-5" />
             <span className="sm:hidden">Get the Desktop app</span>
             <span className="hidden sm:inline">Download for free</span>
           </>
