@@ -80,11 +80,15 @@ export function triggerDesktopDownload(url: string) {
   window.setTimeout(() => iframe.remove(), 60_000);
 }
 
-export function installPathForDownload(item: DownloadItem) {
+export function installPathForDownload(
+  item: DownloadItem,
+  opts?: { autoStart?: boolean }
+) {
   const platform = platformToOs(item.platform);
   const params = new URLSearchParams({
     url: item.url,
     platform,
   });
+  if (opts?.autoStart === false) params.set("autostart", "0");
   return `/en/download?${params.toString()}`;
 }

@@ -9,6 +9,7 @@ import {
   formatVersion,
   installPathForDownload,
   sortLatestForOs,
+  triggerDesktopDownload,
   type DownloadItem,
   type DownloadsResponse,
 } from "@/lib/desktopDownloads";
@@ -61,18 +62,53 @@ function detectOsLabel(): "macOS" | "Windows" {
   return "macOS";
 }
 
+function Spinner({ className }: { className?: string }) {
+  return (
+    <svg
+      className={["animate-spin", className].filter(Boolean).join(" ")}
+      width="18"
+      height="18"
+      viewBox="0 0 18 18"
+      fill="none"
+      aria-hidden
+    >
+      <circle
+        cx="9"
+        cy="9"
+        r="7"
+        stroke="currentColor"
+        strokeOpacity="0.25"
+        strokeWidth="2.5"
+      />
+      <path
+        d="M16 9a7 7 0 0 0-7-7"
+        stroke="currentColor"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+function itemKey(item: DownloadItem) {
+  return `${item.platform}-${item.version}-${item.url}`;
+}
+
 function LatestCard({
   item,
+  loading,
   onDownload,
 }: {
   item: DownloadItem;
+  loading?: boolean;
   onDownload: (item: DownloadItem) => void;
 }) {
   return (
     <button
       type="button"
+      disabled={loading}
       onClick={() => onDownload(item)}
-      className="group flex w-full items-center gap-5 rounded-2xl bg-white p-5 text-left shadow-[0_5px_30px_0_rgba(0,0,0,0.05),inset_0_0_0_1px_rgba(255,255,255,1)] transition-all hover:shadow-[0_5px_30px_0_rgba(0,0,0,0.1),inset_0_0_0_1px_rgba(255,255,255,1)]"
+      className="group flex w-full items-center gap-5 rounded-2xl bg-white p-5 text-left shadow-[0_5px_30px_0_rgba(0,0,0,0.05),inset_0_0_0_1px_rgba(255,255,255,1)] transition-all hover:shadow-[0_5px_30px_0_rgba(0,0,0,0.1),inset_0_0_0_1px_rgba(255,255,255,1)] disabled:pointer-events-none"
     >
       <div className="flex size-14 shrink-0 items-center justify-center rounded-2xl bg-[#0095FF] text-white">
         <PlatformIcon platform={item.platform} />
@@ -91,8 +127,15 @@ function LatestCard({
           ) : null}
         </span>
       </div>
-      <span className="flex h-10 shrink-0 items-center justify-center rounded-full bg-[#0095FF] px-6 text-sm font-medium text-white transition-colors group-hover:bg-[#0088e8]">
-        Download
+      <span className="flex h-10 min-w-[112px] shrink-0 items-center justify-center gap-2 rounded-full bg-[#0095FF] px-6 text-sm font-medium text-white transition-colors group-hover:bg-[#0088e8] group-disabled:bg-[#0095FF]">
+        {loading ? (
+          <>
+            <Spinner />
+            Starting…
+          </>
+        ) : (
+          "Download"
+        )}
       </span>
     </button>
   );
@@ -100,20 +143,27 @@ function LatestCard({
 
 function PreviousRow({
   item,
+  loading,
   onDownload,
 }: {
   item: DownloadItem;
+  loading?: boolean;
   onDownload: (item: DownloadItem) => void;
 }) {
   return (
     <button
       type="button"
+      disabled={loading}
       onClick={() => onDownload(item)}
-      className="flex w-full items-center justify-between rounded-xl px-4 py-3 text-left transition-colors hover:bg-white/60"
+      className="flex w-full items-center justify-between rounded-xl px-4 py-3 text-left transition-colors hover:bg-white/60 disabled:pointer-events-none disabled:opacity-70"
     >
       <div className="flex min-w-0 items-center gap-3">
         <div className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-[rgba(38,38,38,0.05)] text-[rgba(38,38,38,0.4)]">
-          <PlatformIcon platform={item.platform} className="size-4" />
+          {loading ? (
+            <Spinner className="size-4" />
+          ) : (
+            <PlatformIcon platform={item.platform} className="size-4" />
+          )}
         </div>
         <span className="text-sm font-medium text-[rgba(38,38,38,0.7)]">
           {item.platform}
@@ -123,7 +173,11 @@ function PreviousRow({
         </span>
       </div>
       <span className="shrink-0 text-xs text-[rgba(38,38,38,0.3)]">
-        {item.date ? formatDownloadDate(item.date) : null}
+        {loading
+          ? "Starting…"
+          : item.date
+            ? formatDownloadDate(item.date)
+            : null}
       </span>
     </button>
   );
@@ -134,7 +188,12 @@ export default function DownloadCatalog() {
   const [data, setData] = useState<DownloadsResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [showPrevious, setShowPrevious] = useState(false);
+  const [pendingKey, setPendingKey] = useState<string | null>(null);
   const [osLabel] = useState<"macOS" | "Windows">(detectOsLabel);
+
+  useEffect(() => {
+    router.prefetch("/en/download");
+  }, [router]);
 
   useEffect(() => {
     let cancelled = false;
@@ -176,7 +235,10 @@ export default function DownloadCatalog() {
   }, [data, osLabel]);
 
   function handleDownload(item: DownloadItem) {
-    router.push(installPathForDownload(item));
+    if (pendingKey) return;
+    setPendingKey(itemKey(item));
+    triggerDesktopDownload(item.url);
+    router.push(installPathForDownload(item, { autoStart: false }));
   }
 
   return (
@@ -209,8 +271,9 @@ export default function DownloadCatalog() {
           <div className="flex w-full flex-col gap-3">
             {latest.map((item) => (
               <LatestCard
-                key={`${item.platform}-${item.version}-${item.url}`}
+                key={itemKey(item)}
                 item={item}
+                loading={pendingKey === itemKey(item)}
                 onDownload={handleDownload}
               />
             ))}
@@ -264,8 +327,9 @@ export default function DownloadCatalog() {
                         </div>
                         {group.items.map((item) => (
                           <PreviousRow
-                            key={`${item.platform}-${item.version}-${item.url}`}
+                            key={itemKey(item)}
                             item={item}
+                            loading={pendingKey === itemKey(item)}
                             onDownload={handleDownload}
                           />
                         ))}

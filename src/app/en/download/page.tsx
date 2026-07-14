@@ -10,6 +10,7 @@ export const metadata: Metadata = {
 type SearchParams = Promise<{
   url?: string | string[];
   platform?: string | string[];
+  autostart?: string | string[];
 }>;
 
 function first(value?: string | string[]) {
@@ -24,10 +25,15 @@ export default async function DownloadEnPage({
   const params = await searchParams;
   const url = first(params.url);
   const platform = first(params.platform);
+  const autostart = first(params.autostart);
   const initialOs: DesktopOS | undefined =
     platform === "windows" || platform === "mac" ? platform : undefined;
 
   return (
-    <DownloadInstructionsEn initialUrl={url} initialOs={initialOs} />
+    <DownloadInstructionsEn
+      initialUrl={url}
+      initialOs={initialOs}
+      autoStart={autostart !== "0"}
+    />
   );
 }
