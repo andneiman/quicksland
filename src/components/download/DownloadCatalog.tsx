@@ -191,9 +191,11 @@ export default function DownloadCatalog() {
             className="size-16 object-contain"
           />
           <div className="flex flex-col items-center gap-1 text-center">
-            <h1 className="text-3xl font-semibold">Quicks Recorder</h1>
+            <h1 className="text-3xl font-bold">Quicks App</h1>
             <p className="text-sm text-[rgba(38,38,38,0.5)]">
-              Record calls with automatic transcription
+              It records your lessons and automatically creates
+              <br />
+              homework, quizzes, flashcards, and much more
             </p>
           </div>
         </header>
@@ -281,7 +283,7 @@ export default function DownloadCatalog() {
             href="mailto:school@quicks.com"
             className="underline hover:text-[rgba(38,38,38,0.5)]"
           >
-            Contact support
+            school@quicks.com
           </a>
         </footer>
       </div>
