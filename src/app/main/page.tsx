@@ -21,6 +21,8 @@ export default function MainPage() {
           width={92}
           height={92}
           className="size-[60px] sm:size-[92px]"
+          fetchPriority="high"
+          decoding="async"
         />
 
         {/* content */}
