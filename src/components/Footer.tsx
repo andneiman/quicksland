@@ -92,6 +92,7 @@ export default function Footer({ locale = "ru" }: { locale?: "ru" | "en" }) {
             <br />
             <a
               href="https://t.me/quicks_team"
+              data-ym-location="ru_footer_telegram"
               target="_blank"
               rel="noopener noreferrer"
               className="text-[rgba(37,37,37,0.5)]"

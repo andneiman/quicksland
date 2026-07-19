@@ -52,6 +52,7 @@ export default function FooterEn() {
               href="https://quicks.com/terms"
               target="_blank"
               rel="noopener noreferrer"
+              data-ym-location="en_footer_terms"
               className="inline-flex items-center justify-center px-4 py-[10px] text-sm font-medium leading-5 text-[#262626] transition-colors hover:rounded-full hover:bg-[rgba(38,38,38,0.05)]"
             >
               Terms of use
@@ -60,6 +61,7 @@ export default function FooterEn() {
               href="https://quicks.com/privacy"
               target="_blank"
               rel="noopener noreferrer"
+              data-ym-location="en_footer_privacy"
               className="inline-flex items-center justify-center px-4 py-[10px] text-sm font-medium leading-5 text-[#262626] transition-colors hover:rounded-full hover:bg-[rgba(38,38,38,0.05)]"
             >
               Privacy policy

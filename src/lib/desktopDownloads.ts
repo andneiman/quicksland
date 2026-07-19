@@ -1,3 +1,5 @@
+import { trackFileDownload } from "@/lib/metrika";
+
 export const DOWNLOADS_API = "https://api-3.quicks.ai/downloads";
 
 /** Fallback if API is unreachable — keep in sync with api-3 latest */
@@ -72,8 +74,17 @@ export function latestUrlForOs(
   return match?.url ?? DESKTOP_DOWNLOADS[os];
 }
 
-export function triggerDesktopDownload(url: string) {
+export function triggerDesktopDownload(
+  url: string,
+  opts?: { location?: string; track?: boolean }
+) {
   if (!url) return;
+  if (opts?.track !== false) {
+    trackFileDownload({
+      url,
+      location: opts?.location || "auto_download",
+    });
+  }
   // Cross-origin: hidden iframe keeps the instructions page open
   const iframe = document.createElement("iframe");
   iframe.style.display = "none";
@@ -84,7 +95,7 @@ export function triggerDesktopDownload(url: string) {
 
 export function installPathForDownload(
   item: DownloadItem,
-  opts?: { autoStart?: boolean }
+  opts?: { autoStart?: boolean; from?: string }
 ) {
   const platform = platformToOs(item.platform);
   const params = new URLSearchParams({
@@ -92,5 +103,6 @@ export function installPathForDownload(
     platform,
   });
   if (opts?.autoStart === false) params.set("autostart", "0");
+  if (opts?.from) params.set("from", opts.from);
   return `/en/download?${params.toString()}`;
 }

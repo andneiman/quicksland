@@ -234,11 +234,13 @@ export default function DownloadCatalog() {
         ];
   }, [data, osLabel]);
 
-  function handleDownload(item: DownloadItem) {
+  function handleDownload(item: DownloadItem, location: string) {
     if (pendingKey) return;
     setPendingKey(itemKey(item));
-    triggerDesktopDownload(item.url);
-    router.push(installPathForDownload(item, { autoStart: false }));
+    triggerDesktopDownload(item.url, { location });
+    router.push(
+      installPathForDownload(item, { autoStart: false, from: location })
+    );
   }
 
   return (
@@ -274,7 +276,9 @@ export default function DownloadCatalog() {
                 key={itemKey(item)}
                 item={item}
                 loading={pendingKey === itemKey(item)}
-                onDownload={handleDownload}
+                onDownload={(downloadItem) =>
+                  handleDownload(downloadItem, "download_catalog_latest")
+                }
               />
             ))}
           </div>
@@ -330,7 +334,12 @@ export default function DownloadCatalog() {
                             key={itemKey(item)}
                             item={item}
                             loading={pendingKey === itemKey(item)}
-                            onDownload={handleDownload}
+                            onDownload={(downloadItem) =>
+                              handleDownload(
+                                downloadItem,
+                                "download_catalog_previous"
+                              )
+                            }
                           />
                         ))}
                       </div>

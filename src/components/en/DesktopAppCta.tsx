@@ -197,10 +197,14 @@ export default function DesktopAppCta({
     try {
       const data = await fetchDownloads();
       const url = latestUrlForOs(data, os);
-      const params = new URLSearchParams({ url, platform: os });
+      const params = new URLSearchParams({
+        url,
+        platform: os,
+        from: `en_cta_${variant}`,
+      });
       router.push(`/en/download?${params.toString()}`);
     } catch {
-      router.push(`/en/download?platform=${os}`);
+      router.push(`/en/download?platform=${os}&from=en_cta_${variant}`);
     }
   }
 
@@ -384,6 +388,7 @@ export default function DesktopAppCta({
         type="button"
         onClick={handleClick}
         disabled={startingDownload}
+        data-ym-location={`en_cta_${variant}`}
         className={[VARIANT_CLASS[variant], className].filter(Boolean).join(" ")}
       >
         {variant === "nav" ? (

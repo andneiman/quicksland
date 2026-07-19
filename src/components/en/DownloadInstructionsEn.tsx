@@ -98,10 +98,12 @@ export default function DownloadInstructionsEn({
   autoStart = true,
   initialUrl,
   initialOs,
+  buttonLocation = "en_download_page",
 }: {
   autoStart?: boolean;
   initialUrl?: string;
   initialOs?: DesktopOS;
+  buttonLocation?: string;
 }) {
   const [os, setOs] = useState<DesktopOS>(initialOs ?? "mac");
   const [downloadUrl, setDownloadUrl] = useState(
@@ -126,7 +128,9 @@ export default function DownloadInstructionsEn({
       }
       if (cancelled || !url) return;
       setDownloadUrl(url);
-      if (autoStart) triggerDesktopDownload(url);
+      if (autoStart) {
+        triggerDesktopDownload(url, { location: buttonLocation });
+      }
     }
 
     // Always resolve latest from API when no explicit url was passed
@@ -138,7 +142,7 @@ export default function DownloadInstructionsEn({
       cancelled = true;
       window.clearTimeout(t);
     };
-  }, [autoStart, initialOs, initialUrl]);
+  }, [autoStart, buttonLocation, initialOs, initialUrl]);
 
   const steps = os === "windows" ? WIN_STEPS : MAC_STEPS;
 
@@ -177,6 +181,7 @@ export default function DownloadInstructionsEn({
               href={downloadUrl}
               className="text-[#0095ff] hover:underline"
               download
+              data-ym-location="en_download_manual"
             >
               download Quicks manually
             </a>
