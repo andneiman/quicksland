@@ -16,7 +16,7 @@ export async function POST(req: Request) {
     const accountId = process.env.CLOUDFLARE_ACCOUNT_ID;
     const apiToken = process.env.CLOUDFLARE_EMAIL_API_TOKEN;
     const from =
-      process.env.CLOUDFLARE_EMAIL_FROM ?? "welcome@mail.quicks.ai";
+      process.env.CLOUDFLARE_EMAIL_FROM ?? "Quicks <welcome@mail.quicks.ai>";
 
     if (!accountId || !apiToken) {
       return NextResponse.json(
