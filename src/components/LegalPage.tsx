@@ -43,10 +43,10 @@ export default function LegalPage({
       </main>
 
       <footer className="mx-auto flex w-full max-w-[800px] flex-wrap items-center gap-x-4 gap-y-2 px-6 pb-10 text-sm text-[rgba(38,38,38,0.4)] sm:px-8">
-        <Link href="/privacy" className="hover:text-[#262626]">
+        <Link href="https://quicks.com/privacy" className="hover:text-[#262626]">
           Privacy Policy
         </Link>
-        <Link href="/terms" className="hover:text-[#262626]">
+        <Link href="https://quicks.com/terms" className="hover:text-[#262626]">
           Terms of Service
         </Link>
       </footer>

@@ -61,10 +61,10 @@ export default function MainPage() {
               hello@quicks.com
             </a>
             <div className="flex gap-3 text-sm leading-5 text-[rgba(37,37,37,0.5)]">
-              <a href="/privacy" className="hover:text-[#252525]">
+              <a href="https://quicks.com/privacy" className="hover:text-[#252525]">
                 Privacy
               </a>
-              <a href="/terms" className="hover:text-[#252525]">
+              <a href="https://quicks.com/terms" className="hover:text-[#252525]">
                 Terms
               </a>
             </div>
