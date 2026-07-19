@@ -15,8 +15,20 @@ export async function POST(req: Request) {
 
     const accountId = process.env.CLOUDFLARE_ACCOUNT_ID;
     const apiToken = process.env.CLOUDFLARE_EMAIL_API_TOKEN;
+    const fromAddress =
+      process.env.CLOUDFLARE_EMAIL_FROM_ADDRESS ??
+      process.env.CLOUDFLARE_EMAIL_FROM ??
+      "welcome@mail.quicks.ai";
+    const fromName = process.env.CLOUDFLARE_EMAIL_FROM_NAME ?? "Quicks";
+
+    // Cloudflare REST API accepts a plain address string or { address, name }.
+    // RFC5322 strings like "Quicks <welcome@...>" are rejected.
+    const fromEmail =
+      /<([^>]+)>/.exec(fromAddress)?.[1]?.trim() || fromAddress.trim();
     const from =
-      process.env.CLOUDFLARE_EMAIL_FROM ?? "Quicks <welcome@mail.quicks.ai>";
+      fromName.trim().length > 0
+        ? { address: fromEmail, name: fromName.trim() }
+        : fromEmail;
 
     if (!accountId || !apiToken) {
       return NextResponse.json(
