@@ -124,11 +124,12 @@ export default function DownloadInstructionsEn({
           url = DESKTOP_DOWNLOADS[detected];
         }
       }
-      if (cancelled) return;
+      if (cancelled || !url) return;
       setDownloadUrl(url);
       if (autoStart) triggerDesktopDownload(url);
     }
 
+    // Always resolve latest from API when no explicit url was passed
     const t = window.setTimeout(() => {
       void start();
     }, 150);

@@ -1,10 +1,10 @@
 export const DOWNLOADS_API = "https://api-3.quicks.ai/downloads";
 
-/** Fallback if API is unreachable */
+/** Fallback if API is unreachable — keep in sync with api-3 latest */
 export const DESKTOP_DOWNLOADS = {
-  mac: "https://hel1.your-objectstorage.com/quicks-recordings/updates/recorder/Quicks-Assistant-0.2.80-aarch64.dmg",
+  mac: "https://hel1.your-objectstorage.com/quicks-recordings/updates/recorder/Quicks-Assistant-0.3.0-aarch64.dmg",
   windows:
-    "https://hel1.your-objectstorage.com/quicks-recordings/updates/recorder/Quicks-Assistant-0.2.81-x86_64-setup.exe",
+    "https://hel1.your-objectstorage.com/quicks-recordings/updates/recorder/Quicks-Assistant-0.3.0-x86_64-setup.exe",
 } as const;
 
 export type DesktopOS = "mac" | "windows";
@@ -66,7 +66,9 @@ export function latestUrlForOs(
   os: DesktopOS
 ): string {
   const platform = os === "windows" ? "Windows" : "macOS";
-  const match = data?.latest.find((item) => item.platform === platform);
+  const match = data?.latest.find(
+    (item) => item.platform.toLowerCase() === platform.toLowerCase()
+  );
   return match?.url ?? DESKTOP_DOWNLOADS[os];
 }
 

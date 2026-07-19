@@ -10,6 +10,11 @@ import {
 } from "react";
 import { createPortal } from "react-dom";
 import { useRouter } from "next/navigation";
+import {
+  detectDesktopOS,
+  fetchDownloads,
+  latestUrlForOs,
+} from "@/lib/desktopDownloads";
 
 function DesktopIcon({ className }: { className?: string }) {
   return (
@@ -113,6 +118,7 @@ export default function DesktopAppCta({
     "idle" | "loading" | "success" | "error"
   >("idle");
   const [copied, setCopied] = useState(false);
+  const [startingDownload, setStartingDownload] = useState(false);
   // Pin overlay to the visible Safari viewport (above keyboard)
   const [vv, setVv] = useState({ top: 0, height: 0 });
 
@@ -175,7 +181,7 @@ export default function DesktopAppCta({
     return () => window.removeEventListener("keydown", onKey);
   }, [open, allowDismiss]);
 
-  function handleClick() {
+  async function handleClick() {
     const isMobile =
       typeof window !== "undefined" &&
       window.matchMedia("(max-width: 639px)").matches;
@@ -185,7 +191,17 @@ export default function DesktopAppCta({
       return;
     }
 
-    router.push("/en/download");
+    if (startingDownload) return;
+    setStartingDownload(true);
+    const os = detectDesktopOS();
+    try {
+      const data = await fetchDownloads();
+      const url = latestUrlForOs(data, os);
+      const params = new URLSearchParams({ url, platform: os });
+      router.push(`/en/download?${params.toString()}`);
+    } catch {
+      router.push(`/en/download?platform=${os}`);
+    }
   }
 
   async function handleSend(e?: FormEvent | MouseEvent) {
@@ -367,6 +383,7 @@ export default function DesktopAppCta({
       <button
         type="button"
         onClick={handleClick}
+        disabled={startingDownload}
         className={[VARIANT_CLASS[variant], className].filter(Boolean).join(" ")}
       >
         {variant === "nav" ? (
