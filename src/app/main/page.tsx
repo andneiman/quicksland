@@ -52,13 +52,23 @@ export default function MainPage() {
 
       {/* ===== FOOTER ===== */}
       <footer className="flex w-full shrink-0 items-center px-6 sm:px-20">
-        <div className="flex w-full flex-col gap-1 px-4 py-4 sm:flex-row sm:items-start sm:justify-between sm:px-8 sm:py-6">
-          <a
-            href="mailto:hello@quicks.com"
-            className="text-sm leading-5 text-[rgba(37,37,37,0.5)]"
-          >
-            hello@quicks.com
-          </a>
+        <div className="flex w-full flex-col gap-3 px-4 py-4 sm:flex-row sm:items-start sm:justify-between sm:px-8 sm:py-6">
+          <div className="flex flex-col gap-1">
+            <a
+              href="mailto:hello@quicks.com"
+              className="text-sm leading-5 text-[rgba(37,37,37,0.5)]"
+            >
+              hello@quicks.com
+            </a>
+            <div className="flex gap-3 text-sm leading-5 text-[rgba(37,37,37,0.5)]">
+              <a href="/privacy" className="hover:text-[#252525]">
+                Privacy
+              </a>
+              <a href="/terms" className="hover:text-[#252525]">
+                Terms
+              </a>
+            </div>
+          </div>
           <p className="text-sm leading-5 text-[#252525] sm:text-right">
             Quicks.com | All rights reserved
           </p>
