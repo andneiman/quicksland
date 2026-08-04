@@ -55,10 +55,10 @@ export default function HeroPreviewEn() {
             type="button"
             onClick={() => setActive(tab.id)}
             className={[
-              "inline-flex items-center justify-center rounded-full px-4 py-[10px] text-base font-medium leading-6 text-[rgba(38,38,38,0.6)] shadow-[0px_0px_6px_0px_rgba(0,0,0,0.02),0px_2px_4px_0px_rgba(0,0,0,0.08)]",
+              "inline-flex cursor-pointer items-center justify-center rounded-full px-4 py-[10px] text-base font-medium leading-6 text-[rgba(38,38,38,0.6)] shadow-[0px_0px_6px_0px_rgba(0,0,0,0.02),0px_2px_4px_0px_rgba(0,0,0,0.08)] transition-colors",
               tab.id === active
                 ? "bg-white"
-                : "bg-[rgba(255,255,255,0.6)]",
+                : "bg-[rgba(255,255,255,0.6)] hover:bg-white",
             ].join(" ")}
           >
             {tab.label}

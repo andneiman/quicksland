@@ -16,35 +16,6 @@ import {
   latestUrlForOs,
 } from "@/lib/desktopDownloads";
 
-function DesktopIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      width="20"
-      height="20"
-      viewBox="0 0 24 24"
-      fill="none"
-      aria-hidden
-    >
-      <rect
-        x="3"
-        y="4"
-        width="18"
-        height="12"
-        rx="2"
-        stroke="currentColor"
-        strokeWidth="1.75"
-      />
-      <path
-        d="M8 20h8M12 16v4"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
-
 function PhoneIcon() {
   return (
     <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden>
@@ -92,12 +63,12 @@ function CheckIcon({ className }: { className?: string }) {
 type Variant = "hero" | "feature" | "bottom" | "nav";
 
 const VARIANT_CLASS: Record<Variant, string> = {
-  hero: "inline-flex items-center justify-center gap-2 rounded-full bg-[#262626] px-6 py-4 text-base font-medium leading-6 text-white sm:font-semibold",
+  hero: "inline-flex cursor-pointer items-center justify-center rounded-full bg-[#FF7733] px-6 py-4 text-base font-medium leading-6 text-white transition-colors hover:bg-[#ff8c4d] sm:font-semibold disabled:cursor-not-allowed disabled:opacity-70",
   feature:
-    "inline-flex items-center justify-center gap-2 rounded-full bg-[#262626] px-6 py-4 text-base font-medium leading-6 text-white",
+    "inline-flex cursor-pointer items-center justify-center rounded-full bg-[#262626] px-6 py-4 text-base font-medium leading-6 text-white transition-colors hover:bg-[#3d3d3d] disabled:cursor-not-allowed disabled:opacity-70",
   bottom:
-    "mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-[#262626] px-6 py-4 text-base font-semibold leading-6 text-white",
-  nav: "flex shrink-0 items-center gap-1.5 rounded-full bg-[#262626] px-4 py-[10px] text-sm font-semibold leading-5 text-white",
+    "mt-8 inline-flex cursor-pointer items-center justify-center rounded-full bg-[#262626] px-6 py-4 text-base font-semibold leading-6 text-white transition-colors hover:bg-[#3d3d3d] disabled:cursor-not-allowed disabled:opacity-70",
+  nav: "flex shrink-0 cursor-pointer items-center rounded-full bg-[#262626] px-4 py-[10px] text-sm font-semibold leading-5 text-white transition-colors hover:bg-[#3d3d3d] disabled:cursor-not-allowed disabled:opacity-70",
 };
 
 export default function DesktopAppCta({
@@ -391,15 +362,7 @@ export default function DesktopAppCta({
         data-ym-location={`en_cta_${variant}`}
         className={[VARIANT_CLASS[variant], className].filter(Boolean).join(" ")}
       >
-        {variant === "nav" ? (
-          "Download"
-        ) : (
-          <>
-            <DesktopIcon className="size-5" />
-            <span className="sm:hidden">Get the Desktop app</span>
-            <span className="hidden sm:inline">Download for free</span>
-          </>
-        )}
+        Start for free
       </button>
       {sheet}
     </>
