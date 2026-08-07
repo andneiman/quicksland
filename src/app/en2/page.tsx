@@ -9,6 +9,7 @@ import SocialProofEn from "@/components/en2/SocialProofEn";
 import LiveDemoEn from "@/components/en2/LiveDemoEn";
 import FeatureStoryBlocks from "@/components/en2/FeatureStoryBlocks";
 import SchoolPitchBlock from "@/components/en2/SchoolPitchBlock";
+import PreloadHeroImages from "@/components/en2/PreloadHeroImages";
 
 export const metadata: Metadata = {
   title: "Quicks — AI assistant for tutors (v2)",
@@ -77,9 +78,10 @@ function Placeholder({ w }: { w: number }) {
 export default function HomeEn() {
   return (
     <div className="relative flex min-h-dvh w-full max-w-[100vw] flex-col items-center overflow-x-clip bg-white text-[#262626]">
-      <link rel="preload" as="image" href="/en2/previews/quiz.png" type="image/png" />
-      <link rel="preload" as="image" href="/en2/previews/lesson-notes.png" type="image/png" />
-      <link rel="preload" as="image" href="/en2/previews/flashcards.png" type="image/png" />
+      <PreloadHeroImages />
+      <link rel="preload" as="image" href="/en2/previews/homework.jpg" type="image/jpeg" />
+      <link rel="preload" as="image" href="/en2/previews/flashcards.jpg" type="image/jpeg" />
+      <link rel="preload" as="image" href="/en2/previews/ai-chat.jpg" type="image/jpeg" />
       {/* ── top wash: white on mobile, soft gray on desktop ── */}
       <div className="pointer-events-none absolute left-0 top-0 hidden h-[221px] w-full bg-gradient-to-b from-[#eee] to-white sm:block" />
 

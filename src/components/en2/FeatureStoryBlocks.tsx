@@ -12,7 +12,7 @@ const BLOCKS = [
     ),
     description:
       "Fully compliant with data protection regulations, with your data encrypted and securely stored at all times.",
-    image: "/en2/private.png",
+    image: "/en2/private.jpg",
     imageAlt: "Invite to collaborate — share notes when you're ready",
   },
   {
@@ -20,7 +20,7 @@ const BLOCKS = [
     title: <>Compatible with every way you meet</>,
     description:
       "Whether it’s Zoom, Google Meet, Teams, Huddles, in-person, on-the-go: capture conversations wherever it happens.",
-    image: "/en2/compatible.png",
+    image: "/en2/compatible.jpg",
     imageAlt: "Works with Zoom, Google Meet, and Microsoft Teams",
   },
   {
@@ -34,7 +34,7 @@ const BLOCKS = [
     ),
     description:
       "Quicks AI assistant listens in the background, and helps with next steps, creates homework, and summarizes student progress.",
-    image: "/en2/listens.png",
+    image: "/en2/listens.jpg",
     imageAlt: "Quicks listening during a lesson and helping with next steps",
   },
 ] as const;

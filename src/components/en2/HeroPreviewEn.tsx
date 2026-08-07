@@ -2,34 +2,49 @@
 
 import { useEffect, useState } from "react";
 
-const TABS = [
-  { id: "quiz", label: "Quiz", src: "/en2/previews/quiz.png" },
+export const HERO_PREVIEW_TABS = [
   {
-    id: "lesson-notes",
-    label: "Lesson notes",
-    src: "/en2/previews/lesson-notes.png",
+    id: "homework",
+    label: "Homework",
+    src: "/en2/previews/homework.jpg",
   },
-  { id: "flashcards", label: "Flashcards", src: "/en2/previews/flashcards.png" },
+  {
+    id: "flashcards",
+    label: "Flashcards",
+    src: "/en2/previews/flashcards.jpg",
+  },
+  {
+    id: "ai-chat",
+    label: "AI Chat",
+    src: "/en2/previews/ai-chat.jpg",
+  },
 ] as const;
 
-type TabId = (typeof TABS)[number]["id"];
+type TabId = (typeof HERO_PREVIEW_TABS)[number]["id"];
+
+/** Start loading/decoding all hero previews as soon as the page mounts. */
+export function preloadHeroPreviews() {
+  if (typeof window === "undefined") return;
+  HERO_PREVIEW_TABS.forEach((tab) => {
+    const img = new window.Image();
+    img.decoding = "async";
+    img.src = tab.src;
+    void img.decode?.().catch(() => {});
+  });
+}
 
 export default function HeroPreviewEn() {
-  const [active, setActive] = useState<TabId>("quiz");
+  const [active, setActive] = useState<TabId>("homework");
 
   useEffect(() => {
-    TABS.forEach((tab) => {
-      const img = new window.Image();
-      img.src = tab.src;
-      void img.decode?.().catch(() => {});
-    });
+    preloadHeroPreviews();
   }, []);
 
   return (
     <div className="flex w-full flex-col items-center gap-5">
       <div className="relative -mx-2 w-[calc(100%+1rem)] overflow-clip sm:mx-0 sm:w-full">
         <div className="relative aspect-[1400/896] w-full">
-          {TABS.map((tab) => {
+          {HERO_PREVIEW_TABS.map((tab) => {
             const isActive = tab.id === active;
             return (
               // eslint-disable-next-line @next/next/no-img-element
@@ -37,9 +52,10 @@ export default function HeroPreviewEn() {
                 key={tab.src}
                 src={tab.src}
                 alt={isActive ? `Preview — ${tab.label}` : ""}
-                width={1400}
-                height={896}
+                width={2800}
+                height={1792}
                 decoding="async"
+                loading="eager"
                 fetchPriority="high"
                 className={[
                   "absolute inset-0 size-full object-contain",
@@ -53,7 +69,7 @@ export default function HeroPreviewEn() {
       </div>
 
       <div className="flex flex-wrap justify-center gap-2">
-        {TABS.map((tab) => (
+        {HERO_PREVIEW_TABS.map((tab) => (
           <button
             key={tab.id}
             type="button"
