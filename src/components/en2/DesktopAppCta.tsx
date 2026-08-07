@@ -63,12 +63,12 @@ function CheckIcon({ className }: { className?: string }) {
 type Variant = "hero" | "feature" | "bottom" | "nav";
 
 const VARIANT_CLASS: Record<Variant, string> = {
-  hero: "inline-flex cursor-pointer items-center justify-center rounded-full bg-[#FF7733] px-6 py-4 text-base font-medium leading-6 text-white transition-colors hover:bg-[#ff8c4d] sm:font-semibold disabled:cursor-not-allowed disabled:opacity-70",
+  hero: "inline-flex cursor-pointer items-center justify-center rounded-full bg-[#0095FF] px-6 py-4 text-base font-medium leading-6 text-white transition-colors hover:bg-[#33aaff] sm:font-semibold disabled:cursor-not-allowed disabled:opacity-70",
   feature:
-    "inline-flex cursor-pointer items-center justify-center rounded-full bg-[#262626] px-6 py-4 text-base font-medium leading-6 text-white transition-colors hover:bg-[#3d3d3d] disabled:cursor-not-allowed disabled:opacity-70",
+    "inline-flex cursor-pointer items-center justify-center rounded-full bg-[#0095FF] px-6 py-4 text-base font-medium leading-6 text-white transition-colors hover:bg-[#33aaff] disabled:cursor-not-allowed disabled:opacity-70",
   bottom:
-    "mt-8 inline-flex cursor-pointer items-center justify-center rounded-full bg-[#262626] px-6 py-4 text-base font-semibold leading-6 text-white transition-colors hover:bg-[#3d3d3d] disabled:cursor-not-allowed disabled:opacity-70",
-  nav: "flex shrink-0 cursor-pointer items-center rounded-full bg-[#262626] px-4 py-[10px] text-sm font-semibold leading-5 text-white transition-colors hover:bg-[#3d3d3d] disabled:cursor-not-allowed disabled:opacity-70",
+    "mt-8 inline-flex cursor-pointer items-center justify-center rounded-full bg-[#0095FF] px-6 py-4 text-base font-semibold leading-6 text-white transition-colors hover:bg-[#33aaff] disabled:cursor-not-allowed disabled:opacity-70",
+  nav: "flex shrink-0 cursor-pointer items-center rounded-full bg-[#0095FF] px-4 py-[10px] text-sm font-semibold leading-5 text-white transition-colors hover:bg-[#33aaff] disabled:cursor-not-allowed disabled:opacity-70",
 };
 
 export default function DesktopAppCta({

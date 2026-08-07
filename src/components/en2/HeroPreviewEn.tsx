@@ -3,15 +3,19 @@
 import { useEffect, useState } from "react";
 
 const TABS = [
-  { id: "homework", label: "Homework", src: "/previews/en-homework.jpg" },
-  { id: "flashcards", label: "Flashcards", src: "/previews/en-flashcards.jpg" },
-  { id: "chat", label: "AI chat", src: "/previews/en-chat.jpg" },
+  { id: "quiz", label: "Quiz", src: "/en2/previews/quiz.png" },
+  {
+    id: "lesson-notes",
+    label: "Lesson notes",
+    src: "/en2/previews/lesson-notes.png",
+  },
+  { id: "flashcards", label: "Flashcards", src: "/en2/previews/flashcards.png" },
 ] as const;
 
 type TabId = (typeof TABS)[number]["id"];
 
 export default function HeroPreviewEn() {
-  const [active, setActive] = useState<TabId>("homework");
+  const [active, setActive] = useState<TabId>("quiz");
 
   useEffect(() => {
     TABS.forEach((tab) => {
@@ -24,7 +28,7 @@ export default function HeroPreviewEn() {
   return (
     <div className="flex w-full flex-col items-center gap-5">
       <div className="relative -mx-2 w-[calc(100%+1rem)] overflow-clip sm:mx-0 sm:w-full">
-        <div className="relative aspect-[2200/1330] w-full">
+        <div className="relative aspect-[1400/896] w-full">
           {TABS.map((tab) => {
             const isActive = tab.id === active;
             return (
@@ -33,8 +37,8 @@ export default function HeroPreviewEn() {
                 key={tab.src}
                 src={tab.src}
                 alt={isActive ? `Preview — ${tab.label}` : ""}
-                width={2200}
-                height={1330}
+                width={1400}
+                height={896}
                 decoding="async"
                 fetchPriority="high"
                 className={[
@@ -48,7 +52,7 @@ export default function HeroPreviewEn() {
         </div>
       </div>
 
-      <div className="flex gap-2">
+      <div className="flex flex-wrap justify-center gap-2">
         {TABS.map((tab) => (
           <button
             key={tab.id}
