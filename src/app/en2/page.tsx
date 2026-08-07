@@ -79,9 +79,9 @@ export default function HomeEn() {
   return (
     <div className="relative flex min-h-dvh w-full max-w-[100vw] flex-col items-center overflow-x-clip bg-white text-[#262626]">
       <PreloadHeroImages />
-      <link rel="preload" as="image" href="/en2/previews/homework.jpg" type="image/jpeg" />
-      <link rel="preload" as="image" href="/en2/previews/flashcards.jpg" type="image/jpeg" />
-      <link rel="preload" as="image" href="/en2/previews/ai-chat.jpg" type="image/jpeg" />
+      <link rel="preload" as="image" href="/en2/previews/homework.jpg?v=5" type="image/jpeg" />
+      <link rel="preload" as="image" href="/en2/previews/flashcards.jpg?v=5" type="image/jpeg" />
+      <link rel="preload" as="image" href="/en2/previews/ai-chat.jpg?v=5" type="image/jpeg" />
       {/* ── top wash: white on mobile, soft gray on desktop ── */}
       <div className="pointer-events-none absolute left-0 top-0 hidden h-[221px] w-full bg-gradient-to-b from-[#eee] to-white sm:block" />
 

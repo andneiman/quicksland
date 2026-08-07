@@ -2,24 +2,31 @@
 
 import { useEffect, useState } from "react";
 
+const CACHE_BUST = "v5";
+
+function withBust(src: string) {
+  return `${src}?${CACHE_BUST}`;
+}
+
 export const HERO_PREVIEW_TABS = [
   {
     id: "homework",
     label: "Homework",
-    // rotated: former #3 → #1
-    src: "/en2/previews/ai-chat.jpg",
+    // Desktop OK; mobile had 1↔2 swapped
+    src: withBust("/en2/previews/ai-chat.jpg"),
+    srcMobile: withBust("/en2/previews/homework.jpg"),
   },
   {
     id: "flashcards",
     label: "Flashcards",
-    // rotated: former #1 → #2
-    src: "/en2/previews/homework.jpg",
+    src: withBust("/en2/previews/homework.jpg"),
+    srcMobile: withBust("/en2/previews/ai-chat.jpg"),
   },
   {
     id: "ai-chat",
     label: "AI Chat",
-    // rotated: former #2 → #3
-    src: "/en2/previews/flashcards.jpg",
+    src: withBust("/en2/previews/flashcards.jpg"),
+    srcMobile: withBust("/en2/previews/flashcards.jpg"),
   },
 ] as const;
 
@@ -28,10 +35,15 @@ type TabId = (typeof HERO_PREVIEW_TABS)[number]["id"];
 /** Start loading/decoding all hero previews as soon as the page mounts. */
 export function preloadHeroPreviews() {
   if (typeof window === "undefined") return;
+  const urls = new Set<string>();
   HERO_PREVIEW_TABS.forEach((tab) => {
+    urls.add(tab.src);
+    urls.add(tab.srcMobile);
+  });
+  urls.forEach((src) => {
     const img = new window.Image();
     img.decoding = "async";
-    img.src = tab.src;
+    img.src = src;
     void img.decode?.().catch(() => {});
   });
 }
@@ -50,22 +62,24 @@ export default function HeroPreviewEn() {
           {HERO_PREVIEW_TABS.map((tab) => {
             const isActive = tab.id === active;
             return (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                key={tab.src}
-                src={tab.src}
-                alt={isActive ? `Preview — ${tab.label}` : ""}
-                width={2800}
-                height={1792}
-                decoding="async"
-                loading="eager"
-                fetchPriority="high"
-                className={[
-                  "absolute inset-0 size-full object-contain",
-                  isActive ? "opacity-100" : "pointer-events-none opacity-0",
-                ].join(" ")}
-                aria-hidden={!isActive}
-              />
+              <picture key={tab.id}>
+                <source media="(min-width: 640px)" srcSet={tab.src} />
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={tab.srcMobile}
+                  alt={isActive ? `Preview — ${tab.label}` : ""}
+                  width={2800}
+                  height={1792}
+                  decoding="async"
+                  loading="eager"
+                  fetchPriority="high"
+                  className={[
+                    "absolute inset-0 size-full object-contain",
+                    isActive ? "opacity-100" : "pointer-events-none opacity-0",
+                  ].join(" ")}
+                  aria-hidden={!isActive}
+                />
+              </picture>
             );
           })}
         </div>
