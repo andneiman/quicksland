@@ -6,17 +6,20 @@ export const HERO_PREVIEW_TABS = [
   {
     id: "homework",
     label: "Homework",
-    src: "/en2/previews/homework.jpg",
+    // rotated: former #3 → #1
+    src: "/en2/previews/ai-chat.jpg",
   },
   {
     id: "flashcards",
     label: "Flashcards",
-    src: "/en2/previews/flashcards.jpg",
+    // rotated: former #1 → #2
+    src: "/en2/previews/homework.jpg",
   },
   {
     id: "ai-chat",
     label: "AI Chat",
-    src: "/en2/previews/ai-chat.jpg",
+    // rotated: former #2 → #3
+    src: "/en2/previews/flashcards.jpg",
   },
 ] as const;
 
