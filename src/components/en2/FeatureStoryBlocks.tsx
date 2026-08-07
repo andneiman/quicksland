@@ -11,7 +11,7 @@ const BLOCKS = [
       </>
     ),
     description:
-      "Your lessons are just for you. Find, refine, and review them—then share them whenever and however you choose.",
+      "Fully compliant with data protection regulations, with your data encrypted and securely stored at all times.",
     image: "/en2/private.png",
     imageAlt: "Invite to collaborate — share notes when you're ready",
   },
