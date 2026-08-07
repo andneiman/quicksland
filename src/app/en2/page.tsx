@@ -8,6 +8,7 @@ import DesktopAppCta from "@/components/en2/DesktopAppCta";
 import SocialProofEn from "@/components/en2/SocialProofEn";
 import LiveDemoEn from "@/components/en2/LiveDemoEn";
 import FeatureStoryBlocks from "@/components/en2/FeatureStoryBlocks";
+import SchoolPitchBlock from "@/components/en2/SchoolPitchBlock";
 
 export const metadata: Metadata = {
   title: "Quicks — AI assistant for tutors (v2)",
@@ -241,6 +242,9 @@ export default function HomeEn() {
 
       {/* ===== LIVE DEMO ===== */}
       <LiveDemoEn />
+
+      {/* ===== SCHOOL PITCH ===== */}
+      <SchoolPitchBlock />
 
       {/* ===== SOCIAL PROOF ===== */}
       <SocialProofEn />
