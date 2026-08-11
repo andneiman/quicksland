@@ -1,18 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
 
 import type { Metadata } from "next";
-import HeroPreviewEn from "@/components/en/HeroPreviewEn";
-import FAQEn from "@/components/en/FAQEn";
-import FooterEn from "@/components/en/FooterEn";
-import DesktopAppCta from "@/components/en/DesktopAppCta";
-import SocialProofEn from "@/components/en/SocialProofEn";
-import LiveDemoEn from "@/components/en/LiveDemoEn";
-import FeatureStoryBlocks from "@/components/en/FeatureStoryBlocks";
-import SchoolPitchBlock from "@/components/en/SchoolPitchBlock";
-import PreloadHeroImages from "@/components/en/PreloadHeroImages";
+import HeroPreviewEn from "@/components/en0/HeroPreviewEn";
+import FAQEn from "@/components/en0/FAQEn";
+import FooterEn from "@/components/en0/FooterEn";
+import DesktopAppCta from "@/components/en0/DesktopAppCta";
+import SocialProofEn from "@/components/en0/SocialProofEn";
+import LiveDemoEn from "@/components/en0/LiveDemoEn";
 
 export const metadata: Metadata = {
-  title: "Quicks — AI assistant for tutors (v2)",
+  title: "Quicks — AI assistant for tutors",
   description:
     "It records your lessons and automatically creates homework, quizzes, flashcards, and much more",
 };
@@ -78,10 +75,9 @@ function Placeholder({ w }: { w: number }) {
 export default function HomeEn() {
   return (
     <div className="relative flex min-h-dvh w-full max-w-[100vw] flex-col items-center overflow-x-clip bg-white text-[#262626]">
-      <PreloadHeroImages />
-      <link rel="preload" as="image" href="/en/previews/homework.jpg?v=5" type="image/jpeg" />
-      <link rel="preload" as="image" href="/en/previews/flashcards.jpg?v=5" type="image/jpeg" />
-      <link rel="preload" as="image" href="/en/previews/ai-chat.jpg?v=5" type="image/jpeg" />
+      <link rel="preload" as="image" href="/previews/en-homework.jpg" type="image/jpeg" />
+      <link rel="preload" as="image" href="/previews/en-flashcards.jpg" type="image/jpeg" />
+      <link rel="preload" as="image" href="/previews/en-chat.jpg" type="image/jpeg" />
       {/* ── top wash: white on mobile, soft gray on desktop ── */}
       <div className="pointer-events-none absolute left-0 top-0 hidden h-[221px] w-full bg-gradient-to-b from-[#eee] to-white sm:block" />
 
@@ -239,14 +235,8 @@ export default function HomeEn() {
         </div>
       </section>
 
-      {/* ===== FEATURE STORY BLOCKS ===== */}
-      <FeatureStoryBlocks />
-
       {/* ===== LIVE DEMO ===== */}
       <LiveDemoEn />
-
-      {/* ===== SCHOOL PITCH ===== */}
-      <SchoolPitchBlock />
 
       {/* ===== SOCIAL PROOF ===== */}
       <SocialProofEn />

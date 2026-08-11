@@ -53,12 +53,11 @@ export default function SocialProofEn() {
         <h2 className="text-[24px] font-semibold leading-[28px] sm:text-[40px] sm:leading-[44px]">
           <span className="text-[rgba(38,38,38,0.4)]">Loved by tutors</span>
           <br />
-          at language schools
+          at top language schools
         </h2>
       </div>
 
-      {/* school logos — hidden for now, keep in markup */}
-      <div className="hidden w-full max-w-[1120px] flex-wrap items-center justify-center gap-x-8 gap-y-6 sm:gap-x-12 sm:gap-y-8">
+      <div className="flex w-full max-w-[1120px] flex-wrap items-center justify-center gap-x-8 gap-y-6 sm:gap-x-12 sm:gap-y-8">
         {SCHOOLS.map((school) => (
           <div
             key={school.name}

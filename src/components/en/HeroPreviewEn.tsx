@@ -2,54 +2,91 @@
 
 import { useEffect, useState } from "react";
 
-const TABS = [
-  { id: "homework", label: "Homework", src: "/previews/en-homework.jpg" },
-  { id: "flashcards", label: "Flashcards", src: "/previews/en-flashcards.jpg" },
-  { id: "chat", label: "AI chat", src: "/previews/en-chat.jpg" },
+const CACHE_BUST = "v5";
+
+function withBust(src: string) {
+  return `${src}?${CACHE_BUST}`;
+}
+
+export const HERO_PREVIEW_TABS = [
+  {
+    id: "homework",
+    label: "Homework",
+    // Desktop OK; mobile had 1↔2 swapped
+    src: withBust("/en/previews/ai-chat.jpg"),
+    srcMobile: withBust("/en/previews/homework.jpg"),
+  },
+  {
+    id: "flashcards",
+    label: "Flashcards",
+    src: withBust("/en/previews/homework.jpg"),
+    srcMobile: withBust("/en/previews/ai-chat.jpg"),
+  },
+  {
+    id: "ai-chat",
+    label: "AI Chat",
+    src: withBust("/en/previews/flashcards.jpg"),
+    srcMobile: withBust("/en/previews/flashcards.jpg"),
+  },
 ] as const;
 
-type TabId = (typeof TABS)[number]["id"];
+type TabId = (typeof HERO_PREVIEW_TABS)[number]["id"];
+
+/** Start loading/decoding all hero previews as soon as the page mounts. */
+export function preloadHeroPreviews() {
+  if (typeof window === "undefined") return;
+  const urls = new Set<string>();
+  HERO_PREVIEW_TABS.forEach((tab) => {
+    urls.add(tab.src);
+    urls.add(tab.srcMobile);
+  });
+  urls.forEach((src) => {
+    const img = new window.Image();
+    img.decoding = "async";
+    img.src = src;
+    void img.decode?.().catch(() => {});
+  });
+}
 
 export default function HeroPreviewEn() {
   const [active, setActive] = useState<TabId>("homework");
 
   useEffect(() => {
-    TABS.forEach((tab) => {
-      const img = new window.Image();
-      img.src = tab.src;
-      void img.decode?.().catch(() => {});
-    });
+    preloadHeroPreviews();
   }, []);
 
   return (
     <div className="flex w-full flex-col items-center gap-5">
       <div className="relative -mx-2 w-[calc(100%+1rem)] overflow-clip sm:mx-0 sm:w-full">
-        <div className="relative aspect-[2200/1330] w-full">
-          {TABS.map((tab) => {
+        <div className="relative aspect-[1400/896] w-full">
+          {HERO_PREVIEW_TABS.map((tab) => {
             const isActive = tab.id === active;
             return (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                key={tab.src}
-                src={tab.src}
-                alt={isActive ? `Preview — ${tab.label}` : ""}
-                width={2200}
-                height={1330}
-                decoding="async"
-                fetchPriority="high"
-                className={[
-                  "absolute inset-0 size-full object-contain",
-                  isActive ? "opacity-100" : "pointer-events-none opacity-0",
-                ].join(" ")}
-                aria-hidden={!isActive}
-              />
+              <picture key={tab.id}>
+                <source media="(min-width: 640px)" srcSet={tab.src} />
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={tab.srcMobile}
+                  alt={isActive ? `Preview — ${tab.label}` : ""}
+                  width={2800}
+                  height={1792}
+                  decoding="async"
+                  loading="eager"
+                  fetchPriority="high"
+                  className={[
+                    "absolute inset-0 size-full object-contain",
+                    isActive ? "opacity-100" : "pointer-events-none opacity-0",
+                  ].join(" ")}
+                  aria-hidden={!isActive}
+                />
+              </picture>
             );
           })}
         </div>
       </div>
 
-      <div className="flex gap-2">
-        {TABS.map((tab) => (
+      <div className="flex flex-wrap justify-center gap-2">
+        {HERO_PREVIEW_TABS.map((tab) => (
           <button
             key={tab.id}
             type="button"

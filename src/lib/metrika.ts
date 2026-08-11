@@ -23,7 +23,13 @@ export function isMetrikaHost(hostname: string) {
 }
 
 export function localeFromPath(pathname: string): "en" | "ru" | "other" {
-  if (pathname === "/en" || pathname.startsWith("/en/")) return "en";
+  if (
+    pathname === "/en" ||
+    pathname.startsWith("/en/") ||
+    pathname === "/en0" ||
+    pathname.startsWith("/en0/")
+  )
+    return "en";
   if (pathname === "/ru" || pathname.startsWith("/ru/")) return "ru";
   if (pathname === "/download" || pathname.startsWith("/download/")) return "en";
   return "other";

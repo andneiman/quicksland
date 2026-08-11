@@ -5,7 +5,7 @@ import { useState, type ReactNode } from "react";
 const FAQ_DATA: { q: string; a: ReactNode }[] = [
   {
     q: "Why do I need an AI assistant?",
-    a: "An AI assistant saves you time by creating learning materials, grading homework, generating reports, and much more",
+    a: "An AI assistant saves you time by creating learning materials, grading homework, and much more",
   },
   {
     q: "How much does it cost?",
