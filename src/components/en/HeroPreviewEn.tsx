@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-const CACHE_BUST = "v5";
+const CACHE_BUST = "v6";
 
 function withBust(src: string) {
   return `${src}?${CACHE_BUST}`;
@@ -12,14 +12,13 @@ export const HERO_PREVIEW_TABS = [
   {
     id: "homework",
     label: "Homework",
-    // Desktop OK; mobile had 1↔2 swapped
-    src: withBust("/en/previews/ai-chat.jpg"),
+    src: withBust("/en/previews/homework.jpg"),
     srcMobile: withBust("/en/previews/homework.jpg"),
   },
   {
     id: "flashcards",
     label: "Flashcards",
-    src: withBust("/en/previews/homework.jpg"),
+    src: withBust("/en/previews/ai-chat.jpg"),
     srcMobile: withBust("/en/previews/ai-chat.jpg"),
   },
   {
