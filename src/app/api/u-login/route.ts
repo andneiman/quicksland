@@ -10,8 +10,7 @@ export const runtime = "nodejs";
 function publicOrigin(req: Request) {
   const origin = req.headers.get("origin");
   if (origin) return origin;
-  const host =
-    req.headers.get("x-forwarded-host") || req.headers.get("host") || "";
+  const host = req.headers.get("host") || "";
   const proto = req.headers.get("x-forwarded-proto") || "https";
   return `${proto}://${host}`;
 }
