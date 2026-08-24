@@ -50,7 +50,7 @@ export default async function LeadsPage({
     return (
       <div className="flex min-h-dvh w-full flex-col items-center justify-center bg-[#F0F0F0] px-6 text-[#262626]">
         <form
-          action="/api/leads-auth"
+          action="/api/leads"
           method="post"
           className="flex w-full max-w-[360px] flex-col gap-4"
         >
