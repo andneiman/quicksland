@@ -35,7 +35,6 @@ export default function LeadsUnlockForm() {
       onSubmit={onSubmit}
       className="flex w-full max-w-[360px] flex-col gap-4"
     >
-      <h1 className="text-center text-2xl font-semibold">Leads</h1>
       <input
         type="password"
         name="password"

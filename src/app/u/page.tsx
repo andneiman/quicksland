@@ -7,7 +7,7 @@ import LeadsUnlockForm from "@/components/LeadsUnlockForm";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Leads",
+  title: "Quicks",
   robots: {
     index: false,
     follow: false,
@@ -56,8 +56,7 @@ export default async function LeadsPage() {
   return (
     <div className="min-h-dvh bg-[#F0F0F0] px-4 py-8 text-[#262626] sm:px-8">
       <div className="mx-auto max-w-[1400px]">
-        <header className="mb-6 flex items-baseline justify-between gap-4">
-          <h1 className="text-2xl font-semibold">Leads</h1>
+        <header className="mb-6 flex items-baseline justify-end gap-4">
           <p className="text-sm text-[rgba(38,38,38,0.5)]">
             {leads.length} {leads.length === 1 ? "row" : "rows"}
           </p>
@@ -87,7 +86,7 @@ export default async function LeadsPage() {
                     colSpan={11}
                     className="px-4 py-10 text-center text-[rgba(38,38,38,0.45)]"
                   >
-                    No leads yet
+                    Nothing yet
                   </td>
                 </tr>
               ) : (

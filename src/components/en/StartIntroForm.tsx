@@ -78,44 +78,28 @@ export default function StartIntroForm() {
       onSubmit={handleSubmit}
       className="flex w-full flex-col items-center gap-4"
     >
-      <div className="flex w-full flex-col gap-2">
-        <label
-          htmlFor="start-name"
-          className="text-sm font-medium text-[rgba(38,38,38,0.6)]"
-        >
-          Name
-        </label>
-        <input
-          id="start-name"
-          type="text"
-          name="name"
-          autoComplete="name"
-          autoFocus
-          placeholder="Your name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          className="h-10 w-full rounded-xl border-0 bg-[rgba(38,38,38,0.05)] px-4 py-2.5 text-base text-[#262626] caret-[#262626] outline-none placeholder:text-[rgba(38,38,38,0.4)] focus:ring-2 focus:ring-[#262626]"
-        />
-      </div>
+      <input
+        id="start-name"
+        type="text"
+        name="name"
+        autoComplete="name"
+        autoFocus
+        placeholder="Your name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        className="h-10 w-full rounded-xl border-0 bg-[rgba(38,38,38,0.05)] px-4 py-2.5 text-base text-[#262626] caret-[#262626] outline-none placeholder:text-[rgba(38,38,38,0.4)] focus:ring-2 focus:ring-[#262626]"
+      />
 
-      <div className="flex w-full flex-col gap-2">
-        <label
-          htmlFor="start-email"
-          className="text-sm font-medium text-[rgba(38,38,38,0.6)]"
-        >
-          Email
-        </label>
-        <input
-          id="start-email"
-          type="email"
-          name="email"
-          autoComplete="email"
-          placeholder="Enter your email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="h-10 w-full rounded-xl border-0 bg-[rgba(38,38,38,0.05)] px-4 py-2.5 text-base text-[#262626] caret-[#262626] outline-none placeholder:text-[rgba(38,38,38,0.4)] focus:ring-2 focus:ring-[#262626]"
-        />
-      </div>
+      <input
+        id="start-email"
+        type="email"
+        name="email"
+        autoComplete="email"
+        placeholder="Enter your email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        className="h-10 w-full rounded-xl border-0 bg-[rgba(38,38,38,0.05)] px-4 py-2.5 text-base text-[#262626] caret-[#262626] outline-none placeholder:text-[rgba(38,38,38,0.4)] focus:ring-2 focus:ring-[#262626]"
+      />
 
       {error ? (
         <p className="w-full text-sm font-medium text-[#c10007]">{error}</p>
