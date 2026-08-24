@@ -34,8 +34,12 @@ function YandexMetrikaInner() {
   const skipNextHit = useRef(true);
 
   useEffect(() => {
+    if (pathname === "/u" || pathname.startsWith("/u/")) {
+      setEnabled(false);
+      return;
+    }
     setEnabled(isMetrikaHost(window.location.hostname));
-  }, []);
+  }, [pathname]);
 
   // SPA pageviews — skip first (covered by ym init)
   useEffect(() => {
