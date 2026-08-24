@@ -5,7 +5,7 @@ import { Suspense } from "react";
 import StartIntroForm from "@/components/en/StartIntroForm";
 
 export const metadata: Metadata = {
-  title: "Nice to meet you — Quicks",
+  title: "Let’s get started — Quicks",
   description: "A few details so we can get you set up with Quicks",
 };
 
@@ -23,7 +23,7 @@ export default function StartEnPage() {
               className="size-16 object-contain"
             />
             <h1 className="whitespace-pre-wrap text-center text-4xl font-semibold leading-10">
-              {"Nice to\nmeet you"}
+              {"Let’s get\nstarted"}
             </h1>
           </header>
 
