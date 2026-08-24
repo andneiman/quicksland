@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { LEADS_AUTH_COOKIE, isLeadsAuthCookie } from "@/lib/leadsAuth";
 import { getPrisma } from "@/lib/prisma";
-import { loginLeadsDashboard } from "./actions";
 
 export const dynamic = "force-dynamic";
 
@@ -51,7 +50,8 @@ export default async function LeadsPage({
     return (
       <div className="flex min-h-dvh w-full flex-col items-center justify-center bg-[#F0F0F0] px-6 text-[#262626]">
         <form
-          action={loginLeadsDashboard}
+          action="/u/login"
+          method="post"
           className="flex w-full max-w-[360px] flex-col gap-4"
         >
           <h1 className="text-center text-2xl font-semibold">Leads</h1>

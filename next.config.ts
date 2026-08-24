@@ -2,6 +2,9 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   serverExternalPackages: ["@prisma/client", "@prisma/adapter-pg", "pg"],
+  serverActions: {
+    allowedOrigins: ["quicks.school", "www.quicks.school", "quicksland.vercel.app"],
+  },
   images: {
     remotePatterns: [
       { protocol: "https", hostname: "www.figma.com" },
