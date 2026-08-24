@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { LEADS_AUTH_COOKIE, isLeadsAuthCookie } from "@/lib/leadsAuth";
 import { getPrisma } from "@/lib/prisma";
+import LeadsUnlockForm from "@/components/LeadsUnlockForm";
 
 export const dynamic = "force-dynamic";
 
@@ -35,46 +36,14 @@ function cell(value: string | null | undefined) {
   return text ? text : "—";
 }
 
-export default async function LeadsPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ e?: string | string[] }>;
-}) {
+export default async function LeadsPage() {
   const jar = await cookies();
   const authed = isLeadsAuthCookie(jar.get(LEADS_AUTH_COOKIE)?.value);
 
   if (!authed) {
-    const params = await searchParams;
-    const failed = Array.isArray(params.e) ? params.e[0] : params.e;
-
     return (
       <div className="flex min-h-dvh w-full flex-col items-center justify-center bg-[#F0F0F0] px-6 text-[#262626]">
-        <form
-          action="/api/leads"
-          method="post"
-          className="flex w-full max-w-[360px] flex-col gap-4"
-        >
-          <h1 className="text-center text-2xl font-semibold">Leads</h1>
-          <input
-            type="password"
-            name="password"
-            autoFocus
-            autoComplete="current-password"
-            placeholder="Password"
-            className="h-10 w-full rounded-xl border-0 bg-white px-4 text-base outline-none ring-1 ring-[rgba(38,38,38,0.08)] focus:ring-2 focus:ring-[#262626]"
-          />
-          {failed ? (
-            <p className="text-center text-sm font-medium text-[#c10007]">
-              Wrong password
-            </p>
-          ) : null}
-          <button
-            type="submit"
-            className="flex min-h-10 w-full items-center justify-center rounded-xl bg-[#262626] px-4 text-base font-medium text-white hover:bg-[#3d3d3d]"
-          >
-            Continue
-          </button>
-        </form>
+        <LeadsUnlockForm />
       </div>
     );
   }
