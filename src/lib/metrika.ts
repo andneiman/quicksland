@@ -155,3 +155,17 @@ export function trackOutboundClick(opts: { url: string; location?: string }) {
     button_location: opts.location || "unknown",
   });
 }
+
+export function setMetrikaUser(email: string, name?: string) {
+  try {
+    if (typeof window === "undefined" || typeof window.ym !== "function") {
+      return;
+    }
+    window.ym(YANDEX_METRIKA_ID, "userParams", {
+      UserID: email,
+      name: name || "",
+    });
+  } catch {
+    // ignore
+  }
+}
