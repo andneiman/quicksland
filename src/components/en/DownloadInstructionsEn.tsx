@@ -8,6 +8,7 @@ import {
   detectDesktopOS,
   fetchDownloads,
   latestUrlForOs,
+  openWindowsStore,
   triggerDesktopDownload,
   type DesktopOS,
 } from "@/lib/desktopDownloads";
@@ -99,13 +100,18 @@ export default function DownloadInstructionsEn({
   initialUrl,
   initialOs,
   buttonLocation = "en_download_page",
+  directInstaller = false,
 }: {
   autoStart?: boolean;
   initialUrl?: string;
   initialOs?: DesktopOS;
   buttonLocation?: string;
+  directInstaller?: boolean;
 }) {
   const [os, setOs] = useState<DesktopOS>(initialOs ?? "mac");
+  const [ready, setReady] = useState(
+    Boolean(directInstaller || initialOs === "mac")
+  );
   const [downloadUrl, setDownloadUrl] = useState(
     initialUrl || DESKTOP_DOWNLOADS[initialOs ?? "mac"]
   );
@@ -113,6 +119,13 @@ export default function DownloadInstructionsEn({
   useEffect(() => {
     const detected = initialOs ?? detectDesktopOS();
     setOs(detected);
+
+    if (detected === "windows" && !directInstaller) {
+      openWindowsStore({ location: buttonLocation });
+      return;
+    }
+
+    setReady(true);
 
     let cancelled = false;
 
@@ -142,7 +155,17 @@ export default function DownloadInstructionsEn({
       cancelled = true;
       window.clearTimeout(t);
     };
-  }, [autoStart, buttonLocation, initialOs, initialUrl]);
+  }, [autoStart, buttonLocation, directInstaller, initialOs, initialUrl]);
+
+  if (!ready || (os === "windows" && !directInstaller)) {
+    return (
+      <div className="flex min-h-dvh w-full items-center justify-center bg-white text-sm text-[rgba(38,38,38,0.5)]">
+        {os === "windows" && !directInstaller
+          ? "Opening Microsoft Store…"
+          : "Just a moment…"}
+      </div>
+    );
+  }
 
   const steps = os === "windows" ? WIN_STEPS : MAC_STEPS;
 

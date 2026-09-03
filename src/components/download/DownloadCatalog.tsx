@@ -4,10 +4,14 @@
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
+  DESKTOP_DOWNLOADS,
   fetchDownloads,
   formatDownloadDate,
   formatVersion,
   installPathForDownload,
+  latestItemForOs,
+  openWindowsStore,
+  platformToOs,
   sortLatestForOs,
   triggerDesktopDownload,
   type DownloadItem,
@@ -97,10 +101,14 @@ function itemKey(item: DownloadItem) {
 function LatestCard({
   item,
   loading,
+  subtitle,
+  buttonLabel = "Download",
   onDownload,
 }: {
   item: DownloadItem;
   loading?: boolean;
+  subtitle?: string;
+  buttonLabel?: string;
   onDownload: (item: DownloadItem) => void;
 }) {
   return (
@@ -118,13 +126,17 @@ function LatestCard({
           {item.platform}
         </span>
         <span className="truncate text-sm text-[rgba(38,38,38,0.5)]">
-          {item.arch} · {formatVersion(item.version)} · {item.format}
-          {item.date ? (
-            <span className="text-[rgba(38,38,38,0.3)]">
-              {" "}
-              · {formatDownloadDate(item.date)}
-            </span>
-          ) : null}
+          {subtitle ?? (
+            <>
+              {item.arch} · {formatVersion(item.version)} · {item.format}
+              {item.date ? (
+                <span className="text-[rgba(38,38,38,0.3)]">
+                  {" "}
+                  · {formatDownloadDate(item.date)}
+                </span>
+              ) : null}
+            </>
+          )}
         </span>
       </div>
       <span className="flex h-10 min-w-[112px] shrink-0 items-center justify-center gap-2 rounded-full bg-[#0095FF] px-6 text-sm font-medium text-white transition-colors group-hover:bg-[#0088e8] group-disabled:bg-[#0095FF]">
@@ -134,7 +146,7 @@ function LatestCard({
             Starting…
           </>
         ) : (
-          "Download"
+          buttonLabel
         )}
       </span>
     </button>
@@ -234,12 +246,40 @@ export default function DownloadCatalog() {
         ];
   }, [data, osLabel]);
 
-  function handleDownload(item: DownloadItem, location: string) {
+  const windowsInstaller = useMemo(() => {
+    if (loading) return undefined;
+    return (
+      latestItemForOs(data, "windows") ?? {
+        platform: "Windows",
+        arch: "x64",
+        version: "",
+        format: "exe",
+        date: "",
+        url: DESKTOP_DOWNLOADS.windows,
+      }
+    );
+  }, [data, loading]);
+
+  function handleStore(location: string) {
+    if (pendingKey) return;
+    setPendingKey("windows-store");
+    openWindowsStore({ location });
+  }
+
+  function handleDownload(
+    item: DownloadItem,
+    location: string,
+    opts?: { direct?: boolean }
+  ) {
     if (pendingKey) return;
     setPendingKey(itemKey(item));
     triggerDesktopDownload(item.url, { location });
     router.push(
-      installPathForDownload(item, { autoStart: false, from: location })
+      installPathForDownload(item, {
+        autoStart: false,
+        from: location,
+        direct: opts?.direct ?? platformToOs(item.platform) === "windows",
+      })
     );
   }
 
@@ -271,22 +311,53 @@ export default function DownloadCatalog() {
           </div>
         ) : latest.length > 0 ? (
           <div className="flex w-full flex-col gap-3">
-            {latest.map((item) => (
-              <LatestCard
-                key={itemKey(item)}
-                item={item}
-                loading={pendingKey === itemKey(item)}
-                onDownload={(downloadItem) =>
-                  handleDownload(downloadItem, "download_catalog_latest")
-                }
-              />
-            ))}
+            {latest.map((item) => {
+              const isWindows = platformToOs(item.platform) === "windows";
+              return (
+                <LatestCard
+                  key={itemKey(item)}
+                  item={item}
+                  loading={
+                    pendingKey ===
+                    (isWindows ? "windows-store" : itemKey(item))
+                  }
+                  subtitle={isWindows ? "Microsoft Store" : undefined}
+                  onDownload={() =>
+                    isWindows
+                      ? handleStore("download_catalog_latest")
+                      : handleDownload(item, "download_catalog_latest")
+                  }
+                />
+              );
+            })}
           </div>
         ) : (
           <p className="text-sm text-[rgba(38,38,38,0.5)]">
             Couldn&apos;t load downloads. Please try again later.
           </p>
         )}
+
+        {windowsInstaller ? (
+          <div className="flex w-full flex-col gap-2">
+            <p className="self-start text-xs font-semibold uppercase tracking-wide text-[rgba(38,38,38,0.3)]">
+              Download variants
+            </p>
+            <PreviousRow
+              item={{
+                ...windowsInstaller,
+                platform: "Windows installer",
+              }}
+              loading={pendingKey === itemKey(windowsInstaller)}
+              onDownload={() =>
+                handleDownload(
+                  windowsInstaller,
+                  "download_catalog_variant",
+                  { direct: true }
+                )
+              }
+            />
+          </div>
+        ) : null}
 
         {data && data.previous.length > 0 ? (
           <div className="flex w-full flex-col gap-2">

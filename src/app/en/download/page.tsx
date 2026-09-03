@@ -12,6 +12,7 @@ type SearchParams = Promise<{
   platform?: string | string[];
   autostart?: string | string[];
   from?: string | string[];
+  direct?: string | string[];
 }>;
 
 function first(value?: string | string[]) {
@@ -28,6 +29,7 @@ export default async function DownloadEnPage({
   const platform = first(params.platform);
   const autostart = first(params.autostart);
   const from = first(params.from);
+  const direct = first(params.direct);
   const initialOs: DesktopOS | undefined =
     platform === "windows" || platform === "mac" ? platform : undefined;
 
@@ -37,6 +39,7 @@ export default async function DownloadEnPage({
       initialOs={initialOs}
       autoStart={autostart !== "0"}
       buttonLocation={from || "en_download_page"}
+      directInstaller={direct === "1"}
     />
   );
 }

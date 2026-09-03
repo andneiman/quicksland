@@ -6,6 +6,7 @@ import {
   detectDesktopOS,
   fetchDownloads,
   latestUrlForOs,
+  openWindowsStore,
 } from "@/lib/desktopDownloads";
 import { reachGoal, setMetrikaUser } from "@/lib/metrika";
 
@@ -53,6 +54,10 @@ export default function StartIntroForm() {
       setMetrikaUser(trimmedEmail, trimmedName);
 
       const os = detectDesktopOS();
+      if (os === "windows") {
+        openWindowsStore({ location: source });
+        return;
+      }
       try {
         const data = await fetchDownloads();
         const url = latestUrlForOs(data, os);
